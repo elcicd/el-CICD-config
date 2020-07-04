@@ -1,0 +1,13 @@
+rbacGroup: devops
+scmHost: github.com
+scmOrganization: hippyod
+gitBranch: development
+microServices:
+- gitRepoName: Test-CICD1
+  codeBase: python
+  active: true
+- gitRepoName: Test_CICD4
+  codeBase: python
+  active: true
+disabledTestEnvs:
+  - uat
