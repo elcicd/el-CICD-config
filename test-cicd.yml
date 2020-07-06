@@ -6,8 +6,14 @@ microServices:
 - gitRepoName: Test-CICD1
   codeBase: python
   active: true
+- gitRepoName: test-CICD2
+  codeBase: python
+  active: false
+- gitRepoName: TeST-CiCD3
+  codeBase: python
+  active: true
 - gitRepoName: Test_CICD4
   codeBase: python
   active: true
-disabledTestEnvs:
+disabledEnvs:
   - uat
