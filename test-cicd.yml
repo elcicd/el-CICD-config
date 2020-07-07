@@ -19,5 +19,5 @@ microServices:
   codeBase: python
   tester: pytest
   active: true
-disabledEnvs:
+disabledTestEnvs:
   - uat
