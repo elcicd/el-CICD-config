@@ -4,16 +4,20 @@ scmOrganization: hippyod
 gitBranch: development
 microServices:
 - gitRepoName: Test-CICD1
-  codeBase: python-pytest
+  codeBase: python
+  tester: pytest
   active: true
 - gitRepoName: test-CICD2
-  codeBase: python-pytest
+  codeBase: python
+  tester: pytest
   active: false
 - gitRepoName: TeST-CiCD3
-  codeBase: python-pytest
+  codeBase: python
+  tester: pytest
   active: true
 - gitRepoName: Test_CICD4
-  codeBase: python-pytest
+  codeBase: python
+  tester: pytest
   active: true
 disabledEnvs:
   - uat
