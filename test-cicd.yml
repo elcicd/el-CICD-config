@@ -7,7 +7,7 @@ microServices:
   codeBase: python
   tester: pytest
   active: true
-- gitRepoName: test_CICD2-error
+- gitRepoName: test_CICD2
   codeBase: python
   tester: pytest
   active: false
