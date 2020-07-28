@@ -3,19 +3,19 @@ scmHost: github.com
 scmOrganization: hippyod
 gitBranch: development
 microServices:
-- gitRepoName: Test-CICD1
+- gitRepoName: Test-CICD1-legacy
   codeBase: python
   tester: pytest
   active: true
-- gitRepoName: test_CICD2
+- gitRepoName: test_CICD2-legacy
   codeBase: python
   tester: pytest
   active: false
-- gitRepoName: TeSt-CiCd3
+- gitRepoName: TeSt-CiCd3-legacy
   codeBase: python
   tester: pytest
   active: true
-- gitRepoName: Test_CICD4
+- gitRepoName: Test_CICD4-legacy
   codeBase: python
   tester: pytest
   active: true
