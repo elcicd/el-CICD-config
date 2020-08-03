@@ -21,3 +21,4 @@ microServices:
   active: true
 disabledTestEnvs:
   - uat
+sandboxEnvs: 5
