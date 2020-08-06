@@ -19,6 +19,9 @@ microServices:
   codeBase: python
   tester: pytest
   active: true
+- gitRepoName: test-cicd-stationdemo
+  codeBase: java-maven
+  active: true
 disabledTestEnvs:
   - uat
 sandboxEnvs: 5
