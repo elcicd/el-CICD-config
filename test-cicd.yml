@@ -22,6 +22,9 @@ microServices:
 - gitRepoName: test-cicd-stationdemo
   codeBase: java-maven
   active: true
+- gitRepoName: test-cicd-R
+  codeBase: r-lang
+  active: true
 disabledTestEnvs:
   - uat
 sandboxEnvs: 5
