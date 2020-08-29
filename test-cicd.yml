@@ -25,6 +25,7 @@ microServices:
 - gitRepoName: test-cicd-R
   codeBase: r-lang
   active: true
-disabledTestEnvs:
-  - uat
-sandboxEnvs: 5
+enabledTestEnvs:
+  - qa
+  - stg
+sandboxEnvs: 2
