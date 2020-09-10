@@ -3,6 +3,9 @@ scmHost: github.com
 scmOrganization: hippyod
 gitBranch: development
 microServices:
+- gitRepoName: test-cicd-stationdemo
+  codeBase: java-maven
+  active: true
 - gitRepoName: Test-CICD1
   codeBase: python
   tester: pytest
@@ -18,9 +21,6 @@ microServices:
 - gitRepoName: Test_CICD4
   codeBase: python
   tester: pytest
-  active: true
-- gitRepoName: test-cicd-stationdemo
-  codeBase: java-maven
   active: true
 - gitRepoName: test-cicd-R
   codeBase: r-lang
