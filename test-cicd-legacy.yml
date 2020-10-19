@@ -20,4 +20,4 @@ microServices:
   tester: pytest
   active: true
 disabledTestEnvs:
-  - uat
+- uat

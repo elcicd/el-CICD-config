@@ -26,6 +26,6 @@ microServices:
   codeBase: r-lang
   active: true
 enabledTestEnvs:
-  - qa
-  - stg
+- qa
+- stg
 sandboxEnvs: 2
