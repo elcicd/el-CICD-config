@@ -1,6 +1,6 @@
 rbacGroup: devops
 scmHost: github.com
-scmOrganization: hippyod
+scmOrganization: elcicd
 gitBranch: development
 microServices:
 - gitRepoName: Test-CICD1-legacy
