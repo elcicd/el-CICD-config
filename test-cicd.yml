@@ -1,5 +1,6 @@
 rbacGroup: devops
 scmHost: github.com
+scmRestApiHost: api.github.com
 scmOrganization: elcicd
 gitBranch: development
 microServices:
