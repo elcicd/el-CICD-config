@@ -1,1 +1,5 @@
-echoBanner("WE'RE IN THE PRE-HOOK SCRIPT!!!!!!")
+
+
+def call() {
+    pipelineUtils.echoBanner("WE'RE IN THE PRE-HOOK SCRIPT!!!!!!")
+}
