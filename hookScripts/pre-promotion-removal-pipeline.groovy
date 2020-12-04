@@ -1,0 +1,1 @@
+echoBanner("WE'RE IN THE PRE-HOOK SCRIPT!!!!!!")
