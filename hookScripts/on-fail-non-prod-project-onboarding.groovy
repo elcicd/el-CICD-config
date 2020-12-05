@@ -4,3 +4,5 @@ def call(def exception) {
 
     pipelineUtils.choBanner("WE'RE IN THE FAIL SCRIPT: ${exception?.message} !!!!!!")
 }
+
+return this
