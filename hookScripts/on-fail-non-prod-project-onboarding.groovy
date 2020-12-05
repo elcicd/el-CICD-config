@@ -1,6 +1,6 @@
 
 def call(def exception) {
-    pipelineUtils.choBanner("WE'RE IN THE FAIL SCRIPT: ${exception?.getMessage()} !!!!!!")
+    pipelineUtils.echoBanner("WE'RE IN THE FAIL SCRIPT: ${exception?.getMessage()} !!!!!!")
 }
 
 return this
