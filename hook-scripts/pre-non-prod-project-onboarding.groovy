@@ -3,8 +3,9 @@
  */
 
 def call(Map args) {
+    def projectInfo = args.projectInfo
     dir (el.cicd.PROJECT_DEFS_DIR) {
-        sh "cp ${args.projectId}.yml ${args.projectId}-test.yml"
+        sh "cp ${projectInfo.id}.yml ${projectInfo.id}-test.yml"
 
         withCredentials([sshUserPrivateKey(credentialsId: el.cicd.EL_CICD_PROJECT_INFO_REPOSITORY_READ_ONLY_GITHUB_PRIVATE_KEY_ID, keyFileVariable: 'GITHUB_PRIVATE_KEY')]) {
             sh """
