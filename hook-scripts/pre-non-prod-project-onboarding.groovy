@@ -15,8 +15,8 @@ def call(Map args) {
                 ${sshAgentBash GITHUB_PRIVATE_KEY,
                                "git config --global user.name \"el-CICD\"",
                                "git config --global user.email \"${el.cicd.DEVOPS_EMAIL_LIST}\"",
-                               "git add ${args.projectId}.yml",
-                               "git commit -am \"writing el-CICD-config Project Definition File for ${args.projectId}\"",
+                               "git add ${args.projectId}-test.yml",
+                               "git commit -am \"writing el-CICD-config Project Definition File for ${args.projectId}-test\"",
                                "git push --set-upstream origin development"}
             """
         }
