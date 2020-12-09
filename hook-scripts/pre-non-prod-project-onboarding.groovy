@@ -13,12 +13,14 @@ def call(Map args) {
                 #git config user.email "${el.cicd.DEVOPS_EMAIL_LIST}"
                 #git commit -am 'writing el-CICD-config Project Definition File for ${projectInfo.id}'
                 ${sshAgentBash GITHUB_PRIVATE_KEY,
-                                    "git config --global user.name \"el-CICD\"",
-                                    "git config --global user.email \"${el.cicd.DEVOPS_EMAIL_LIST}\"",
-                                    "git add ${projectInfo.id}.yml",
-                                    "git commit -am \"writing el-CICD-config Project Definition File for ${projectInfo.id}\"",
-                                    "git push --set-upstream origin development"}
+                               "git config --global user.name \"el-CICD\"",
+                               "git config --global user.email \"${el.cicd.DEVOPS_EMAIL_LIST}\"",
+                               "git add ${projectInfo.id}.yml",
+                               "git commit -am \"writing el-CICD-config Project Definition File for ${projectInfo.id}\"",
+                               "git push --set-upstream origin development"}
             """
         }
     }
 }
+
+return this
