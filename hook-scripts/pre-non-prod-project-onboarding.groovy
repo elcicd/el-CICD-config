@@ -15,7 +15,7 @@ def call(Map args) {
                 ${sshAgentBash GITHUB_PRIVATE_KEY,
                                "git add ${args.projectId}-test.yml",
                                "git commit -am \"writing el-CICD-config Project Definition File for ${args.projectId}-test\"",
-                               "git push --set-upstream origin development"}
+                               "git push"}
             """
         }
     }
