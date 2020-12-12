@@ -5,3 +5,5 @@
 def call(Map args) {
     pipelineUtils.echoBanner("WE'RE IN THE ON-SUCCESS SCRIPT!!!!!!")
 }
+
+return this
