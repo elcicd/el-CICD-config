@@ -1,13 +1,13 @@
-FROM openshift/jenkins-slave-maven-centos7:v3.11
+FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-base
 
 USER root
 
-RUN yum-config-manager --disable cbs-paas7-openshift-multiarch-el7-build && \
-    yum install -y --setopt=tsflags=nodocs epel-release && \
-    yum install --setopt=tsflags=nodocs deltarpm -y && \
-    yum install -y --setopt=tsflags=nodocs podman skopeo buildah jq && \
-    yum update -y --setopt=tsflags=nodocs && \
-    yum  clean all && \
+# REMOVE THE FOLLOWING REDHAT ENTITLED BUILDS ARE ENABLED YOUR CLUSTER
+COPY ./centos.repo /etc/yum.repos.d/
+
+RUN yum install -y --nogpgcheck --setopt=tsflags=nodocs epel-release podman skopeo buildah jq && \
+    yum update -y --nogpgcheck --setopt=tsflags=nodocs && \
+    yum clean all && \
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash -s 3.8.5 && \
     mv ./kustomize /usr/local/bin
 
