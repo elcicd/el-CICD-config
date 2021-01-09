@@ -6,7 +6,7 @@ USER root
 COPY ./centos.repo /etc/yum.repos.d/
 
 RUN yum install -y --setopt=tsflags=nodocs epel-release && \
-    yum config-manager --set-enabled powertools && 
+    yum config-manager --set-enabled powertools && \
     yum install -y  podman skopeo buildah jq && \
     yum update -y --setopt=tsflags=nodocs && \
     yum clean all && \
