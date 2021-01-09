@@ -2,8 +2,7 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-el
 
 USER root
 
-RUN yum-config-manager --disable cbs-paas7-openshift-multiarch-el7-build && \
-    yum install -y --setopt=tsflags=nodocs ShellCheck openssl-devel libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-libGLU-devel libpng-devel libxml2 libxml2-devel && \
+RUN yum install -y --setopt=tsflags=nodocs ShellCheck openssl-devel libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-libGLU-devel libpng-devel libxml2 libxml2-devel && \
     yum install -y R && \
     yum  clean all && \
     R -e "install.packages('devtools', repos='https://cran.rstudio.com/')"  && \

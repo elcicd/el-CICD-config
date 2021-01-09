@@ -5,7 +5,8 @@ USER root
 # REMOVE THE FOLLOWING REDHAT ENTITLED BUILDS ARE ENABLED YOUR CLUSTER
 COPY ./centos.repo /etc/yum.repos.d/
 
-RUN yum install -y --nogpgcheck --setopt=tsflags=nodocs epel-release podman skopeo buildah jq && \
+RUN yum install -y --nogpgcheck --setopt=tsflags=nodocs deltarpm && \
+    yum install -y --nogpgcheck --setopt=tsflags=nodocs epel-release podman skopeo buildah jq && \
     yum update -y --nogpgcheck --setopt=tsflags=nodocs && \
     yum clean all && \
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash -s 3.8.5 && \
