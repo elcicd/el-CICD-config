@@ -1,4 +1,4 @@
-FROM openshift/jenkins-agent-el-cicd-base
+FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-el-cicd-base
 
 USER root
 
