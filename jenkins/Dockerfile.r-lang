@@ -5,6 +5,8 @@ USER root
 RUN yum install -y --setopt=tsflags=nodocs ShellCheck openssl-devel libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-libGLU-devel libpng-devel libxml2 libxml2-devel && \
     yum install -y R && \
     yum  clean all && \
+    curl -Of https://shellcheck.storage.googleapis.com/shellcheck-v0.7.0.linux.x86_64.tar.xz && \
+    tar -C /usr/local/bin/ -xf shellcheck-v0.7.0.linux.x86_64.tar.xz --no-anchored 'shellcheck' --strip=1 && \
     R -e "install.packages('devtools', repos='https://cran.rstudio.com/')"  && \
     R -e "install.packages('renv', repos='https://cran.rstudio.com/')"  && \
     R -e "install.packages('lintr', repos='https://cran.rstudio.com/')"  && \
