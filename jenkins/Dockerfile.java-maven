@@ -2,7 +2,7 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-el
 
 USER root
 
-RUN yum install -y --setopt=tsflags=nodocs java-11-openjdk-devel && \
+RUN yum install -y --setopt=tsflags=nodocs java-11-openjdk-devel maven && \
     yum  clean all
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
