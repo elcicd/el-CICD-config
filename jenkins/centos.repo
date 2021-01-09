@@ -24,7 +24,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 
 [PowerTools]
 name=CentOS-$releasever - PowerTools
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=powertools&infra=$infra
 baseurl=http://mirror.centos.org/$contentdir/$releasever/PowerTools/$basearch/os/
 gpgcheck=0
 enabled=1

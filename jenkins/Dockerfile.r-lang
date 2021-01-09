@@ -2,7 +2,10 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-el
 
 USER root
 
+COPY ./centos.repo /etc/yum.repos.d/
+
 RUN yum install -y --setopt=tsflags=nodocs openssl-devel libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-libGLU-devel libpng-devel libxml2 libxml2-devel && \
+    dnf config-manager --set-enabled PowerTools && \
     yum install -y R && \
     yum  clean all && \
     curl -Of https://shellcheck.storage.googleapis.com/shellcheck-v0.7.0.linux.x86_64.tar.xz && \
