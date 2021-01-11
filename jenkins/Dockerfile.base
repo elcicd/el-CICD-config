@@ -2,7 +2,7 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-ba
 
 USER root
 
-# REMOVE THE FOLLOWING REDHAT ENTITLED BUILDS ARE ENABLED YOUR CLUSTER
+# REMOVE THE FOLLOWING IF REDHAT ENTITLED BUILDS ARE ENABLED YOUR CLUSTER
 COPY ./centos.repo /etc/yum.repos.d/
 
 RUN yum install -y --setopt=tsflags=nodocs drpm epel-release && \
