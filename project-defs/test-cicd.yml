@@ -28,5 +28,4 @@ microServices:
   active: true
 enabledTestEnvs:
 - qa
-- stg
 sandboxEnvs: 2
