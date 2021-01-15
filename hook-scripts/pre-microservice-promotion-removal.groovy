@@ -1,7 +1,7 @@
 
 
 def call(Map args) {
-    pipelineUtils.echoBanner("WE'RE IN THE PRE-HOOK SCRIPT!!!!!!")
+    pipelineUtils.echoBanner("RUNNING IN THE EXAMPLE MICROSERVICE PROMOTION SUCCESS SCRIPT")
 }
 
 return this
