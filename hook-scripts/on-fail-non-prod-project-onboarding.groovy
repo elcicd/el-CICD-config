@@ -1,6 +1,6 @@
 
 def call(def exception, Map args) {
-    pipelineUtils.echoBanner("PROJECT ONBOARDING FAILED WITH EXCEPTION: ${exception}")
+    pipelineUtils.echoBanner("RUNNING IN THE EXAMPLE PROJECT ONBOARDING FAILED WITH EXCEPTION SCRIPT: ${exception}")
 }
 
 return this
