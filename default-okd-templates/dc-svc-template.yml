@@ -81,7 +81,6 @@ objects:
 #############################################################################  
             - containerPort: ${{SVC_PORT}}
               protocol: TCP
-
 #############################################################################
 ##
 ## DO NOT EDIT OR REMOVE.  Doing so will break deployments.

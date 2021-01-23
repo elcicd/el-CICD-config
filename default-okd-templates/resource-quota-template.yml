@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: resource-quota-template
+message: Deploying using templated resources
+metadata:
+  name:  resource-quota-template
+objects:
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: ${RESOURCE_QUOTA_NAME}
+    namespace: ${NAMESPACE}
+  labels:
+    template: resource-quota-template
+  spec:
+    hard:
+      limits.cpu: ${CPU_LIMIT}
+      limits.memory: ${MEM_LIMIT}
+      requests.storage: ${STORAGE_REQ}
+
+parameters:
+- description: Resource Quota Name
+  displayName: Resource Quota Name
+  name: RESOURCE_QUOTA_NAME
+  required: true
+
+- description: Namespace where this Resource Quota will be applied
+  displayName: Namespace
+  name: NAMESPACE
+  required: true
+
+- description: Maximum CPU Resource Limit allowed; see OKD docs for more info
+  displayName: CPU Resource Limit
+  name: CPU_LIMIT
+  required: true
+
+- description: Memory Resource Limit (Ceiling) in Mi or Gi; see OKD docs for more info
+  displayName: Memory Resource Limit in Mi or Gi
+  name: MEM_LIMIT
+  required: true
+
+- description: Max storage Resource Request; see OKD docs for more info
+  displayName: Max Storage Resource Request
+  name: STORAGE_REQ
+  required: true
