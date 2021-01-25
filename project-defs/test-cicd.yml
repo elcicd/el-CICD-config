@@ -29,4 +29,17 @@ microServices:
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
+nfsShares:
+  - envs:
+    - qa
+    - stg
+    - prod
+    capacity: 5Gi
+    accessMode: ReadWriteMany
+    path: /mnt/nfs-test-dev
+    server: hippys-bfs
+    claimName: nfs-pv-test-dir
+
+
+
 

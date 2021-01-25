@@ -32,7 +32,7 @@ objects:
 ## For Dynamically generated volumes set storageClassName to
 ##  "glusterfs-storage" and remove the volumeName line.
 ## For NFS volumes, leave storageClassName empty set  "", and set volumeName
-## to the NFS volume name defined in your persistent-volume.yaml
+## to the NFS volume name defined in your persistent-volume.yml
 ########################################################################
     storageClassName: ${STORAGE_CLASS}
     volumeName: ${VOLUME_NAME}

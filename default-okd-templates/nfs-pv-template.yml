@@ -10,14 +10,12 @@ objects:
   kind: PersistentVolume
   metadata:
     name: nfs-${PV_NAME}
-  labels:
-    projectid: ${PROJECT_ID}
   spec:
     capacity:
       storage: ${CAPACITY}
     accessModes:
       - ${ACCESS_MODE}
-    persistentVolumeReclaimPolicy: ${RECLAIM_POLICY}
+    persistentVolumeReclaimPolicy: Retain
     nfs:
       path: ${NFS_EXPORT}
       server: ${NFS_SERVER}
@@ -26,11 +24,6 @@ objects:
       namespace: ${NAMESPACE}
 
 parameters:
-- description: Project ID the PV belongs to
-  displayName: Project ID
-  name: PROJECT_ID
-  required: true
-
 - description: Persistent Volume Object Name
   displayName: Persistent Volume Object Name
   name: PV_NAME
@@ -44,12 +37,6 @@ parameters:
 - description: Storage Access Mode "ReadWriteOnce|ReadWriteMany|ReadOnly"
   displayName: Storage Access Mode
   name: ACCESS_MODE
-  required: true
-
-- description: Storage Recalim Policy
-  displayName: Storage Reclaim Policy
-  name: RECLAIM_POLICY
-  default: Retain
   required: true
 
 - description: NFS Export path
