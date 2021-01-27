@@ -41,6 +41,6 @@ nfsShares:
     - prod
     capacity: 5Gi
     accessMode: ReadWriteMany
-    exportPath: /mnt/nfs-test-dev
+    exportPath: /mnt/nfs-test
     server: hippys-bfs.localdomain
-    claimName: nfs-pv-test-dir
+    claimName: test-dir
