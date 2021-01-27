@@ -4,7 +4,7 @@
  * Utility method for running post processing of microservice code before the image build
  */
 
-def package(def projectInfo, def microService) {
+def assemble(def projectInfo, def microService) {
     // clean python workspace after scanner step complete
     sh """
         git clean -fxd
