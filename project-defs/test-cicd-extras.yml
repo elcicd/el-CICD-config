@@ -30,10 +30,10 @@ enabledTestEnvs:
 - qa
 sandboxEnvs: 2
 resourceQuotas:
-  dev: resource-quota-small.yml
-  qa: resource-quota-medium.yml
-  stg: resource-quota-medium.yml
-  prod: resource-quota-large.yml
+  dev: small.yml
+  qa: medium.yml
+  stg: medium.yml
+  prod: large.yml
 nfsShares:
   - envs:
     - qa
