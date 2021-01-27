@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Template
 labels:
-  template: pv-template
+  template: nfs-pv-template
 message: Deploying using templated resources
 metadata:
   name:  nfs-pv-template

@@ -4,7 +4,7 @@
  * Utility method for scanning Python based microservices
  */
 
-def scan(def projectId, def microService) {
+def scan(def projectInfo, def microService) {
     /*withCredentials([string(credentialsId: el.cicd.SONARQUBE_ACCESS_TOKEN_ID, variable: 'SONARQUBE_ACCESS_TOKEN')]) {
         // sonar.sources=. -> define source code directory
         // sonar.tests=./tests ->  define directory for test code; ./tests must exist or the build will fail
@@ -28,9 +28,6 @@ def scan(def projectId, def microService) {
                           -Dsonar.exclusions=tests/**,venv/**,*.xml
         """
     }*/
-
-    // clean python workspace after scanner step complete
-    sh "git clean -fxd"
 }
 
 return this

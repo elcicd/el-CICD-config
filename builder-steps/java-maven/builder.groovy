@@ -8,7 +8,12 @@
 def build(def projectInfo, def microService) {
     sh """
         export JAVA_TOOL_OPTIONS=
-        mvn -DskipTests --batch-mode clean package
+        if [[ -f ${el.cicd.BUILD_SECRETS_DIR}/settings.xml ]]
+        then
+            mvn -s ${el.cicd.BUILD_SECRETS_DIR}/settings.xml -DskipTests --batch-mode clean package
+        else
+            mvn -DskipTests --batch-mode clean package
+        fi
     """
 }
 

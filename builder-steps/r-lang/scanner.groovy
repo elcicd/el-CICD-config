@@ -28,10 +28,7 @@ def scan(def projectId, def microService) {
                           -Dsonar.exclusions=tests/**,renv/**,*.xml
         """
     }*/
-
-    // clean workspace after scan complete
-    sh "git clean -fxd"
-}    
+}
 
 return this
 

@@ -4,7 +4,7 @@
  * Utility method for running Python pytest based unit tests
  */
 
-def test(def projectId, def microService) {
+def test(def projectInfo, def microService) {
     sh """
         mkdir -p ./tests
         if [[ `ls -l ./tests/*.py | wc -l` -gt 0 ]]

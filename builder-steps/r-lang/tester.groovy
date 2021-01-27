@@ -4,7 +4,7 @@
  * Utility methods for Testing Python applications
  */
 
-def test(def projectId, def microService) {
+def test(def projectInfo, def microService) {
     sh """
         Rscript ${el.cicd.BUILDER_STEPS_DIR}/${microService.codeBase}/resources/Rlint.R
         mkdir -p ./tests

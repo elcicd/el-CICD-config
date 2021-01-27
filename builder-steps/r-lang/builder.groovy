@@ -4,7 +4,7 @@
  * Utility methods for building R microservices
  */
 
-def build(def autoId, def microService) {
+def build(def projectInfo, def microService) {
     echo 'R only projects require no build...'
 }
 
