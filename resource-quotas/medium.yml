@@ -1,11 +1,17 @@
-apiVersion: v1
-kind: ResourceQuota
-metadata:
-  name: medium
-spec:
-  hard:
-    limits.cpu: 8
-    limits.memory: 48Gi
-    requests.storage: 256Gi
-  scopes:
-  - NotTerminating
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: medium-pods
+  spec:
+    hard:
+      limits.cpu: 8
+      limits.memory: 48Gi
+    scopes:
+    - NotTerminating
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: medium-storage
+  spec:
+    hard:
+      requests.storage: 256Gi
