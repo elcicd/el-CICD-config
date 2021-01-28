@@ -4,17 +4,17 @@ items:
 - apiVersion: v1
   kind: ResourceQuota
   metadata:
-    name: medium-pods
+    name: sandbox-pods
   spec:
     hard:
-      limits.cpu: "8"
-      limits.memory: 48Gi
+      limits.cpu: "2"
+      limits.memory: 10Gi
     scopes:
     - NotTerminating
 - apiVersion: v1
   kind: ResourceQuota
   metadata:
-    name: medium-storage
+    name: sandbox-storage
   spec:
     hard:
-      requests.storage: 256Gi
+      requests.storage: 25Gi
