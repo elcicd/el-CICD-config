@@ -7,7 +7,7 @@ items:
     name: large-pods
   spec:
     hard:
-      limits.cpu: 16
+      limits.cpu: "16"
       limits.memory: 95Gi
     scopes:
     - NotTerminating

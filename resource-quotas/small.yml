@@ -7,7 +7,7 @@ items:
     name: small-pods
   spec:
     hard:
-      limits.cpu: 2
+      limits.cpu: "2"
       limits.memory: 10Gi
     scopes:
     - NotTerminating
