@@ -30,17 +30,17 @@ enabledTestEnvs:
 - qa
 sandboxEnvs: 2
 resourceQuotas:
-  dev: small.yml
+  default: small.yml
   qa: medium.yml
-  stg: medium.yml
+  stg: large.yml
   prod: large.yml
 nfsShares:
-  - envs:
-    - qa
-    - stg
-    - prod
-    capacity: 5Gi
-    accessMode: ReadWriteMany
-    exportPath: /mnt/nfs-test
-    server: hippys-bfs.localdomain
-    claimName: test-dir
+- envs:
+  - qa
+  - stg
+  - prod
+  capacity: 5Gi
+  accessMode: ReadWriteMany
+  exportPath: /mnt/nfs-test
+  server: hippys-bfs.localdomain
+  claimName: test-dir
