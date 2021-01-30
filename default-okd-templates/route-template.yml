@@ -24,7 +24,7 @@ objects:
   kind: Route
   metadata:
     labels:
-      app: ${ROUTE_NAME}
+      app: ${APP_NAME}
     name: ${ROUTE_NAME}
   spec:
     host: ${ROUTE_HOST}
