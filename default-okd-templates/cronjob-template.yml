@@ -31,21 +31,11 @@ objects:
           spec:
             containers:
             - command:
-############################################################################
-##
-## The interpreter and or executable parameters mey need to be a quoted string
-## if the executable requires a additional arguments, such as:
-##
-## '/opt/app-root/src/app.py arg1'
-##
-############################################################################
               - ${INTERPRETER}
               - ${EXECUTABLE}
               image: ${IMAGE_REPOSITORY}/${PROJECT_ID}-${MICROSERVICE_NAME}:${IMAGE_TAG}
               name: ${APP_NAME}
               imagePullPolicy: Always
-            imagePullSecrets:
-            - name: ${PULL_SECRET}
               resources:
                 limits:
                   cpu: ${CPU_LIMIT}
@@ -55,6 +45,8 @@ objects:
                   memory: ${MEM_REQ}
               terminationMessagePath: /dev/termination-log
               terminationMessagePolicy: File
+            imagePullSecrets:
+            - name: ${PULL_SECRET}
             dnsPolicy: ClusterFirst
             restartPolicy: OnFailure
             schedulerName: default-scheduler
