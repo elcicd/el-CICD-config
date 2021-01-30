@@ -25,7 +25,7 @@ objects:
   metadata:
     labels:
       app: ${APP_NAME}
-    name: ${ROUTE_NAME}
+    name: ${APP_NAME}
   spec:
     host: ${ROUTE_HOST}
     port:
