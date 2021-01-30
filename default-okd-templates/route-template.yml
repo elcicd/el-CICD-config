@@ -63,11 +63,6 @@ parameters:
   required: true
   value: edge
 
-- description: The name for of the service; el-CICD will default to the APP_NAME if not set
-  displayName: Service Name
-  name: SERVICE
-  required: true
-
 - description: Weight of route in LB
   displayName: Route weight
   name: WEIGHT
