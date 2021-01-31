@@ -29,7 +29,18 @@ microServices:
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
-
-
-
-
+resourceQuotas:
+  default: small.yml
+  qa: medium.yml
+  stg: large.yml
+  prod: large.yml
+nfsShares:
+- envs:
+  - qa
+  - stg
+  - prod
+  capacity: 5Gi
+  accessMode: ReadWriteMany
+  exportPath: /mnt/nfs-test
+  server: hippys-bfs.localdomain
+  claimName: test-dir
