@@ -9,7 +9,7 @@ def assemble(def projectInfo, def microService) {
     sh """
         git clean -fxd
 
-        sed -i '/^FROM.*/a ARG PIP_CONFIG_FILE=./${el.cicd.EL_CICD_BUILD_SECRETS}/pip.conf' Dockerfile
+        sed -i '/^FROM.*/a ARG PIP_CONFIG_FILE=./${el.cicd.EL_CICD_BUILD_SECRETS_NAME}/pip.conf' Dockerfile
     """
 }
 
