@@ -21,8 +21,8 @@ objects:
   metadata:
     name: ${APP_NAME}
   spec:
-    concurrencyPolicy: Allow
-    failedJobsHistoryLimit: 3
+    concurrencyPolicy: ${CONCURRENCY_POLICY}
+    failedJobsHistoryLimit: ${{FAILED_JOB_HISTORY_LIMIT}}
     jobTemplate:
       metadata:
       spec:
@@ -35,7 +35,6 @@ objects:
               - ${EXECUTABLE}
               image: ${IMAGE_REPOSITORY}/${PROJECT_ID}-${MICROSERVICE_NAME}:${IMAGE_TAG}
               name: ${APP_NAME}
-              imagePullPolicy: Always
               resources:
                 limits:
                   cpu: ${CPU_LIMIT}
@@ -43,15 +42,12 @@ objects:
                 requests:
                   cpu: ${CPU_REQ}
                   memory: ${MEM_REQ}
-              terminationMessagePath: /dev/termination-log
-              terminationMessagePolicy: File
             imagePullSecrets:
             - name: ${PULL_SECRET}
-            dnsPolicy: ClusterFirst
-            restartPolicy: OnFailure
-            schedulerName: default-scheduler
+            dnsPolicy: ${DNS_POLICY}
+            restartPolicy: ${RESTART_POLICY}
             securityContext: {}
-            terminationGracePeriodSeconds: 30
+            terminationGracePeriodSeconds: ${{TERMINATION_GRACE_PERIOD_SECONDS}}
     schedule: ${SCHEDULE}
 ############################################################################
 ##
@@ -69,6 +65,11 @@ parameters:
 - description: The image repository from where to fetch the image
   displayName: Image Repository
   name: IMAGE_REPOSITORY
+  required: true
+
+- description: The image repository pull secret
+  displayName: Image Repository Pull
+  name: PULL_SECRET
   required: true
 
 - description: The name for the microservice, derived by el-CICD from the name of the Git repository
@@ -90,6 +91,18 @@ parameters:
   displayName: Environment Name
   name: ENV
   required: true
+
+- description: Concurrrency Policy
+  displayName:  Concurrrency Policy
+  name: CONCURRENCY_POLICY
+  required: true
+  value: Allow
+
+- description: Failed job history limit
+  displayName:  Failed Job History Limit
+  name: FAILED_JOB_HISTORY_LIMIT
+  required: true
+  value: "3"
 
 - description: Image Tag used to pull image from image repository
   displayName:  Image Tag
@@ -130,7 +143,25 @@ parameters:
   name: EXECUTABLE
   required: true
 
-- description: cronjob schedule
-  displayName: cronjob schedule, using standard cron notation
+- description: Restart Policy
+  displayName: Restart policy
+  name: RESTART_POLICY
+  required: true
+  value: OnFailure
+
+- description: DNS Policy
+  displayName: DNS Policy
+  name: DNS_POLICY
+  required: true
+  value: ClusterFirst
+
+- description: Termination grace period in seconds
+  displayName: Termination Grace Period Seconds
+  name: TERMINATION_GRACE_PERIOD_SECONDS
+  required: true
+  value: "30"
+
+- description: Cronjob schedule, using standard cron notation
+  displayName: Cronjob schedule
   name: SCHEDULE
   required: true

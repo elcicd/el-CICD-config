@@ -57,7 +57,6 @@ objects:
 ##
 ######################################################################
             image: ${IMAGE_REPOSITORY}/${PROJECT_ID}-${MICROSERVICE_NAME}:${IMAGE_TAG}
-            imagePullPolicy: Always
 ######################################################################
 ##
 ## Best practices say your deployments should define resource limits and requests,
@@ -80,7 +79,6 @@ objects:
 ##
 #############################################################################  
             - containerPort: ${{SVC_PORT}}
-              protocol: TCP
 #############################################################################
 ##
 ## DO NOT EDIT OR REMOVE.  Doing so will break deployments.
@@ -104,8 +102,7 @@ objects:
     selector:
       app: ${APP_NAME}
     ports:
-      - protocol: TCP
-        port: ${{SVC_PORT}}
+      - port: ${{SVC_PORT}}
         targetPort: ${{SVC_PORT}}
 
 parameters:

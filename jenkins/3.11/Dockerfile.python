@@ -1,4 +1,4 @@
-FROM openshift/jenkins-agent-el-cicd-base
+FROM openshift/el-cicd-jenkins-agent-base
 
 USER root
 
