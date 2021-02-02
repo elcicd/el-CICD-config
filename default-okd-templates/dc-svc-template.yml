@@ -57,6 +57,7 @@ objects:
 ##
 ######################################################################
             image: ${IMAGE_REPOSITORY}/${PROJECT_ID}-${MICROSERVICE_NAME}:${IMAGE_TAG}
+            imagePullPolicy: ${IMAGE_PULL_POLICY}
 ######################################################################
 ##
 ## Best practices say your deployments should define resource limits and requests,
@@ -110,6 +111,12 @@ parameters:
   displayName: Image Repository
   name: IMAGE_REPOSITORY
   required: true
+
+- description: The image pull policy
+  displayName: Image Pull Policy
+  name: IMAGE_PULL_POLICY
+  required: true
+  value: Always
 
 - description: The image repository pull secret
   displayName: Image Repository Pull

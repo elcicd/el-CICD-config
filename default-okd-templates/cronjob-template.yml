@@ -30,10 +30,9 @@ objects:
           metadata:
           spec:
             containers:
-            - command:
-              - ${INTERPRETER}
-              - ${EXECUTABLE}
+            - command: [${COMMAND}]
               image: ${IMAGE_REPOSITORY}/${PROJECT_ID}-${MICROSERVICE_NAME}:${IMAGE_TAG}
+              imagePullPolicy: ${IMAGE_PULL_POLICY}
               name: ${APP_NAME}
               resources:
                 limits:
@@ -66,6 +65,12 @@ parameters:
   displayName: Image Repository
   name: IMAGE_REPOSITORY
   required: true
+
+- description: The image pull policy
+  displayName: Image Pull Policy
+  name: IMAGE_PULL_POLICY
+  required: true
+  value: Always
 
 - description: The image repository pull secret
   displayName: Image Repository Pull
@@ -133,14 +138,9 @@ parameters:
   required: true
   value: 500Mi
 
-- description: Interpreter program to run 
-  displayName: Interpreter program
-  name: INTERPRETER
-  required: true
-
-- description: Full path to executable program
-  displayName: executable program
-  name: EXECUTABLE
+- description: Command to run, broken out as "'command', 'arg1', ... , 'argN', 'executable'"
+  displayName: Command To Run
+  name: COMMAND
   required: true
 
 - description: Restart Policy
