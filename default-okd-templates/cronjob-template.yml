@@ -179,7 +179,6 @@ parameters:
   required: true
   value: "3"
 
-
 - description: Suspend the job from launching
   displayName: Suspend
   name: SUSPEND
