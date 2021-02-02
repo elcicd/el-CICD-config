@@ -30,7 +30,9 @@ objects:
           metadata:
           spec:
             containers:
-            - command: [${COMMAND}]
+            - command:
+              - ${INTERPRETER}
+              - ${EXECUTABLE}
               image: ${IMAGE_REPOSITORY}/${PROJECT_ID}-${MICROSERVICE_NAME}:${IMAGE_TAG}
               imagePullPolicy: ${IMAGE_PULL_POLICY}
               name: ${APP_NAME}
@@ -138,9 +140,14 @@ parameters:
   required: true
   value: 500Mi
 
-- description: Command to run, broken out as "'command', 'arg1', ... , 'argN', 'executable'"
-  displayName: Command To Run
-  name: COMMAND
+- description: Interpreter program to run 
+  displayName: Interpreter program
+  name: INTERPRETER
+  required: true
+
+- description: Full path to executable program
+  displayName: executable program
+  name: EXECUTABLE
   required: true
 
 - description: Restart Policy
