@@ -58,8 +58,8 @@ objects:
 ## CronJobs use standard cron notation for scheduling.
 ##
 ############################################################################
-    successfulJobsHistoryLimit: 3
-    suspend: false
+    successfulJobsHistoryLimit: ${{SUCCESSFUL_JOBS_HISTORY_LIMIT}}
+    suspend: ${{SUSPEND}}
 
 parameters:
 - description: The image repository from where to fetch the image
@@ -165,3 +165,16 @@ parameters:
   displayName: Cronjob schedule
   name: SCHEDULE
   required: true
+
+- description: Successful job history limit
+  displayName: Successful Job History Limit
+  name: SUCCESSFUL_JOBS_HISTORY_LIMIT
+  required: true
+  value: "3"
+
+
+- description: Suspend the job from launching
+  displayName: Suspend
+  name: SUSPEND
+  required: true
+  value: "false"
