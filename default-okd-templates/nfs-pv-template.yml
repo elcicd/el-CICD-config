@@ -9,7 +9,7 @@ objects:
 - apiVersion: v1
   kind: PersistentVolume
   metadata:
-    name: nfs-${PV_NAME}
+    name: ${PV_NAME}
   spec:
     capacity:
       storage: ${CAPACITY}
