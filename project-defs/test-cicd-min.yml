@@ -6,26 +6,26 @@ gitBranch: development
 microServices:
 - gitRepoName: test-cicd-stationdemo
   codeBase: java-maven
-  active: true
+  status: ACTIVE
 - gitRepoName: Test-CICD1
   codeBase: python
   tester: pytest
-  active: true
+  status: ACTIVE
 - gitRepoName: test_CICD2
   codeBase: python
   tester: pytest
-  active: false
+  status: INACTIVE
 - gitRepoName: TeSt-CiCd3
   codeBase: python
   tester: pytest
-  active: true
+  status: ACTIVE
 - gitRepoName: Test_CICD4
   codeBase: python
   tester: pytest
-  active: true
+  status: ACTIVE
 - gitRepoName: test-cicd-R
   codeBase: r-lang
-  active: true
+  status: ACTIVE
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
