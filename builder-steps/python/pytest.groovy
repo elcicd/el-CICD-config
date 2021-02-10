@@ -6,6 +6,11 @@
 
 def test(def projectInfo, def microService) {
     sh """
+        if [[ -f ${el.cicd.BUILDER_SECRETS_DIR}/pip.conf ]]
+        then
+            PIP_CONFIG_FILE=${el.cicd.BUILDER_SECRETS_DIR}/pip.conf
+        fi
+
         mkdir -p ./tests
         if [[ `ls -l ./tests/*.py | wc -l` -gt 0 ]]
         then

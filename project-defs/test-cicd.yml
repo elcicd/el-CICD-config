@@ -28,7 +28,7 @@ microServices:
   status: ACTIVE
 enabledTestEnvs:
 - qa
--sandboxEnvs: 2
+sandboxEnvs: 2
 resourceQuotas:
   default: small.yml
   qa: medium.yml
