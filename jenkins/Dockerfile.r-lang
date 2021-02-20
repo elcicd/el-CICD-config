@@ -10,9 +10,6 @@ RUN yum install -y --setopt=tsflags=nodocs openssl-devel libcurl libcurl-devel l
     yum  clean all && \
     curl -Of https://shellcheck.storage.googleapis.com/shellcheck-v0.7.0.linux.x86_64.tar.xz && \
     tar -C /usr/local/bin/ -xf shellcheck-v0.7.0.linux.x86_64.tar.xz --no-anchored 'shellcheck' --strip=1 && \
-    R -e "install.packages('devtools', repos='https://cran.rstudio.com/')"  && \
-    R -e "install.packages('renv', repos='https://cran.rstudio.com/')"  && \
-    R -e "install.packages('lintr', repos='https://cran.rstudio.com/')"  && \
-    R -e "install.packages('jsonlite', repos='https://cran.rstudio.com/')"
+    R -e "install.packages(c('devtools', 'renv', 'lintr', 'jsonlite'), repos='https://cran.rstudio.com/', INSTALL_opts=c('--no-help','--no-html',' --no-docs','--no-multiarch','--no-demo'))"
 
 USER 1001
