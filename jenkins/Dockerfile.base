@@ -1,15 +1,11 @@
-FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-base
-
-USER root
+FROM registry.redhat.io/openshift4/ose-jenkins-agent-base
 
 # REMOVE THE FOLLOWING IF REDHAT ENTITLED BUILDS ARE ENABLED YOUR CLUSTER
 COPY ./centos.repo /etc/yum.repos.d/
 
 RUN yum install -y --setopt=tsflags=nodocs drpm epel-release && \
     yum install -y --setopt=tsflags=nodocs podman skopeo buildah jq && \
-    yum update -y --setopt=tsflags=nodocs && \
+    yum upgrade -y --setopt=tsflags=nodocs && \
     yum clean all && \
-    curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash -s 3.8.5 && \
+    curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash -s 4.0.1 && \
     mv ./kustomize /usr/local/bin
-
-USER 1001
