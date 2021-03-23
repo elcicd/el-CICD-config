@@ -6,7 +6,7 @@
 ## edge termination, and a weight of 100.
 ##
 ######################################################################
-apiVersion: v1
+apiVersion: template.openshift.io/v1
 kind: Template
 labels:
   template: route-template
