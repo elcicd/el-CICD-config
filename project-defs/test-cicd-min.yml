@@ -23,9 +23,9 @@ microServices:
   codeBase: python
   tester: pytest
   status: ACTIVE
-# - gitRepoName: test-cicd-R
-#   codeBase: r-lang
-#   status: ACTIVE
+- gitRepoName: test-cicd-R
+  codeBase: r-lang
+  status: ACTIVE
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
