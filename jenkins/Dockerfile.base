@@ -1,5 +1,7 @@
 FROM registry.redhat.io/openshift4/ose-jenkins-agent-base
 
+ENV LC_ALL=C.UTF-8
+
 USER root
 
 # REMOVE THE FOLLOWING IF REDHAT ENTITLED BUILDS ARE ENABLED YOUR CLUSTER
