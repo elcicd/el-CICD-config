@@ -2,7 +2,7 @@ rbacGroup: devops
 scmHost: github.com
 scmRestApiHost: api.github.com
 scmOrganization: elcicd
-gitBranch: development
+gitBranch: dev-k8s
 microServices:
 - gitRepoName: test-cicd-stationdemo
   codeBase: java-maven
