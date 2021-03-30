@@ -32,7 +32,10 @@ objects:
     replicas: ${{REPLICAS}}
     selector:
         matchExpressions:
-          - {key: build-number, operator: Gt, values: "0" }
+          - key: build-number
+            operator: Gt
+            values:
+              - "0"
         matchLabels:
           microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
