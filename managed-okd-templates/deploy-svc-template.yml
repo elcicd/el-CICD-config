@@ -31,10 +31,11 @@ objects:
   spec:
     replicas: ${{REPLICAS}}
     selector:
+        matchExpressions:
+          - {key: build-number, operator: Gt, values: "0" }
         matchLabels:
           microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
-          build-number: ${BUILD_NUMBER}
 ######################################################################
 ##
 ## Default strategy is "Rolling", per OKD standards.
@@ -46,8 +47,8 @@ objects:
       metadata:
         labels:
           microservice: ${MICROSERVICE_NAME}
+          build-number: ${{BUILD_NUMBER}}
           app: ${APP_NAME}
-          build-number: ${BUILD_NUMBER}
       spec:
         containers:
           - name: ${APP_NAME}
