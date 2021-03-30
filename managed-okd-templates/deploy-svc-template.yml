@@ -32,9 +32,10 @@ objects:
   spec:
     replicas: ${{REPLICAS}}
     selector:
-      microservice: ${MICROSERVICE_NAME}
-      app: ${APP_NAME}
-      deploymentconfig: ${APP_NAME}
+        matchLabels:
+          microservice: ${MICROSERVICE_NAME}
+          app: ${APP_NAME}
+          deploymentconfig: ${APP_NAME}
 ######################################################################
 ##
 ## Default strategy is "Rolling", per OKD standards.
@@ -185,4 +186,4 @@ parameters:
   displayName: Deployment strategy
   name: STRATEGY
   required: true
-  value: Rolling
+  value: RollingUpdate
