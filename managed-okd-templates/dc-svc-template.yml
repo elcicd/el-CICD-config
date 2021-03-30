@@ -31,7 +31,9 @@ objects:
   spec:
     replicas: ${{REPLICAS}}
     selector:
+      microservice: ${MICROSERVICE_NAME}
       app: ${APP_NAME}
+      build-number: ${BUILD_NUMBER}
 ######################################################################
 ##
 ## Default strategy is "Rolling", per OKD standards.
