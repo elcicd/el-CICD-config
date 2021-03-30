@@ -33,9 +33,7 @@ objects:
     selector:
         matchExpressions:
           - key: build-number
-            operator: Gt
-            values:
-              - "0"
+            operator: Exists
         matchLabels:
           microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
@@ -50,7 +48,7 @@ objects:
       metadata:
         labels:
           microservice: ${MICROSERVICE_NAME}
-          build-number: "${BUILD_NUMBER}"
+          build-number: ${BUILD_NUMBER}
           app: ${APP_NAME}
       spec:
         containers:
