@@ -33,7 +33,7 @@ objects:
     selector:
       microservice: ${MICROSERVICE_NAME}
       app: ${APP_NAME}
-      build-number: ${BUILD_NUMBER}
+      build-number: build-${BUILD_NUMBER}
 ######################################################################
 ##
 ## Default strategy is "Rolling", per OKD standards.
@@ -46,7 +46,7 @@ objects:
         labels:
           microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
-          build-number: ${BUILD_NUMBER}
+          build-number: build-${BUILD_NUMBER}
       spec:
         containers:
           - name: ${APP_NAME}

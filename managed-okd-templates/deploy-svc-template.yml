@@ -48,7 +48,7 @@ objects:
       metadata:
         labels:
           microservice: ${MICROSERVICE_NAME}
-          build-number: ${BUILD_NUMBER}
+          build-number: build-${BUILD_NUMBER}
           app: ${APP_NAME}
       spec:
         containers:
