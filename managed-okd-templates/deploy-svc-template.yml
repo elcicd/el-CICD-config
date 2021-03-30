@@ -27,9 +27,7 @@ objects:
   metadata:
     name: ${APP_NAME}
     labels:
-      microservice: ${MICROSERVICE_NAME}
       app: ${APP_NAME}
-      build-number: ${BUILD_NUMBER}
   spec:
     replicas: ${{REPLICAS}}
     selector:
@@ -47,7 +45,9 @@ objects:
     template:
       metadata:
         labels:
+          microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
+          build-number: ${BUILD_NUMBER}
       spec:
         containers:
           - name: ${APP_NAME}
