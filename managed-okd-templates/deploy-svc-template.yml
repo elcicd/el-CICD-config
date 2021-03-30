@@ -27,7 +27,6 @@ objects:
   metadata:
     name: ${APP_NAME}
     labels:
-      microservice: ${MICROSERVICE_NAME}
       app: ${APP_NAME}
   spec:
     replicas: ${{REPLICAS}}
@@ -35,7 +34,7 @@ objects:
         matchLabels:
           microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
-          deploymentconfig: ${APP_NAME}
+          build-number: ${BUILD_NUMBER}
 ######################################################################
 ##
 ## Default strategy is "Rolling", per OKD standards.
@@ -46,9 +45,7 @@ objects:
     template:
       metadata:
         labels:
-          microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
-          deploymentconfig: ${APP_NAME}
       spec:
         containers:
           - name: ${APP_NAME}
@@ -104,6 +101,11 @@ objects:
         protocol: ${PORT_PROTOCOL}
 
 parameters:
+- description: The build number
+  displayName: Build Number
+  name: BUILD_NUMBER
+  required: true
+
 - description: The image repository from where to fetch the image
   displayName: Image Repository
   name: IMAGE_REPOSITORY

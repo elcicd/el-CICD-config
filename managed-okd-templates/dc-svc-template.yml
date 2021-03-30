@@ -16,7 +16,7 @@ message: Deploying using templated resources
 metadata:
   name:  dc-svc-template
 objects:
-- apiVersion: v1
+- apiVersion: apps.openshift.io/v1
   kind: DeploymentConfig
 ######################################################################
 ##
@@ -27,14 +27,11 @@ objects:
   metadata:
     name: ${APP_NAME}
     labels:
-      microservice: ${MICROSERVICE_NAME}
       app: ${APP_NAME}
   spec:
     replicas: ${{REPLICAS}}
     selector:
-      microservice: ${MICROSERVICE_NAME}
       app: ${APP_NAME}
-      deploymentconfig: ${APP_NAME}
 ######################################################################
 ##
 ## Default strategy is "Rolling", per OKD standards.
@@ -47,7 +44,7 @@ objects:
         labels:
           microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
-          deploymentconfig: ${APP_NAME}
+          build-number: ${BUILD_NUMBER}
       spec:
         containers:
           - name: ${APP_NAME}
@@ -109,6 +106,11 @@ objects:
         protocol: ${PORT_PROTOCOL}
 
 parameters:
+- description: The build number
+  displayName: Build Number
+  name: BUILD_NUMBER
+  required: true
+
 - description: The image repository from where to fetch the image
   displayName: Image Repository
   name: IMAGE_REPOSITORY
