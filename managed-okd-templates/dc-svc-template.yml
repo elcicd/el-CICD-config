@@ -79,8 +79,7 @@ objects:
 ## service port.  For strings, use a single set of curly braces { }.
 ##
 #############################################################################  
-              - port: ${{SVC_PORT}}
-                targetPort: ${{SVC_PORT}}
+              - containerPort: ${{SVC_PORT}}
                 protocol: ${PORT_PROTOCOL}
 #############################################################################
 ##
