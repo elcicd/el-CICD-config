@@ -30,10 +30,6 @@ objects:
       kubernetes.io/ingress.allow-http: "${ALLOW_HTTP}"
   spec:
     ingressClassName: ${INGRESS_CLASS_NAME}
-    tls:
-    - hosts:
-      - ${ROUTE_HOST}
-
     rules:
     - host: ${ROUTE_HOST}
       http:
