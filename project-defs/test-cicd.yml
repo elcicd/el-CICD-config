@@ -30,6 +30,10 @@ libraries:
 - gitRepoName: test-cicd-stationdemo
   codeBase: java-maven
   status: ACTIVE
+- gitRepoName: Test-CICD1
+  codeBase: python
+  tester: pytest
+  status: ACTIVE
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
