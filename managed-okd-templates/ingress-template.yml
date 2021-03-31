@@ -1,9 +1,9 @@
 ######################################################################
 ##
-## The following template can be used as is for defining an external Route.
+## The following template can be used as is for defining an external Ingress.
 ## The Host Name will be automatically defined by el-CICD if not specified
 ## in your template-defs.json.  The default values include port 8080,
-## edge termination, and a weight of 100.
+## and HTTP traffic is redirected to HTTPS.
 ##
 ######################################################################
 apiVersion: template.openshift.io/v1
