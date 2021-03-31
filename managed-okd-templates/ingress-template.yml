@@ -34,10 +34,8 @@ objects:
         - path: ${INGRESS_PATH}
           pathType: Prefix
           backend:
-            service:
-              name: ${APP_NAME}
-              port:
-                number: ${{SVC_PORT}}
+            serviceName: ${APP_NAME}
+            servicePort: ${{SVC_PORT}}
 
 parameters:
 - description: The name for the app; set this value in template-defs.json for multiple deployments of the same image; default value is the microservice name
