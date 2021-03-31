@@ -20,7 +20,7 @@ objects:
 ## this is you intend to deploy the same image multiple times.
 ##
 ######################################################################
-- apiVersion: networking.k8s.io/v1
+- apiVersion: networking.k8s.io/v1beta1
   kind: Ingress
   metadata:
     labels:
