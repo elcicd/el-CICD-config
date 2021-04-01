@@ -4,7 +4,7 @@
  * Utility method for deploying a library to an artifact repository
  */
 
-def assemble(def projectInfo, def library) {
+def deploy(def projectInfo, def library) {
     echo 'WARNING: library deployments not currently enabled for Java Maven builds'
 
     // sh 'mvn -DskipTests --batch-mode deploy'
