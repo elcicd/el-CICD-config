@@ -26,6 +26,14 @@ microServices:
 - gitRepoName: test-cicd-R
   codeBase: r-lang
   status: ACTIVE
+libraries:
+- gitRepoName: test-cicd-stationdemo-lib
+  codeBase: java-maven
+  status: ACTIVE
+- gitRepoName: Test-CICD1-lib
+  codeBase: python
+  tester: pytest
+  status: ACTIVE
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
