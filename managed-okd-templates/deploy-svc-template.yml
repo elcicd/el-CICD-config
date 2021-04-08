@@ -35,6 +35,7 @@ objects:
           - key: build-number
             operator: Exists
         matchLabels:
+          projectid: ${PROJECT_ID}
           microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
 ######################################################################
@@ -47,6 +48,7 @@ objects:
     template:
       metadata:
         labels:
+          projectid: ${PROJECT_ID}
           microservice: ${MICROSERVICE_NAME}
           build-number: build-${BUILD_NUMBER}
           app: ${APP_NAME}

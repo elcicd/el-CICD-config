@@ -31,6 +31,7 @@ objects:
   spec:
     replicas: ${{REPLICAS}}
     selector:
+      projectid: ${PROJECT_ID}
       microservice: ${MICROSERVICE_NAME}
       app: ${APP_NAME}
       build-number: build-${BUILD_NUMBER}
@@ -44,6 +45,7 @@ objects:
     template:
       metadata:
         labels:
+          projectid: ${PROJECT_ID}
           microservice: ${MICROSERVICE_NAME}
           app: ${APP_NAME}
           build-number: build-${BUILD_NUMBER}

@@ -28,6 +28,10 @@ objects:
       spec:
         template:
           metadata:
+            labels:
+              projectid: ${PROJECT_ID}
+              microservice: ${MICROSERVICE_NAME}
+              app: ${APP_NAME}
           spec:
             containers:
             - command:
