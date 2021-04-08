@@ -24,7 +24,6 @@ objects:
     concurrencyPolicy: ${CONCURRENCY_POLICY}
     failedJobsHistoryLimit: ${{FAILED_JOB_HISTORY_LIMIT}}
     jobTemplate:
-      metadata:
       spec:
         template:
           metadata:
