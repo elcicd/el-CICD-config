@@ -37,6 +37,7 @@ libraries:
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
+allowsHotfixes: true
 resourceQuotas:
   default: small.yml
   qa: medium.yml
