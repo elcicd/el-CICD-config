@@ -37,7 +37,6 @@ objects:
         matchLabels:
           projectid: ${PROJECT_ID}
           microservice: ${MICROSERVICE_NAME}
-          app: ${APP_NAME}
 ######################################################################
 ##
 ## Default strategy is "Rolling", per OKD standards.
@@ -51,7 +50,6 @@ objects:
           projectid: ${PROJECT_ID}
           microservice: ${MICROSERVICE_NAME}
           build-number: build-${BUILD_NUMBER}
-          app: ${APP_NAME}
       spec:
         containers:
           - name: ${APP_NAME}
