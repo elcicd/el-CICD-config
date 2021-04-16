@@ -1,5 +1,5 @@
 /*
- * Pre-non-prod project onboarding test script.
+ * pre-non-prod project test script
  */
 
 def call(Map args) {

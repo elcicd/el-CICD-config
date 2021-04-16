@@ -1,5 +1,5 @@
 /*
- * On-success-non-prod project onboarding script for commiting and pushing a new Project Definition File to el-CICD.
+ * on-success-non-prod project test script
  */
 
 def call(Map args) {
