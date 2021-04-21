@@ -38,6 +38,9 @@ enabledTestEnvs:
 - qa
 sandboxEnvs: 2
 allowsHotfixes: true
+releaseRegions:
+  - east
+  - west
 resourceQuotas:
   default: small.yml
   qa: medium.yml
