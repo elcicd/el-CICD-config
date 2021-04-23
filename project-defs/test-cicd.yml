@@ -39,7 +39,7 @@ enabledTestEnvs:
 sandboxEnvs: 2
 allowsHotfixes: true
 releaseRegions:
-  - east
+  - East
   - west
 resourceQuotas:
   default: small.yml
