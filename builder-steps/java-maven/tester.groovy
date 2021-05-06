@@ -7,7 +7,12 @@
 def test(def projectInfo, def microService) {
     sh """
         export JAVA_TOOL_OPTIONS=
-        mvn test
+        if [[ -f ${el.cicd.BUILDER_SECRETS_DIR}/settings.xml ]]
+        then
+            mvn -s ${el.cicd.BUILDER_SECRETS_DIR}/settings.xml test
+        else
+            mvn test
+        fi
     """
 }
 
