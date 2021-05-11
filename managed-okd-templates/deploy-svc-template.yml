@@ -96,8 +96,20 @@ objects:
   kind: Service
   metadata:
     name: ${APP_NAME}
+    annotations:
+      # Prometheus annotations: ignore if not using
+      prometheus.io/path: ${PROM_PATH}
+      prometheus.io/port: ${{SVC_PORT}}
+      prometheus.io/scheme: ${PROM_SCHEME}
+      prometheus.io/scrape: ${PROM_SCRAPE}
+      # 3Scale annotations: ignore if not using
+      discovery.3scale.net/path: ${3SCALE_PATH}
+      discovery.3scale.net/port: ${{SVC_PORT}}
+      discovery.3scale.net/scheme: ${3SCALE_SCHEME}
     labels:
       app: ${APP_NAME}
+      # 3Scale label: set to "true" ignore if not using
+      discovery.3scale.net: ${3SCALE_NET}
   spec:
     selector:
       app: ${APP_NAME}
@@ -195,3 +207,44 @@ parameters:
   name: STRATEGY
   required: true
   value: RollingUpdate
+
+- description: Prometheus scraping path
+  displayName: Prometheus Path
+  name: PROM_PATH
+  required: false
+
+- description: Prometheus scheme (http/https)
+  displayName: Prometheus Scheme
+  name: PROM_SCHEME
+  required: true
+  value: https
+
+- description: Prometheus scheme (http/https)
+  displayName: Prometheus Scheme
+  name: PROM_SCRAPE
+  required: true
+  value: false
+
+- description: 3Scale path (http/https)
+  displayName: Prometheus Path
+  name: 3SCALE_PATH
+  required: false
+
+- description: 3Scale scheme (http/https)
+  displayName: Prometheus Scheme
+  name: 3SCALE_SCHEME
+  required: true
+  value: https
+
+- description: 3Scale path (http/https)
+  displayName: Description Path
+  name: 3SCALE_DESCRIPTION_PATH
+  required: false
+  value: false
+
+- description: 3Scale net - set true if active (http/https)
+  displayName: Net
+  name: 3SCALE_NET
+  required: false
+  value: "false"
+
