@@ -219,31 +219,30 @@ parameters:
   required: true
   value: https
 
-- description: Prometheus scheme (http/https)
-  displayName: Prometheus Scheme
+- description: Prometheus scrape (http/https)
+  displayName: Prometheus Scrape
   name: PROM_SCRAPE
   required: true
-  value: false
+  value: "false"
 
-- description: 3Scale path (http/https)
-  displayName: Prometheus Path
+- description: 3Scale path
+  displayName: 3Scale Path
   name: 3SCALE_PATH
   required: false
 
 - description: 3Scale scheme (http/https)
-  displayName: Prometheus Scheme
+  displayName: 3Scale Scheme
   name: 3SCALE_SCHEME
   required: true
   value: https
 
-- description: 3Scale path (http/https)
-  displayName: Description Path
+- description: 3Scale description path
+  displayName: 3Scale Description Path
   name: 3SCALE_DESCRIPTION_PATH
   required: false
-  value: false
 
 - description: 3Scale net - set true if active (http/https)
-  displayName: Net
+  displayName: 3Scale Net
   name: 3SCALE_NET
   required: false
   value: "false"
