@@ -11,10 +11,10 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
-  template: deploy-svc-template
+  template: deploy-svc-prom-port-template
 message: Deploying using templated resources
 metadata:
-  name:  deploy-svc-template
+  name:  deploy-svc-prom-port-template
 objects:
 - apiVersion: apps/v1
   kind: Deployment
