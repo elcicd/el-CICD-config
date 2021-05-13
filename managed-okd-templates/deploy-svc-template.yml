@@ -97,14 +97,14 @@ objects:
   metadata:
     name: ${APP_NAME}
     annotations:
-      # Prometheus annotations: ignore if not using
+      # Prometheus annotations: OK to ignore if not using
       prometheus.io/path: ${PROM_PATH}
-      prometheus.io/port: ${{SVC_PORT}}
+      prometheus.io/port: ${PROM_PORT}
       prometheus.io/scheme: ${PROM_SCHEME}
       prometheus.io/scrape: ${PROM_SCRAPE}
-      # 3Scale annotations: ignore if not using
+      # 3Scale annotations: OK to ignore if not using
       discovery.3scale.net/path: ${3SCALE_PATH}
-      discovery.3scale.net/port: ${{SVC_PORT}}
+      discovery.3scale.net/port: ${SVC_PORT}
       discovery.3scale.net/scheme: ${3SCALE_SCHEME}
     labels:
       app: ${APP_NAME}
