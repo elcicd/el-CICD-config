@@ -98,10 +98,10 @@ objects:
     name: ${APP_NAME}
     annotations:
       # Prometheus annotations: OK to ignore if not using
-      prometheus.io/path: ${PROM_PATH}
-      prometheus.io/port: ${PROM_PORT}
-      prometheus.io/scheme: ${PROM_SCHEME}
-      prometheus.io/scrape: ${PROM_SCRAPE}
+      prometheus.io/path: ${PROMETHEUS_PATH}
+      prometheus.io/port: ${PROMETHEUS_PORT}
+      prometheus.io/scheme: ${PROMETHEUS_SCHEME}
+      prometheus.io/scrape: ${PROMETHEUS_SCRAPE}
       # 3Scale annotations: OK to ignore if not using
       discovery.3scale.net/path: ${3SCALE_PATH}
       discovery.3scale.net/port: ${SVC_PORT}
@@ -119,8 +119,8 @@ objects:
         targetPort: ${{SVC_PORT}}
         protocol: ${PORT_PROTOCOL}
       - name: ${APP_NAME}-prometheus-port
-        port: ${{PROM_PORT}}
-        targetPort: ${{SVC_PORT}}
+        port: ${{PROMETHEUS_PORT}}
+        targetPort: ${{PROMETHEUS_PORT}}
         protocol: ${PORT_PROTOCOL}
 
 parameters:
@@ -215,23 +215,23 @@ parameters:
 
 - description: Prometheus scraping path
   displayName: Prometheus Path
-  name: PROM_PATH
+  name: PROMETHEUS_PATH
   required: false
 
 - description: Prometheus port
   displayName: Prometheus Port
-  name: PROM_PORT
+  name: PROMETHEUS_PORT
   required: true
 
 - description: Prometheus scheme (http/https)
   displayName: Prometheus Scheme
-  name: PROM_SCHEME
+  name: PROMETHEUS_SCHEME
   required: true
   value: https
 
 - description: Prometheus scrape (http/https)
   displayName: Prometheus Scrape
-  name: PROM_SCRAPE
+  name: PROMETHEUS_SCRAPE
   required: true
   value: "false"
 
