@@ -80,8 +80,10 @@ objects:
 ## service port.  For strings, use a single set of curly braces { }.
 ##
 #############################################################################  
-              - containerPort: ${{SVC_PORT}}
-                protocol: ${PORT_PROTOCOL}
+            - containerPort: ${{SVC_PORT}}
+              protocol: ${PORT_PROTOCOL}
+            - containerPort: ${{PROMETHEUS_PORT}}
+              protocol: ${PROMETHEUS_PORT_PROTOCOL}
 #############################################################################
 ##
 ## DO NOT EDIT OR REMOVE.  Doing so will break deployments.
@@ -226,13 +228,19 @@ parameters:
   name: PROMETHEUS_PORT
   required: true
 
+- description: Protocol for Prometheus port. Must be UDP, TCP, or SCTP. Defaults to "TCP".
+  displayName: Prometheus Port Protocol
+  name: PROMETHEUS_PORT_PROTOCOL
+  required: true
+  value: TCP
+
 - description: Prometheus scheme (http/https)
   displayName: Prometheus Scheme
   name: PROMETHEUS_SCHEME
   required: true
   value: https
 
-- description: Prometheus scrape (http/https)
+- description: Prometheus scrape (true/false)
   displayName: Prometheus Scrape
   name: PROMETHEUS_SCRAPE
   required: true
@@ -254,7 +262,7 @@ parameters:
   name: 3SCALE_DESCRIPTION_PATH
   required: false
 
-- description: 3Scale net - set true if active (http/https)
+- description: 3Scale net (true/false, true if active)
   displayName: 3Scale Net
   name: 3SCALE_NET
   required: false
