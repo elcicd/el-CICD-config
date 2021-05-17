@@ -105,13 +105,13 @@ objects:
       prometheus.io/scheme: ${PROMETHEUS_SCHEME}
       prometheus.io/scrape: ${PROMETHEUS_SCRAPE}
       # 3Scale annotations: OK to ignore if not using
-      discovery.3scale.net/path: ${3SCALE_PATH}
+      discovery.3scale.net/path: ${THREE_PATH}
       discovery.3scale.net/port: ${SVC_PORT}
-      discovery.3scale.net/scheme: ${3SCALE_SCHEME}
+      discovery.3scale.net/scheme: ${THREE_SCHEME}
     labels:
       app: ${APP_NAME}
       # 3Scale label: set to "true" ignore if not using
-      discovery.3scale.net: ${3SCALE_NET}
+      discovery.3scale.net: ${THREE_NET}
   spec:
     selector:
       app: ${APP_NAME}
@@ -245,22 +245,22 @@ parameters:
 
 - description: 3Scale path
   displayName: 3Scale Path
-  name: 3SCALE_PATH
+  name: THREE_PATH
   required: false
 
 - description: 3Scale scheme (http/https)
   displayName: 3Scale Scheme
-  name: 3SCALE_SCHEME
+  name: THREE_SCHEME
   required: true
   value: https
 
 - description: 3Scale description path
   displayName: 3Scale Description Path
-  name: 3SCALE_DESCRIPTION_PATH
+  name: THREE_DESCRIPTION_PATH
   required: false
 
 - description: 3Scale net (true/false, true if active)
   displayName: 3Scale Net
-  name: 3SCALE_NET
+  name: THREE_NET
   required: false
   value: "false"
