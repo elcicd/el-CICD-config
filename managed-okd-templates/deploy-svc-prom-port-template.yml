@@ -4,7 +4,7 @@
 ## that do not require an external Route.  The parameters defined within should
 ## allow you to configure a deployment to any degree you need.  With minor exceptions
 ## documented below, DO NOT edit the template; e.g. you need sidecar container.
-## If you need additional parameters, use kustomize and template-defs.json per the
+## If you need additional parameters, use kustomize and template-defs per the
 ## el-CICD documention to add them.
 ##
 ######################################################################
@@ -152,7 +152,7 @@ parameters:
   name: MICROSERVICE_NAME
   required: true
 
-- description: The name for the app.  Set this value manually through the template-defs.json file for multiple deployments of the same image.
+- description: The name for the app.  Set this value manually through the template-defs file for multiple deployments of the same image.
   displayName: Application Name
   name: APP_NAME
   required: true
