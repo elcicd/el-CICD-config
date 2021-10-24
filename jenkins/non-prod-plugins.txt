@@ -1,2 +1,3 @@
 configuration-as-code:latest
 mailer:latest
+pipeline-utility-steps:latest
