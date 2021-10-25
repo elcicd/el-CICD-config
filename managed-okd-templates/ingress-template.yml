@@ -73,6 +73,8 @@ parameters:
 - description: Ingress Class Name
   displayName: Ingress Class Name
   name: INGRESS_CLASS_NAME
+  required: true
+  value: "None"
 
 - description: Service port
   displayName: Service Port
