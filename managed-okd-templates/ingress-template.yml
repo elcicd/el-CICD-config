@@ -29,7 +29,6 @@ objects:
     annotations:
       kubernetes.io/ingress.allow-http: "${ALLOW_HTTP}"
   spec:
-    ingressClassName: ${INGRESS_CLASS_NAME}
     rules:
     - host: ${ROUTE_HOST}
       http:
@@ -69,12 +68,6 @@ parameters:
   name: ALLOW_HTTP
   required: true
   value: "false"
-
-- description: Ingress Class Name
-  displayName: Ingress Class Name
-  name: INGRESS_CLASS_NAME
-  required: true
-  value: "None"
 
 - description: Service port
   displayName: Service Port
