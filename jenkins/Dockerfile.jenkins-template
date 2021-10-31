@@ -1,4 +1,4 @@
-FROM %OCP_IMAGE_REPO%/jenkins:latest
+FROM quay.io/openshift/origin-jenkins:latest
 
 COPY ["%JENKINS_CONFIGURATION_FILE%", "%JENKINS_PLUGINS_FILE%", "%CONFIG_PATH%/"]
 
