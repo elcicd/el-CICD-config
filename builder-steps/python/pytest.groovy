@@ -23,7 +23,7 @@ def test(def projectInfo, def microService) {
             python -m coverage xml -o ./coverage.xml
             deactivate
         else
-            ${shellEcho 'No Python tests found in tests directory'}
+            ${shCmd.echo 'No Python tests found in tests directory'}
         fi
     """
 }
