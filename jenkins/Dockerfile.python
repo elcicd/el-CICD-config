@@ -2,8 +2,18 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/el-cicd-jenkins-
 
 USER root
 
-RUN yum install -y --setopt=tsflags=nodocs gcc python3-devel python3-setuptools python3-pip && \
-    yum  clean all && \
+RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs gcc python3-devel python3-setuptools python3-pip python3-wheel && \
+    yum clean all --disableplugin=subscription-manager && \
+    mkdir -p /home/jenkins && \
+    chown -R 1001:0 /home/jenkins && \
+    chmod -R g+w /home/jenkins && \
+    chmod -R 775 /etc/alternatives && \
+    chmod -R 775 /var/lib/alternatives && \
+    chmod -R 775 /usr/lib/jvm && \
+    chmod 775 /usr/bin && \
+    chmod 775 /usr/share/man/man1 && \
+    mkdir -p /var/lib/origin && \
+    chmod 775 /var/lib/origin && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install bzt virtualenv
 

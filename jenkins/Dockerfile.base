@@ -7,10 +7,8 @@ USER root
 # REMOVE THE FOLLOWING IF REDHAT ENTITLED BUILDS ARE ENABLED YOUR CLUSTER
 COPY ./centos.repo /etc/yum.repos.d/
 
-RUN yum install -y --setopt=tsflags=nodocs drpm epel-release --disableplugin=subscription-manager && \
-    yum install -y --setopt=tsflags=nodocs podman skopeo buildah jq --disableplugin=subscription-manager && \
-    yum upgrade -y --setopt=tsflags=nodocs --disableplugin=subscription-manager && \
-    yum clean all && \
+RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs epel-release podman skopeo buildah && \
+    yum clean all --disableplugin=subscription-manager && \
     mkdir -p /home/jenkins && \
     chown -R 1001:0 /home/jenkins && \
     chmod -R g+w /home/jenkins && \
@@ -20,7 +18,7 @@ RUN yum install -y --setopt=tsflags=nodocs drpm epel-release --disableplugin=sub
     chmod 775 /usr/bin && \
     chmod 775 /usr/share/man/man1 && \
     mkdir -p /var/lib/origin && \
-    chmod 775 /var/lib/origin && \    
+    chmod 775 /var/lib/origin && \
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash -s 4.0.1 && \
     mv ./kustomize /usr/local/bin
 
