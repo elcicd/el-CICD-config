@@ -6,7 +6,7 @@ RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs 
     yum clean all --disableplugin=subscription-manager && \
     mkdir -p /home/jenkins && \
     chown -R 1001:0 /home/jenkins && \
-    chmod -R 775 /home/jenkins && \
+    chmod -R g+w /home/jenkins && \
     chmod -R 775 /etc/alternatives && \
     chmod -R 775 /var/lib/alternatives && \
     chmod -R 775 /usr/lib/jvm && \
@@ -14,8 +14,6 @@ RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs 
     chmod 775 /usr/share/man/man1 && \
     mkdir -p /var/lib/origin && \
     chmod 775 /var/lib/origin && \
-    chmod 777 /etc/subuid && \
-    chmod 777 /etc/subgid && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install bzt virtualenv
 
