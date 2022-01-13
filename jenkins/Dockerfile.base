@@ -19,10 +19,6 @@ RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs 
     chmod 775 /usr/share/man/man1 && \
     mkdir -p /var/lib/origin && \
     chmod 775 /var/lib/origin && \
-    touch /etc/subuid && \
-    touch /etc/subuid && \
-    chmod 777 /etc/subuid && \
-    chmod 777 /etc/subgid && \
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash -s 4.0.1 && \
     mv ./kustomize /usr/local/bin
 
