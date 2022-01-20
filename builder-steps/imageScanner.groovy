@@ -5,7 +5,7 @@
  */
 
 def scanImage(def projectInfo, def microService) {
-    pipelineUtils.echoBanner("Scan Image: ${microService}", '', 'EXAMPLE ONLY: replace sample script to scan images before pushing to registry')
+    echo 'EXAMPLE IMAGE SCAN COMPLETED (FAKE): replace sample script to do actual scan of images before pushing to registry'
 }
 
 return this
