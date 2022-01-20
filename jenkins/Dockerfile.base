@@ -1,24 +1,27 @@
 FROM registry.redhat.io/openshift4/ose-jenkins-agent-base
 
-ENV LC_ALL=C.UTF-8
+ENV LC_ALL=C.UTF-8 \
+    _BUILDAH_STARTED_IN_USERNS="" \
+    BUILDAH_ISOLATION=chroot \
+    STORAGE_DRIVER=vfs
 
 USER root
 
-# REMOVE THE FOLLOWING IF REDHAT ENTITLED BUILDS ARE ENABLED YOUR CLUSTER
-COPY ./centos.repo /etc/yum.repos.d/
-
-RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs epel-release podman skopeo buildah && \
+RUN adduser -g 0 -u 1001 jenkins && \
+    yum -y --disableplugin=subscription-manager update && \
+    yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs podman skopeo buildah --exclude container-selinux && \
     yum clean all --disableplugin=subscription-manager && \
-    mkdir -p /home/jenkins && \
-    chown -R 1001:0 /home/jenkins && \
-    chmod -R g+w /home/jenkins && \
+    chown -R jenkins:0 /home/jenkins && \
+    chmod -R 775 /home/jenkins && \
     chmod -R 775 /etc/alternatives && \
     chmod -R 775 /var/lib/alternatives && \
     chmod -R 775 /usr/lib/jvm && \
-    chmod 775 /usr/bin && \
+    chmod -R 775 /usr/bin && \
     chmod 775 /usr/share/man/man1 && \
     mkdir -p /var/lib/origin && \
     chmod 775 /var/lib/origin && \
+    chmod u-s /usr/bin/newuidmap && \
+    chmod u-s /usr/bin/newgidmap && \
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash -s 4.0.1 && \
     mv ./kustomize /usr/local/bin
 

@@ -3,7 +3,8 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/el-cicd-jenkins-
 USER root
 
 RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs java-11-openjdk-devel maven && \
-    yum clean all --disableplugin=subscription-manager
+    yum clean all --disableplugin=subscription-manager && \
+    rm -f /var/logs/*
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 
