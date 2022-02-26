@@ -23,6 +23,7 @@ RUN adduser -g 0 -u 1001 jenkins && \
     chmod u-s /usr/bin/newuidmap && \
     chmod u-s /usr/bin/newgidmap && \
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash -s 4.0.1 && \
-    mv ./kustomize /usr/local/bin
+    mv ./kustomize /usr/local/bin && \
+    rm -f /var/logs/*
 
 USER 1001
