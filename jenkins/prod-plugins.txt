@@ -1,3 +1,6 @@
 configuration-as-code:latest
 mailer:latest
 pipeline-utility-steps:latest
+openshift-sync:latest
+openshift-k8s-credentials:latest
+openshift-login:latest

@@ -1,14 +1,11 @@
-FROM image-registry.openshift-image-registry.svc:5000/openshift/el-cicd-jenkins-agent-base
+FROM default-route-openshift-image-registry.apps-crc.testing/openshift/el-cicd-jenkins-agent-base
 
 USER root
 
-COPY ./centos.repo /etc/yum.repos.d/
-
-RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs epel-release  xz openssl-devel libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-libGLU-devel libpng-devel libxml2 libxml2-devel && \
-    yum install -y --disableplugin=subscription-manager R && \
-    yum clean all --disableplugin=subscription-manager && \
-    wget -q --show-progress https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz && \
-    tar -C /usr/local/bin/ -xf shellcheck-stable.linux.x86_64.tar.xz --no-anchored 'shellcheck' --strip=1 && \
+ARG INSTALL_PKGS_1="libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-libGLU-devel libpng-devel libxml2 libxml2-devel"
+ARG INSTALL_PKGS_2="R ShellCheck xz openssl-devel"
+RUN dnf install -y --nodocs ${INSTALL_PKGS_1} ${INSTALL_PKGS_2} && \
+    dnf clean all && \
     R -e "install.packages(c('devtools', 'renv', 'lintr', 'jsonlite'), Ncpus = 6, repos='https://cran.rstudio.com/', INSTALL_opts=c('--no-help','--no-html',' --no-docs','--no-multiarch','--no-demo'))" && \
     rm -f /var/logs/*
 

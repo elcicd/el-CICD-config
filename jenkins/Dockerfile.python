@@ -1,11 +1,12 @@
-FROM image-registry.openshift-image-registry.svc:5000/openshift/el-cicd-jenkins-agent-base
+FROM default-route-openshift-image-registry.apps-crc.testing/openshift/el-cicd-jenkins-agent-base
 
 USER root
 
-RUN yum install -y --disableplugin=subscription-manager --setopt=tsflags=nodocs gcc python3-devel python3-setuptools python3-pip python3-wheel && \
-    yum clean all --disableplugin=subscription-manager && \
+ARG INSTALL_PKGS="gcc python3-devel python3-setuptools python3-pip python3-wheel"
+RUN dnf install -y --nodocs ${INSTALL_PKGS} && \
+    dnf clean all && \
     python3 -m pip install --upgrade pip && \
-    python3 -m pip install bzt virtualenv && \
+    python3 -m pip install wheel bzt virtualenv && \
     rm -f /var/logs/*
 
 USER 1001

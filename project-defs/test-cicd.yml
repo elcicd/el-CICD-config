@@ -7,14 +7,26 @@ microServices:
 - gitRepoName: test-cicd-stationdemo
   codeBase: java-maven
   status: ACTIVE
+  systemTests:
+    codeBase: spock
+    repo: system-tests
+    branch: development
 - gitRepoName: Test-CICD1
   codeBase: python
   tester: pytest
   status: ACTIVE
+  systemTests:
+    codeBase: cucumber
+    repo: system-tests
+    branch: development
 - gitRepoName: test_CICD2
   codeBase: python
   tester: pytest
   status: INACTIVE
+  systemTests:
+    codeBase: cucumber
+    repo: system-tests
+    branch: development
 - gitRepoName: TeSt-CiCd3
   codeBase: python
   tester: pytest
@@ -23,9 +35,17 @@ microServices:
   codeBase: python
   tester: pytest
   status: ACTIVE
+  systemTests:
+    codeBase: cucumber
+    repo: system-tests
+    branch: development
 - gitRepoName: test-cicd-R
   codeBase: r-lang
   status: ACTIVE
+  systemTests:
+    codeBase: spock
+    repo: system-tests
+    branch: development
 libraries:
 - gitRepoName: test-cicd-stationdemo-lib
   codeBase: java-maven
@@ -39,8 +59,8 @@ enabledTestEnvs:
 sandboxEnvs: 2
 allowsHotfixes: true
 releaseRegions:
-  - east
-  - west
+- east
+- west
 resourceQuotas:
   default: small.yml
   qa: medium.yml
@@ -54,5 +74,5 @@ nfsShares:
   capacity: 5Gi
   accessMode: ReadWriteMany
   exportPath: /mnt/nfs-test
-  server: hippys-bfs.localdomain
+  server: my-test-server.localdomain
   claimName: test-dir
