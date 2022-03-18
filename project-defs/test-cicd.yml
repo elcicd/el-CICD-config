@@ -3,30 +3,28 @@ scmHost: github.com
 scmRestApiHost: api.github.com
 scmOrganization: elcicd
 gitBranch: development
+gitTestBranch: development
 microServices:
 - gitRepoName: test-cicd-stationdemo
   codeBase: java-maven
   status: ACTIVE
   systemTests:
     codeBase: spock
-    repo: system-tests
-    branch: development
+    gitRepoName: system-tests
 - gitRepoName: Test-CICD1
   codeBase: python
   tester: pytest
   status: ACTIVE
   systemTests:
     codeBase: cucumber
-    repo: system-tests
-    branch: development
+    gitRepoName: system-tests
 - gitRepoName: test_CICD2
   codeBase: python
   tester: pytest
   status: INACTIVE
   systemTests:
     codeBase: cucumber
-    repo: system-tests
-    branch: development
+    gitRepoName: system-tests
 - gitRepoName: TeSt-CiCd3
   codeBase: python
   tester: pytest
@@ -37,15 +35,13 @@ microServices:
   status: ACTIVE
   systemTests:
     codeBase: cucumber
-    repo: system-tests
-    branch: development
+    gitRepoName: system-tests
 - gitRepoName: test-cicd-R
   codeBase: r-lang
   status: ACTIVE
   systemTests:
     codeBase: spock
-    repo: system-tests
-    branch: development
+    gitRepoName: system-tests
 libraries:
 - gitRepoName: test-cicd-stationdemo-lib
   codeBase: java-maven

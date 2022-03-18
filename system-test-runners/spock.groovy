@@ -4,8 +4,12 @@
  * Example script where system tests can be run...
  */
 
-def runSystemTests(def projectInfo, def microServicesToTest) {
-    echo "[SPOCK RUNNER PLACEHOLDER]: Modify to run acceptance, integration, and/or smoke tests written for Spock..."
+def runTests(def projectInfo, def microServicesToTest, def systemTestNamespace, def systemTestEnv) {
+    def msgs = ["[SPOCK RUNNER EXAMPLE PLACEHOLDER]",
+                "Testing in ${systemTestNamespace} for the ${systemTestEnv.toUpper} environment:"]
+    msgs.addAll(microServicesToTest.collect { it.name }
+
+    pipelineUtils.echoBanner(msgs)
 }
 
 return this
