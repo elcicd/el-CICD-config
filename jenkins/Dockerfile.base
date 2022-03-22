@@ -4,7 +4,6 @@ ARG OC_VERSION=4
 ARG VERSION=4.12
 ARG USER=jenkins
 ARG USER_UID=1001
-ARG AGENT_WORKDIR=/home/${USER}/agent
 
 ENV HOME=/home/${USER} \
     LANG=en_US.UTF-8 \
@@ -14,8 +13,7 @@ ENV HOME=/home/${USER} \
     LC_ALL=C \
     _BUILDAH_STARTED_IN_USERNS="" \
     BUILDAH_ISOLATION=chroot \
-    STORAGE_DRIVER=vfs \
-    AGENT_WORKDIR=${AGENT_WORKDIR}
+    STORAGE_DRIVER=vfs
 
 USER root
 
@@ -52,8 +50,6 @@ RUN curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-
     mv ./kustomize /usr/local/bin && \
     rm -f /var/logs/*
 
-VOLUME /home/${USER}/.jenkins
-VOLUME ${AGENT_WORKDIR}
 WORKDIR /home/${USER}
 
 ENTRYPOINT exec java -cp /usr/share/jenkins/agent.jar \
