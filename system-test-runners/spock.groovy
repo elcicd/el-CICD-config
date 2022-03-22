@@ -4,10 +4,9 @@
  * Example script where system tests can be run...
  */
 
-def runTests(def projectInfo, def microServicesToTest, def systemTestNamespace, def systemTestEnv) {
+def runTests(def projectInfo, def microServiceToTest, def systemTestNamespace, def systemTestEnv) {
     def msgs = ["[SPOCK RUNNER EXAMPLE PLACEHOLDER]",
-                "Testing in ${systemTestNamespace} for the ${systemTestEnv.toUpper} environment:"]
-    msgs.addAll(microServicesToTest.collect { it.name }
+                "Testing ${microServiceToTest.name} in ${systemTestNamespace} for the ${systemTestEnv.toUpperCase()} environment:"]
 
     pipelineUtils.echoBanner(msgs)
 }

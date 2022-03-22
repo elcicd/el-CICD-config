@@ -4,9 +4,9 @@
  * Example script where system tests can be run...
  */
 
-def runTests(def projectInfo, def microServicesToTest, def systemTestNamespace, def systemTestEnv) {
+def runTests(def projectInfo, def microServiceToTest, def systemTestNamespace, def systemTestEnv) {
     def msgs = ["[CUCUMBER RUNNER EXAMPLE PLACEHOLDER]",
-                "Testing ${microServicesToTest} in ${systemTestNamespace} for the ${systemTestEnv.toUpperCase()} environment:"]
+                "Testing ${microServiceToTest.name} in ${systemTestNamespace} for the ${systemTestEnv.toUpperCase()} environment:"]
 
     pipelineUtils.echoBanner(msgs)
 }
