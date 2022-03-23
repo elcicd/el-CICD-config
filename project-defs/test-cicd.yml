@@ -10,21 +10,21 @@ microServices:
   status: ACTIVE
   systemTests:
     codeBase: spock
-    gitRepoName: test-cicd-system-tests
+    gitRepoName: Test-CICD-System-Tests
 - gitRepoName: Test-CICD1
   codeBase: python
   tester: pytest
   status: ACTIVE
   systemTests:
     codeBase: cucumber
-    gitRepoName: test-cicd-system-tests
+    gitRepoName: Test-CICD-System-Tests
 - gitRepoName: test_CICD2
   codeBase: python
   tester: pytest
   status: INACTIVE
   systemTests:
     codeBase: cucumber
-    gitRepoName: test-cicd-system-tests
+    gitRepoName: Test-CICD-System-Tests
 - gitRepoName: TeSt-CiCd3
   codeBase: python
   tester: pytest
@@ -35,13 +35,13 @@ microServices:
   status: ACTIVE
   systemTests:
     codeBase: cucumber
-    gitRepoName: test-cicd-system-tests
+    gitRepoName: Test-CICD-System-Tests
 - gitRepoName: test-cicd-R
   codeBase: r-lang
   status: ACTIVE
   systemTests:
     codeBase: spock
-    gitRepoName: test-cicd-system-tests
+    gitRepoName: Test-CICD-System-Tests
 libraries:
 - gitRepoName: test-cicd-stationdemo-lib
   codeBase: java-maven
