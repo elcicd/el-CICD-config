@@ -32,7 +32,6 @@ RUN curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-
     ln -sf /usr/share/${USER}/agent.jar /usr/share/${USER}/slave.jar && \
     mkdir -p /home/${USER} && \
     mkdir /home/${USER}/.jenkins && \
-    mkdir -p ${AGENT_WORKDIR} && \
     chown -R ${USER_UID}:0 /home/${USER} && \
     chmod -R 775 /home/${USER} && \
     chmod -R 775 /etc/alternatives && \
