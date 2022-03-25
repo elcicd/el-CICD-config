@@ -36,13 +36,13 @@ libraries:
   tester: pytest
   status: ACTIVE
 systemTests:
-- gitRepoName: Test-CICD-Spock-Tests
+- gitRepoName: Test-CICD-Cucumber-Tests
   codeBase: cucumber
   microServiceRepos:
   - Test-CICD1
   - test_CICD2
   - Test_CICD4
-- gitRepoName: Test-CICD-Cucumber-Tests
+- gitRepoName: Test-CICD-Spock-Tests
   codeBase: spock
   microServiceRepos:
   - test-cicd-stationdemo
