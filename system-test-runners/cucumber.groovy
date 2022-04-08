@@ -6,7 +6,7 @@
 
 def runTests(def projectInfo, def microServiceToTest, def systemTestNamespace, def systemTestEnv) {
     def msgs = ["[CUCUMBER RUNNER EXAMPLE PLACEHOLDER]",
-                "Testing ${microServiceToTest.name} in ${systemTestNamespace} for the ${systemTestEnv.toUpperCase()} environment:"]
+                "Testing ${microServiceToTest.name} in ${systemTestNamespace} for the ${systemTestEnv.toUpperCase()} environment"]
 
     pipelineUtils.echoBanner(msgs)
 }
