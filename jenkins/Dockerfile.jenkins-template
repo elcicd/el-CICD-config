@@ -11,7 +11,7 @@ RUN adduser -g 0 -u 1001 jenkins && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
     dnf -y --refresh --nodocs upgrade && \
-    dnf -y --nodocs --best install git wget fontconfig java-11-openjdk-headless java-11-openjdk-devel && \
+    dnf -y --nodocs --best install git gh wget fontconfig java-11-openjdk-headless java-11-openjdk-devel && \
     wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
     rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key && \
     dnf -y --nodocs install jenkins && \

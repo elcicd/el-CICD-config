@@ -3,7 +3,7 @@
  */
 
 def call(Map args) {
-    pipelineUtils.echoBanner("RUNNING IN THE EXAMPLE MICROSERVICE PROMOTION SUCCESS SCRIPT")
+    loggingUtils.echoBanner("RUNNING IN THE EXAMPLE MICROSERVICE PROMOTION SUCCESS SCRIPT")
 }
 
 return this

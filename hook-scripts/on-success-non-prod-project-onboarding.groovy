@@ -3,7 +3,7 @@
  */
 
 def call(Map args) {
-    pipelineUtils.echoBanner("RUNNING IN THE EXAMPLE PROJECT ONBOARDING SUCCESS SCRIPT")
+    loggingUtils.echoBanner("RUNNING IN THE EXAMPLE PROJECT ONBOARDING SUCCESS SCRIPT")
 }
 
 return this
