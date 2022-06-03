@@ -17,7 +17,7 @@ ENV HOME=/home/${USER} \
 
 USER root
 
-ARG INSTALL_PKGS="bc gettext git git-lfs procps java-11-openjdk-headless lsof rsync tar unzip which zip bzip2 jq podman skopeo buildah"
+ARG INSTALL_PKGS="bc gettext git git-lfs gh procps java-11-openjdk-headless lsof rsync tar unzip which zip bzip2 jq podman skopeo buildah"
 RUN curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-ci.org/public/org/${USER}-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar && \
     curl -fsSLo /tmp/oc.tar.gz  https://mirror.openshift.com/pub/openshift-v${OC_VERSION}/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \

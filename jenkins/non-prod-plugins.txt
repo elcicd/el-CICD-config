@@ -5,6 +5,7 @@ authentication-tokens:1.4
 bootstrap4-api:4.6.0-3
 bouncycastle-api:2.25
 branch-api:2.7.0
+build-user-vars-plugin:1.8
 caffeine-api:2.9.2-29.v717aac953ff3
 checks-api:1.7.2
 cloudbees-bitbucket-branch-source:746.v350d2781c184
@@ -51,9 +52,7 @@ mercurial:2.15
 metrics:4.0.2.8.1
 oauth-credentials:0.4
 okhttp-api:3.12.12.2
-openshift-client:1.0.37
 openshift-login:1.0.27
-openshift-sync:1.0.53
 pam-auth:1.6
 pipeline-build-step:2.16
 pipeline-graph-analysis:1.10
