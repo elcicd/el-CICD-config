@@ -1,6 +1,6 @@
 renv::consent(provided = T)
 renv::init()
-options(renv.settings.repos.override = "https://cloud.r-project.org/src/contrib/")
+options(repos="https://CRAN.R-project.org")
 renv::install("xml2")
 renv::install("covr")
 renv::install("DT")
