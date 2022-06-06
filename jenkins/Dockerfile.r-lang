@@ -6,7 +6,7 @@ ARG INSTALL_PKGS_1="libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-lib
 ARG INSTALL_PKGS_2="R ShellCheck xz openssl-devel"
 RUN dnf install -y --nodocs ${INSTALL_PKGS_1} ${INSTALL_PKGS_2} && \
     dnf clean all && \
-    R -e "install.packages(c('devtools', 'renv', 'lintr', 'jsonlite','xml2, 'covr', 'DT', 'testthat'), Ncpus = 6, repos='https://cran.rstudio.com/', INSTALL_opts=c('--no-help','--no-html',' --no-docs','--no-multiarch','--no-demo'))" && \
+    R -e "install.packages(c('devtools', 'renv', 'lintr', 'jsonlite', 'xml2', 'covr', 'DT', 'testthat'), Ncpus = 6, repos='https://cran.rstudio.com/', INSTALL_opts=c('--no-help','--no-html',' --no-docs','--no-multiarch','--no-demo'))" && \
     rm -f /var/logs/*
 
 USER 1001
