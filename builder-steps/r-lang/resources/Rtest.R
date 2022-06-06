@@ -1,6 +1,6 @@
 renv::consent(provided = T)
 renv::init()
-renv::install("/xml2")
+renv::install("xml2", repos='https://cloud.r-project.org/src/contrib/')
 renv::install("covr")
 renv::install("DT")
 renv::install("testthat")
