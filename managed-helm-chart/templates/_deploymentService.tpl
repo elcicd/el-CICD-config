@@ -1,11 +1,12 @@
 {{- define "elCicdChart.deploymentService" }}
-  {{- include "elCicdChart.deployment" . }}
+  {{- include "elCicdChart.deployment" (append . true)  }}
   {{- include "elCicdChart.service" . }}
 {{- end }}
 
 {{- define "elCicdChart.deployment" }}
 {{- $ := index . 0 }}
 {{- $template := index . 1 }}
+{{- $hasService := (((len .) | eq 3) | and (index . 2)) }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,16 +51,16 @@ spec:
       containers:
         {{- $_ := set $template "sidecars" ($template.sidecars | default list) }}
         {{- $containers := prepend $template.sidecars $template }}
-        {{- include "elCicdChart.container" (list $ $containers) | trim | nindent 6 }}
-      volumes: {{ include "elCicdChart.mergeLists"  (list $template "volumes") | indent 4 }}
+        {{- include "elCicdChart.container" (list $ $containers $hasService) | trim | nindent 6 }}
+      volumes: {{ include "elCicdChart.mergeListOfMaps"  (list $template "volumes") | indent 4 }}
       restartPolicy: {{ $template.restartPolicy }}
       imagePullSecrets:
       - name: {{ $.Values.pullSecret }}
 {{- end }}
 
 {{- define "elCicdChart.service" }}
-  {{- $ := index . 0 }}
-  {{- $template := index . 1 }}
+{{- $ := index . 0 }}
+{{- $template := index . 1 }}
 ---
 apiVersion: v1
 kind: Service
@@ -79,8 +80,11 @@ spec:
     {{- include "elCicdChart.selectorLabels" $ | nindent 4 }}
     app: {{ $template.appName }}
   ports:
-  - name:
-    port: {{ $template.servicePort | default $.Values.defaultPort }}
-    targetPort: {{ $template.servicePort | default $.Values.defaultPort }}
-    protocol: {{ $template.portProtocol | default $.Values.defaultProtocol }}
+  {{- if or ($template.sdlcValues).servicePorts $template.servicePorts }}
+    {{- include "elCicdChart.mergeListOfMaps" (list $template "ports") }}
+  {{- else }}
+  - port: {{ ($template.sdlcValues).port | default ($template.port | default $.Values.defaultPort) }}
+    targetPort: {{ ($template.sdlcValues).port | default ($template.port | default $.Values.defaultPort) }}
+    protocol: {{ ($template.sdlcValues).serviceProtocol | default ($template.serviceProtocol | default $.Values.defaultProtocol) }}
+  {{- end }}
 {{- end }}
