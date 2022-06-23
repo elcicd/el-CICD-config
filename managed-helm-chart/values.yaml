@@ -1,0 +1,62 @@
+templates:
+  - templateName: deploymentService
+    appName: foo-test-cicd1
+    env:
+    - name: foo
+      value: "25"
+    - name: baz
+      valueFrom:
+        configMapKeyRef:
+          key: IMAGE_REPO_POSTFIX
+          name: el-cicd-meta-info
+    - name: howdy
+      value: "Hello"
+    volumeMounts:
+    - name: foo
+      mountPath: /mnt/foo
+    - name: bar
+      mountPath: /mnt/bar
+    volumes:
+    - name: foo
+      emptyDir: {}
+    - name: bar
+      emptyDir: {}
+    dev:
+      env:
+      - name: foo
+        value: "1"
+      - name: bar
+        valueFrom:
+          configMapKeyRef:
+            key: INCLUDE_SYSTEM_FILES
+            name: el-cicd-meta-info
+      - name: baz
+        value: "25"
+      servicePort: 9090
+      volumeMounts:
+      - name: foo
+        mountPath: /mnt/dev/foo
+      - name: baz
+        mountPath: /mnt/dev/bar
+      volumes:
+      - name: baz
+        emptyDir: {}
+  - templateName: deploymentService
+    appName: foo-test-cicd2
+    sidecars:
+    - appName: my-sidecar
+      image: docker.io/busybox
+      args:
+      - sleep
+      - "1000000"
+      env:
+      - name: DEFAULT1
+        value: default
+      - name: ALWAYS_DEFAULT
+        value: "always on"
+      dev:
+        env:
+        - name: DEFAULT1
+          value: DEV_VALUE
+        - name: ONLY_DEV
+          value: "in dev only"

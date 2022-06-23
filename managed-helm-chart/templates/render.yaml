@@ -1,0 +1,8 @@
+{{- $_ := set . "UNDEFINED" "undefined" -}}
+
+{{- range $template := .Values.templates }}
+  {{- $_ := set $template "appName" ($template.appName | default $.Values.microService) }}
+  {{- $_ := set $template "sdlcValues" (get $template $.Values.sdlcEnv | default dict) }}
+  {{- $templateName := printf "elCicdChart.%s" $template.templateName }}
+  {{- include $templateName (list $ $template) }}
+{{- end }}
