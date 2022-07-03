@@ -1,4 +1,25 @@
+{{- $_ := set . "UNDEFINED" "undefined" -}}
 
+{{/*
+General Metadata Template
+*/}}
+{{ define "elCicdChart.apiObjectHeader" }}
+{{ $ := index . 0 }}
+{{ $template := index . 1 }}
+apiVersion: {{ $template.apiVersion }}
+kind: {{ $template.kind }}
+metadata:
+  annotations:
+    {{- if $template.annotations}}{{- $template.annotations | indent 4 }}{{- end }}
+    {{- if $.Values.defaultAnnotations}}{{- $.Values.defaultAnnotations | toYaml | indent 4 }}{{- end }}
+  labels:
+    {{- include "elCicdChart.labels" $ | nindent 4 }}
+    app: {{ $template.appName }}
+    {{- if $template.labels}}{{- $template.labels | indent 4 }}{{- end }}
+    {{- if $.Values.labels}}{{- $.Values.labels | indent 4 }}{{- end }}
+  name: {{ required "Unnamed apiObject Name!" $template.appName }}
+  namespace: {{ $.Values.namespace | default $.Release.Namespace}}
+{{- end }}
 
 {{/*
 Expand the name of the chart.
@@ -63,24 +84,23 @@ microservice: {{ required "Missing microservice name!" $.Values.microService }}
 Prometheus Annotations
 */}}
 {{- define "elCicdChart.prometheusAnnotations" -}}
-{{/* prometheus.io/path: {{ PROMETHEUS_PATH }}
-prometheus.io/port: {{ PROMETHEUS_PORT }}
-prometheus.io/scheme: {{ PROMETHEUS_SCHEME }}
-prometheus.io/scrape: {{ PROMETHEUS_SCRAPE */}}
+prometheus.io/port: {{ .prometheus.port }}
+prometheus.io/scheme: {{ .prometheus.scheme }}
+prometheus.io/scrape: {{ .prometheus.scrape }}
 {{- end }}
 
 {{/*
 Scale3 Annotations
 */}}
 {{- define "elCicdChart.scale3Annotations" -}}
-{{/*discovery.3scale.net/path: {{ THREE_SCALE_PATH }}
-discovery.3scale.net/port: {{ SVC_PORT }}
-discovery.3scale.net/scheme: {{ THREE_SCALE_SCHEME */}}
+discovery.3scale.net/path: {{ .threeScale.path }}
+discovery.3scale.net/port: {{ .threeScale.port }}
+discovery.3scale.net/scheme: {{ .threeScale.scheme }}
 {{- end }}
 
 {{/*
 Scale3 Labels
 */}}
 {{- define "elCicdChart.scale3Labels" -}}
-{{/* discovery.3scale.net: {{ THREE_SCALE_NET */}}
+discovery.3scale.net: {{ .threeScale.scheme }}
 {{- end }}

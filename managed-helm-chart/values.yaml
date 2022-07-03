@@ -1,68 +1,98 @@
+
+NOTE - FINISH STATEFUL SET 
+     - MAKE SURE EVERY ROOT SPEC IS DEFINED
+     - REMOVE "SUPPLEMENTAL" IN ALL EXCEPT FOR CONTAINERS
+
 templates:
-  - templateName: deploymentService
-    appName: foo-test-cicd1
+- templateName: deploymentService
+  appName: foo-test-cicd1
+  env:
+  - name: ENV_TEST_1
+    value: "default"
+  - name: ENV_TEST_2
+    valueFrom:
+      configMapKeyRef:
+        key: IMAGE_REPO_POSTFIX
+        name: el-cicd-meta-info
+  - name: ENV_TEST_DEFAULT_1
+    value: "Hello"
+  containerPorts:
+  - containerPort: 8080
+    protocol: TCP
+  - containerPort: 8585
+    protocol: TCP
+  volumeMounts:
+  - name: foo
+    mountPath: /mnt/foo
+  - name: bar
+    mountPath: /mnt/bar
+  volumes:
+  - name: foo
+    emptyDir: {}
+  - name: bar
+    emptyDir: {}
+  dev:
     env:
-    - name: foo
-      value: "25"
-    - name: baz
+    - name: ENV_TEST_1
+      value: "dev"
+    - name: ENV_TEST_2
       valueFrom:
         configMapKeyRef:
-          key: IMAGE_REPO_POSTFIX
+          key: INCLUDE_SYSTEM_FILES
           name: el-cicd-meta-info
-    - name: howdy
-      value: "Hello"
-    containerPorts:
-    - containerPort: 8080
-      protocol: TCP
-    - containerPort: 8585
-      protocol: TCP
+    - name: ENV_TEST_DEV_1
+      value: "33"
     volumeMounts:
     - name: foo
-      mountPath: /mnt/foo
-    - name: bar
-      mountPath: /mnt/bar
+      mountPath: /mnt/dev/foo
+    - name: baz
+      mountPath: /mnt/dev/bar
     volumes:
-    - name: foo
+    - name: baz
       emptyDir: {}
-    - name: bar
-      emptyDir: {}
+  perf:
+    env:
+    - name: ENV_TEST_1
+      value: "perf"
+    - name: ENV_TEST_PERF_1
+      value: "1"
+- templateName: deploymentService
+  dev:
+    port: 9090
+  sidecars:
+  - appName: my-sidecar
+    image: docker.io/busybox
+    args:
+    - sleep
+    - "1000000"
+    env:
+    - name: DEFAULT1
+      value: default
+    - name: ALWAYS_DEFAULT
+      value: "always on"
     dev:
-      env:
-      - name: foo
-        value: "1"
-      - name: bar
-        valueFrom:
-          configMapKeyRef:
-            key: INCLUDE_SYSTEM_FILES
-            name: el-cicd-meta-info
-      - name: baz
-        value: "25"
-      volumeMounts:
-      - name: foo
-        mountPath: /mnt/dev/foo
-      - name: baz
-        mountPath: /mnt/dev/bar
-      volumes:
-      - name: baz
-        emptyDir: {}
-  - templateName: deploymentService
-    appName: foo-test-cicd2
-    dev:
-      port: 9090
-    sidecars:
-    - appName: my-sidecar
-      image: docker.io/busybox
-      args:
-      - sleep
-      - "1000000"
       env:
       - name: DEFAULT1
-        value: default
-      - name: ALWAYS_DEFAULT
-        value: "always on"
-      dev:
-        env:
-        - name: DEFAULT1
-          value: DEV_VALUE
-        - name: ONLY_DEV
-          value: "in dev only"
+        value: DEV_VALUE
+      - name: ONLY_DEV
+        value: "in dev only"
+- templateName: hpa
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myapp
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Pods
+    name: myapp_requests_per_second
+    target:
+      type: AverageValue
+      averageValue: 2
+  dev:
+    metrics:
+    - type: Pods
+      name: myapp_requests_per_second
+      target:
+        type: Value
+        value: 4

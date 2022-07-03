@@ -1,8 +1,34 @@
 {{- $_ := set . "UNDEFINED" "undefined" -}}
 
-{{- range $template := .Values.templates }}
-  {{- $_ := set $template "appName" ($template.appName | default $.Values.microService) }}
-  {{- $_ := set $template "sdlcValues" (get $template $.Values.sdlcEnv | default dict) }}
-  {{- $templateName := printf "elCicdChart.%s" $template.templateName }}
-  {{- include $templateName (list $ $template) }}
+{{- range $templateValues := .Values.templates }}
+  {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
+
+  {{ $render := true }}
+  {{- if $templateValues.forProfiles }}
+    {{- range $profile := $templateValues.forProfiles }}
+      {{- $render = and $render (has $profile $.Values.profiles) }}
+    {{- end }}
+  {{- end }}
+  {{- if and $render $templateValues.notProfiles }}
+    {{- range $profile := $templateValues.notProfiles }}
+      {{- $render = and $render (not (has $profile $.Values.profiles)) }}
+    {{- end }}
+  {{- end }}
+  
+  {{- $templateName := printf "elCicdChart.%s" $templateValues.templateName }}
+  {{- if $render }}
+    {{- range $profile := $.Values.profiles }}
+      {{- include "elCicdChart.mergeProfile" (list $ $templateValues $profile) }}
+    {{- end}}
+        
+    {{- include $templateName (list $ $templateValues) }}
+  {{- else }}
+    {{- include "elCicdChart.skippedTemplate" (list $templateValues.templateName $templateValues.appName) }}
+  {{- end}}
+  
+{{- end }}
+
+{{ define "elCicdChart.skippedTemplate" }}
+---
+# SKIPPED {{ index . 0 }} -> {{ index . 1 }}
 {{- end }}
