@@ -1,12 +1,3 @@
-
-
-{{/*
-Deployment [Short name]
-*/}}
-{{- define "elCicdChart.deploy" }}
-  {{- include "elCicdChart.deployment" . }}
-{{- end }}
-
 {{/*
 Deployment
 */}}
@@ -19,9 +10,17 @@ Deployment
 {{- $_ := set $deployValues "apiVersion" "apps/v1" }}
 {{- include "elCicdChart.apiObjectHeader" . }}
 spec:
+  {{- if $deployValues.minReadySeconds }}
+  minReadySeconds: {{ $deployValues.minReadySeconds }}
+  {{- end }}
+  {{- if $deployValues.progressDeadlineSeconds }}
+  progressDeadlineSeconds: {{ $deployValues.progressDeadlineSeconds }}
+  {{- end }}
   replicas: {{ $deployValues.replicas | default $.Values.defaultReplicas }}
-  minReadySeconds: {{ $deployValues.minReadySeconds | default $.Values.minReadySeconds }}
-  {{- include "elCicdChart.workloadSelector" (list $ $deployValues) | indent 2 }}
+  {{- if $deployValues.revisionHistoryLimit }}
+  revisionHistoryLimit: {{ $deployValues.revisionHistoryLimit }}
+  {{- end }}
+  selector: {{ include "elCicdChart.selector" (list $ $deployValues.appName) | indent 4 }}
   {{- if $deployValues.strategyType }}
   strategy:
     {{- if (eq $deployValues.strategyType "RollingUpdate") }}
@@ -30,12 +29,8 @@ spec:
       maxUnavailable: {{ $deployValues.rollingUpdateMaxUnavailable | default $.Values.defaultRollingUpdateMaxUnavailable }}
     {{- end }}
     type: {{ $deployValues.strategyType }}
-    {{- end }}
-    template:
-    {{- include "elCicdChart.podTemplate" (list $ $deployValues $hasService) | indent 6 }}
-  {{- if $deployValues.deploySupplemental }}
-    {{- $deployValues.deploySupplemental | toYaml | nindent 2 }}
   {{- end }}
+  template: {{ include "elCicdChart.podTemplate" (list $ $deployValues $hasService) | indent 4 }}
 {{- end }}
 
 {{/*
@@ -49,14 +44,7 @@ Job
 {{- $_ := set $jobValues "apiVersion" "batch/v1" }}
 {{- include "elCicdChart.apiObjectHeader" . }}
 spec:
-{{- include "elCicdChart.jobTemplate" }}
-{{- end }}
-
-{{/*
-CronJob [Short name]
-*/}}
-{{- define "elCicdChart.cj" }}
-  {{- include "elCicdChart.cronjob" . }}
+{{- include "elCicdChart.jobTemplate" . }}
 {{- end }}
 
 {{/*
@@ -76,8 +64,7 @@ spec:
   {{- if $cjValues.failedJobsHistoryLimit }}
   failedJobsHistoryLimit: {{ $cjValues.failedJobsHistoryLimit }}
   {{- end }}
-  jobTemplate:
-  {{- include "elCicdChart.jobTemplate" }}
+  jobTemplate: {{ include "elCicdChart.jobTemplate" . }}
   schedule: {{ $cjValues.schedule }}
   {{- if $cjValues.startingDeadlineSeconds }}
   startingDeadlineSeconds: {{ $cjValues.startingDeadlineSeconds }}
@@ -88,17 +75,10 @@ spec:
 {{- end }}
 
 {{/*
-Stateful Set [Short name]
-*/}}
-{{- define "elCicdChart.sts" }}
-  {{- include "elCicdChart.statefulset" . }}
-{{- end }}
-
-
-{{/*
 Stateful Set
 */}}
 {{- define "elCicdChart.statefulset" }}
+{{- include "elCicdChart.service" . }}
 {{- $ := index . 0 }}
 {{- $stsValues := index . 1 }}
 {{- $hasService := (((len .) | eq 3) | and (index . 2)) }}
@@ -107,18 +87,30 @@ Stateful Set
 {{- $_ := set $stsValues "apiVersion" "apps/v1" }}
 {{- include "elCicdChart.apiObjectHeader" . }}
 spec:
+  {{- if $stsValues.minReadySeconds }}
+  minReadySeconds: {{ $deployValues.minReadySeconds }}
+  {{- end }}
+  {{- if $stsValues.pvcRetentionPolicy }}
+  persistentVolumeClaimRetentionPolicy: {{- $stsValues.pvcRetentionPolicy | toYaml | nindent 4 }}
+  {{- end }}
+  {{- if $stsValues.podManagementPolicy }}
+  podManagementPolicy: {{ $stsValues.podManagementPolicy }}
+  {{- end }}
+  replicas: {{ $stsValues.replicas | default $.Values.defaultReplicas }}
+  {{- if $stsValues.revisionHistoryLimit }}
+  revisionHistoryLimit: {{ $stsValues.revisionHistoryLimit }}
+  selector: {{ include "elCicdChart.selector" (list $ $stsValues.appName) | indent 4 }}
+  serviceName: {{ $stsValues.appName }}
+  {{- end }}
   template:
-  {{- include "elCicdChart.workloadSelector" (list $ $stsValues) | indent 2 }}
-  {{- include "elCicdChart.podTemplate" (list $ $stsValues $hasService) | indent 6 }}
-{{- end }}
-
-
-
-{{/*
-HorizontalPodAutoscaler [Short name]
-*/}}
-{{- define "elCicdChart.hpa" }}
-  {{- include "elCicdChart.horizontalPodAutoscaler" . }}
+  {{- include "elCicdChart.selector" (list $ $stsValues) | indent 2 }}
+  {{- include "elCicdChart.podTemplate" (list $ $stsValues $hasService) | indent 4 }}
+  {{- if $stsValues.updateStrategy }}
+  updateStrategy: {{- $stsValues.updateStrategy | toYaml | nindent 4 }}
+  {{- end }}
+  {{- if $stsValues.volumeClaimTemplates }}
+  volumeClaimTemplates: {{- $stsValues.volumeClaimTemplates | toYaml | nindent 4 }}
+  {{- end }}
 {{- end }}
 
 {{/*

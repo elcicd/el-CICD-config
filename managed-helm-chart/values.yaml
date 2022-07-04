@@ -1,8 +1,3 @@
-
-NOTE - FINISH STATEFUL SET 
-     - MAKE SURE EVERY ROOT SPEC IS DEFINED
-     - REMOVE "SUPPLEMENTAL" IN ALL EXCEPT FOR CONTAINERS
-
 templates:
 - templateName: deploymentService
   appName: foo-test-cicd1

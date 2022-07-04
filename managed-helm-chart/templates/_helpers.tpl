@@ -21,6 +21,41 @@ metadata:
   namespace: {{ $.Values.namespace | default $.Release.Namespace}}
 {{- end }}
 
+{{- define "elCicdChart.apiMetadata" }}
+{{- $ := index . 0 }}
+{{- $metadataValues := index . 1 }}
+metadata:
+  annotations:
+    {{- $annotations := ($metadataValues.profileVals).annotations | default $metadataValues.annotations }}
+    {{- if $annotations }}{{- $annotations | indent 4 }}{{- end }}
+    {{- if $.Values.defaultAnnotations}}{{- $.Values.defaultAnnotations | toYaml | indent 4 }}{{- end }}
+  labels:
+    {{- include "elCicdChart.labels" $ | nindent 4 }}
+    app: {{ $metadataValues.appName }}
+    {{- if $metadataValues.labels}}{{- $metadataValues.labels | indent 4 }}{{- end }}
+    {{- if $.Values.labels}}{{- $.Values.labels | indent 4 }}{{- end }}
+  name: {{ required "Unnamed apiObject Name!" $metadataValues.appName }}
+  namespace: {{ $.Values.namespace | default $.Release.Namespace}}
+{{- end }}
+
+{{/*
+el-CICD Selector
+*/}}
+{{- define "elCicdChart.selector" }}
+{{- $ := index . 0 }}
+{{- $appName := index . 1 }}
+matchExpressions:
+- key: projectid
+  operator: Exists
+- key: microservice
+  operator: Exists
+- key: app
+  operator: Exists
+matchLabels:
+  {{- include "elCicdChart.selectorLabels" $ | nindent 2 }}
+  app: {{ $appName }}
+{{- end }}
+
 {{/*
 Expand the name of the chart.
 */}}
