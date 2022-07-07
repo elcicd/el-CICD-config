@@ -88,7 +88,7 @@ Stateful Set
 {{- include "elCicdChart.apiObjectHeader" . }}
 spec:
   {{- if $stsValues.minReadySeconds }}
-  minReadySeconds: {{ $deployValues.minReadySeconds }}
+  minReadySeconds: {{ $stsValues.minReadySeconds }}
   {{- end }}
   {{- if $stsValues.pvcRetentionPolicy }}
   persistentVolumeClaimRetentionPolicy: {{- $stsValues.pvcRetentionPolicy | toYaml | nindent 4 }}

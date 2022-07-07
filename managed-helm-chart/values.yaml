@@ -1,6 +1,8 @@
 templates:
 - templateName: deploymentService
   appName: foo-test-cicd1
+  notProfiles:
+  - dev
   env:
   - name: ENV_TEST_1
     value: "default"
@@ -52,6 +54,8 @@ templates:
     - name: ENV_TEST_PERF_1
       value: "1"
 - templateName: deploymentService
+  notProfiles:
+  - dev
   dev:
     port: 9090
   sidecars:
