@@ -177,6 +177,10 @@ Container definition
   - containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
     protocol: {{ $containerVals.protocol | default $.Values.defaultProtocol }}
     {{- end }}
+    {{- if $containerVals.prometheusPort }}
+  - containerPort: {{ $containerVals.prometheusPort | default $.Values.defaultPrometheusPort }}
+    protocol: {{ $containerVals.prometheusProtocol | default $.Values.defaultPrometheusProtocol }}
+    {{- end }}
   {{- end }}
   {{- if $containerVals.readinessProbe }}
   readinessProbe: {{ $containerVals.readinessProbe | toYaml | nindent 2 }}

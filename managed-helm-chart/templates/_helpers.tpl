@@ -24,6 +24,7 @@ metadata:
     app: {{ $metadataValues.appName }}
     {{- if $metadataValues.labels}}{{- $metadataValues.labels | indent 4 }}{{- end }}
     {{- if $.Values.labels}}{{- $.Values.labels | indent 4 }}{{- end }}
+    {{- if $.Values.defaultLabels}}{{- $.Values.defaultLabels | toYaml | indent 4 }}{{- end }}
   name: {{ required "Unnamed apiObject Name!" $metadataValues.appName }}
   namespace: {{ $.Values.namespace | default $.Release.Namespace}}
 {{- end }}

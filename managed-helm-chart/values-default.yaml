@@ -21,3 +21,11 @@ defaultPvAccessMode: "ReadWriteOnce"
 
 ingressRulesMergeKey: "host"
 ingressTlsMergeKey: "secretName"
+
+
+defaultPrometheusPath: "/metrics"
+defaultPrometheusScheme: "https"
+defaultPrometheusScrape: "false"
+defaultPrometheusProtocol: "TCP"
+
+default3ScaleScheme: "https"
