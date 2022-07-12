@@ -4,7 +4,6 @@ Deployment
 {{- define "elCicdChart.deployment" }}
 {{- $ := index . 0 }}
 {{- $deployValues := index . 1 }}
-{{- $hasService := (((len .) | eq 3) | and (index . 2)) }}
 ---
 {{- $_ := set $deployValues "kind" "Deployment" }}
 {{- $_ := set $deployValues "apiVersion" "apps/v1" }}
@@ -30,7 +29,7 @@ spec:
     {{- end }}
     type: {{ $deployValues.strategyType }}
   {{- end }}
-  template: {{ include "elCicdChart.podTemplate" (list $ $deployValues $hasService) | indent 4 }}
+  template: {{ include "elCicdChart.podTemplate" (list $ $deployValues) | indent 4 }}
 {{- end }}
 
 {{/*
@@ -81,7 +80,6 @@ Stateful Set
 {{- include "elCicdChart.service" . }}
 {{- $ := index . 0 }}
 {{- $stsValues := index . 1 }}
-{{- $hasService := (((len .) | eq 3) | and (index . 2)) }}
 ---
 {{- $_ := set $stsValues "kind" "StatefulSet" }}
 {{- $_ := set $stsValues "apiVersion" "apps/v1" }}
@@ -104,7 +102,7 @@ spec:
   {{- end }}
   template:
   {{- include "elCicdChart.selector" (list $ $stsValues) | indent 2 }}
-  {{- include "elCicdChart.podTemplate" (list $ $stsValues $hasService) | indent 4 }}
+  {{- include "elCicdChart.podTemplate" (list $ $stsValues) | indent 4 }}
   {{- if $stsValues.updateStrategy }}
   updateStrategy: {{- $stsValues.updateStrategy | toYaml | nindent 4 }}
   {{- end }}

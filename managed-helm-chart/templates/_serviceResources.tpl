@@ -13,9 +13,9 @@ Service
 {{- end }}
 {{- if or $svcValues.use3Scale $.Values.use3Scale }}
   {{- $_ := set $svcValues "annotations" ($svcValues.annotations  | dict) }}
-  {{- $_ := set $svcValues.annotations "discovery.3scale.net/path" ($svcValues.3ScalePort | default $svcValues.port | default $.Values.defaultPort) }}
-  {{- $_ := set $svcValues.annotations "discovery.3scale.net/port" ($svcValues.3ScalePath | default $.Values.default3ScalePath) }}
-  {{- $_ := set $svcValues.annotations "discovery.3scale.net/scheme" ($svcValues.3ScaleScheme | default $.Values.default3ScaleScheme) }}
+  {{- $_ := set $svcValues.annotations "discovery.3scale.net/path" ($svcValues.threeScalePort | default $svcValues.port | default $.Values.defaultPort) }}
+  {{- $_ := set $svcValues.annotations "discovery.3scale.net/port" ($svcValues.threeScalePath | default $.Values.default3ScalePath) }}
+  {{- $_ := set $svcValues.annotations "discovery.3scale.net/scheme" ($svcValues.threeScaleScheme | default $.Values.default3ScaleScheme) }}
   {{- $_ := set $svcValues "labels" ($svcValues.labels  | dict) }}
   {{- $_ := set $svcValues.labels "discovery.3scale.net" true }}
 {{- end }}
@@ -28,19 +28,22 @@ spec:
     {{- include "elCicdChart.selectorLabels" $ | nindent 4 }}
     app: {{ $svcValues.appName }}
   ports:
-  {{- if $svcValues.servicePorts }}
-    {{- $svcValues.servicePorts | toYaml | indent 2}}
-  {{- else }}
-  - port: {{ $svcValues.port | default $.Values.defaultPort }}
-    targetPort: {{ $svcValues.port | default $.Values.defaultPort }}
-    protocol: {{ $svcValues.serviceProtocol | default $.Values.defaultProtocol }}
-  {{- end }}
+    {{- if and (or ($svcValues.service).ports $svcValues.ports) $svcValues.port }}
+      {{- fail "A Service cannot define both port and ports values (perhaps a merge caused this?)!" }}
+    {{- end }}
+    {{- if or $svcValues.ports ($svcValues.service).ports }}
+      {{- (($svcValues.service).ports | default $svcValues.ports) | toYaml | nindent 2 }}
+    {{- else if $svcValues.port }}
+    - port: {{ $svcValues.port | default $.Values.defaultPort }}
+      targetPort: {{ $svcValues.targetPort | default ($svcValues.port | default $.Values.defaultPort) }}
+      protocol: {{ $svcValues.protocol | default $.Values.defaultProtocol }}
+    {{- end }}
   {{- if or $svcValues.prometheusPort $.Values.usePrometheus }}
       - name: {{ $svcValues.appName }}-prometheus-port
         port: {{ $svcValues.prometheusPort | default $.Values.defaultPrometheusPort }}
         targetPort: {{ $svcValues.prometheusPort | default $.Values.defaultPrometheusPort }}
         protocol: {{ $svcValues.prometheusProtocol | default $.Values.defaultPrometheusProtocol }}
-  {{- end
+  {{- end }}
 {{- end }}
 
 {{/*

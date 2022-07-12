@@ -6,10 +6,17 @@ Deployment [Short name]
 {{- end }}
 
 {{/*
+Deployment and Service combination [Short name]
+*/}}
+{{- define "elCicdChart.deploySvc" }}
+  {{- include "elCicdChart.deploymentService" . }}
+{{- end }}
+
+{{/*
 Deployment and Service combination
 */}}
 {{- define "elCicdChart.deploymentService" }}
-  {{- include "elCicdChart.deployment" (append . true)  }}
+  {{- include "elCicdChart.deployment" . }}
   {{- include "elCicdChart.service" . }}
 {{- end }}
 
@@ -94,7 +101,6 @@ Pod Template
 {{- define "elCicdChart.podTemplate" }}
 {{- $ := index . 0 }}
 {{- $podValues := index . 1 }}
-{{- $hasService := index . 2 }}
 {{- include "elCicdChart.apiMetadata" . }}
 spec:
   {{- if $podValues.activeDeadlineSeconds }}
@@ -123,7 +129,7 @@ spec:
   {{- end }}
   containers:
     {{- $containers := prepend ($podValues.sidecars | default list) $podValues }}
-    {{- include "elCicdChart.containers" (list $ $containers $hasService) | trim | nindent 2 }}
+    {{- include "elCicdChart.containers" (list $ $containers) | trim | nindent 2 }}
   {{- if $podValues.volumes }}
   volumes: {{- $podValues.volumes | toYaml | nindent 2 }}
   {{- end }}
@@ -135,15 +141,8 @@ Container definition
 {{- define "elCicdChart.containers" }}
 {{- $ := index . 0 }}
 {{- $containers := index . 1 }}
-{{- $hasService := false }}
-{{- if eq (len .) 4 }}
-  {{- $hasService = index . 3 }}
-{{- end }}
 
 {{- range $containerVals := $containers }}
-  {{- range $profile := $.Values.profiles }}
-    {{- include "elCicdChart.mergeProfile" (list $ $containerVals $profile) }}
-  {{- end }}
 - name: {{ $containerVals.appName }}
   image: {{ $containerVals.image | default (include "elCicdChart.microServiceImage" $) }}
  {{- if $containerVals.activeDeadlineSeconds }}
@@ -164,22 +163,24 @@ Container definition
   {{- end }}
   {{- if $containerVals.lifecycle }}
   lifecycle: {{ $containerVals.lifecycle | toYaml | nindent 4 }}
-  {{- end }}}
+  {{- end }}
   {{- if $containerVals.livenessProbe }}
   livenessProbe: {{ $containerVals.livenessProbe | toYaml | nindent 2 }}
   {{- end }}
-  {{- if or $containerVals.containerPort $hasService }}
+  {{- if or $containerVals.containerPort $containerVals.containerPorts }}
   ports:
-    {{- if or $containerVals.containerPort }}
-      {{- $containerVals.containerPorts | toYaml | nindent 2 }}
-    {{- else }}
-      {{- $hasService = false }}
-  - containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
-    protocol: {{ $containerVals.protocol | default $.Values.defaultProtocol }}
+    {{- if and $containerVals.ports $containerVals.port }}
+      {{- fail "A Container cannot define both port and ports values (perhaps a merge caused this?)!" }}
+    {{- end }}
+    {{- if $containerVals.ports }}
+      {{- $containerVals.ports | toYaml | nindent 2 }}
+    {{- else if $containerVals.port  }}
+    - containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
+      protocol: {{ $containerVals.protocol | default $.Values.defaultProtocol }}
     {{- end }}
     {{- if $containerVals.prometheusPort }}
-  - containerPort: {{ $containerVals.prometheusPort | default $.Values.defaultPrometheusPort }}
-    protocol: {{ $containerVals.prometheusProtocol | default $.Values.defaultPrometheusProtocol }}
+    - containerPort: {{ $containerVals.prometheusPort | default $.Values.defaultPrometheusPort }}
+      protocol: {{ $containerVals.prometheusProtocol | default $.Values.defaultPrometheusProtocol }}
     {{- end }}
   {{- end }}
   {{- if $containerVals.readinessProbe }}
@@ -187,11 +188,11 @@ Container definition
   {{- end }}
   resources:
     limits:
-      cpu: {{ (($containerVals.resources).limits).cpu | default $.Values.defaultLimitsCpu }}
-      memory: {{ (($containerVals.resources).limits).memory | default $.Values.defaultLimitsMemory }}
+      cpu: {{ $containerVals.limitsCpu | default $.Values.defaultLimitsCpu }}
+      memory: {{ $containerVals.limitsMemory | default $.Values.defaultLimitsMemory }}
     requests:
-      cpu: {{ (($containerVals.resources).requests).cpu | default $.Values.defaultRequestsCpu}}
-      memory: {{ (($containerVals.resources).requests).memory | default $.Values.defaultRequestsMemory }}
+      cpu: {{ $containerVals.requestsCpu | default $.Values.defaultRequestsCpu }}
+      memory: {{ $containerVals.requestsMemory | default $.Values.defaultRequestsMemory }}
   {{- if $containerVals.startupProbe }}
   startupProbe: {{ $containerVals.startupProbe | toYaml | nindent 2 }}
   {{- end }}

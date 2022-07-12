@@ -1,4 +1,7 @@
 {{- $skippedList := list }}
+{{- if $.Values.templates }}
+  {{- include "elCicdChart.processProfiles" $ }}
+{{- end }}
 {{- range $templateValues := .Values.templates }}
   {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
   {{ $render := true }}
@@ -12,25 +15,15 @@
       {{- $render = and $render (not (has $profile $.Values.profiles)) }}
     {{- end }}
   {{- end }}
-  {{- $templateName := printf "elCicdChart.%s" $templateValues.templateName }}
   {{- if $render }}
-    {{- range $profile := $.Values.profiles }}
-      {{- include "elCicdChart.mergeProfile" (list $ $templateValues $profile) }}
-    {{- end}}
-        
+    {{- $templateName := printf "elCicdChart.%s" $templateValues.templateName }}        
     {{- include $templateName (list $ $templateValues) }}
   {{- else }}
     {{- $skippedList = append $skippedList (list $templateValues.templateName $templateValues.appName) }}
   {{- end}}
 {{- end }}
 ---
-
----
 # Profiles: {{ $.Values.profiles }}
 {{- range $skipped := $skippedList }}
   {{- include "elCicdChart.skippedTemplate" $skipped }}
-{{- end }}
-
-{{ define "elCicdChart.skippedTemplate" }}
-# EXCLUDED BY PROFILES: {{ index . 0 }} -> {{ index . 1 }}
 {{- end }}
