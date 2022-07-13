@@ -1,7 +1,6 @@
 {{- $skippedList := list }}
-{{- if $.Values.templates }}
-  {{- include "elCicdChart.processProfiles" $ }}
-{{- end }}
+{{- $_ := set $.Values "templates" ($.Values.templates | default dict) }}
+{{- include "elCicdChart.processProfiles" $ }}
 {{- range $templateValues := .Values.templates }}
   {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
   {{ $render := true }}
