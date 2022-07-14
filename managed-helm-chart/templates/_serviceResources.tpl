@@ -6,10 +6,10 @@ Service
 {{- $svcValues := index . 1 }}
 {{- if or $svcValues.prometheusPort $.Values.usePrometheus }}
   {{- $_ := set $svcValues "annotations" ($svcValues.annotations | default dict) }}
-  {{- $_ := set $svcValues.annotations "prometheus.io/path" ($svcValues.prometheusPath | default $.Values.defaultPrometheusPath) }}
-  {{- $_ := set $svcValues.annotations "prometheus.io/port" ($svcValues.prometheusPort | default $.Values.defaultPrometheusPort) }}
-  {{- $_ := set $svcValues.annotations "prometheus.io/scheme" ($svcValues.prometheusScheme | default $.Values.defaultPrometheusScheme) }}
-  {{- $_ := set $svcValues.annotations "prometheus.io/scrape" ($svcValues.prometheusScrape | default $.Values.defaultPrometheusScrape) }}
+  {{- $_ := set $svcValues.annotations "prometheus.io/path" ($svcValues.prometheusPath | default $.Values.defaultPrometheusPath | quote) }}
+  {{- $_ := set $svcValues.annotations "prometheus.io/port" ($svcValues.prometheusPort | default $.Values.defaultPrometheusPort | quote) }}
+  {{- $_ := set $svcValues.annotations "prometheus.io/scheme" ($svcValues.prometheusScheme | default $.Values.defaultPrometheusScheme | quote) }}
+  {{- $_ := set $svcValues.annotations "prometheus.io/scrape" ($svcValues.prometheusScrape | default $.Values.defaultPrometheusScrape | quote) }}
 {{- end }}
 {{- if or $svcValues.threeScalePort $.Values.use3Scale }}
   {{- $_ := set $svcValues "annotations" ($svcValues.annotations | default dict) }}

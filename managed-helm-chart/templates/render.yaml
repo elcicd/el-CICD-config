@@ -21,6 +21,9 @@
     {{- $skippedList = append $skippedList (list $templateValues.templateName $templateValues.appName) }}
   {{- end}}
 {{- end }}
+{{- if $.Values.microService }}
+ {{- include "elCicdChart.microServiceMetaInfo" . }}
+{{- end }}
 ---
 # Profiles: {{ $.Values.profiles }}
 {{- range $skipped := $skippedList }}

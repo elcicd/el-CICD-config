@@ -1,3 +1,5 @@
+{{- $_ := set . "UNDEFINED" "undefined" -}}
+
 {{/*
 Deployment [Short name]
 */}}
@@ -39,6 +41,13 @@ HorizontalPodAutoscaler [Short name]
 */}}
 {{- define "elCicdChart.hpa" }}
   {{- include "elCicdChart.horizontalPodAutoscaler" . }}
+{{- end }}
+
+{{/*
+ConfigMap [Short name]
+*/}}
+{{- define "elCicdChart.cm" }}
+  {{- include "elCicdChart.configMap" . }}
 {{- end }}
 
 {{/*
@@ -220,9 +229,10 @@ Container definition
 {{- end }}
 {{- end }}
 
+
 {{/*
 Default image definition
 */}}
 {{- define "elCicdChart.microServiceImage" }}
-{{- $.Values.imageRepository }}/{{- $.Values.projectId }}-{{- $.Values.microService }}:{{- $.Values.imageTag }}
+  {{- $.Values.imageRepository }}/{{- $.Values.projectId }}-{{- $.Values.microService }}:{{- $.Values.imageTag }}
 {{- end }}
