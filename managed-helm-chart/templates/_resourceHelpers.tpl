@@ -211,8 +211,8 @@ Container definition
   {{- if $containerVals.volumeMounts }}
   volumeMounts: {{ $containerVals.volumeMounts | toYaml | nindent 2 }}
   {{- end }}
-  {{- if or ($containerVals.profileVals).workingDir $containerVals.defaultWorkingDir }}
-  workingDir: {{ ($containerVals.profileVals).workingDir | default $containerVals.defaultWorkingDir }}
+  {{- if or $containerVals.workingDir $containerVals.defaultWorkingDir }}
+  workingDir: {{ $containerVals.workingDir | default $containerVals.defaultWorkingDir }}
   {{- end }}
   {{- if $containerVals.supplemental }}
     {{- $containerVals.supplemental | toYaml | nindent 2 }}

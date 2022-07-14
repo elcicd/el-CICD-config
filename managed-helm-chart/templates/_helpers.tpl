@@ -15,10 +15,11 @@ kind: {{ $template.kind }}
 {{- $ := index . 0 }}
 {{- $metadataValues := index . 1 }}
 metadata:
+  {{- if or $metadataValues.annotations $.Values.defaultAnnotations }}
   annotations:
-    {{- $annotations := ($metadataValues.profileVals).annotations | default $metadataValues.annotations }}
-    {{- if $annotations }}{{- $annotations | indent 4 }}{{- end }}
-    {{- if $.Values.defaultAnnotations}}{{- $.Values.defaultAnnotations | toYaml | indent 4 }}{{- end }}
+    {{- if $metadataValues.annotations }}{{- $metadataValues.annotations | toYaml | nindent 4 }}{{- end }}
+    {{- if $.Values.defaultAnnotations}}{{- $.Values.defaultAnnotations | toYaml | nindent 4 }}{{- end }}
+  {{- end }}
   labels:
     {{- include "elCicdChart.labels" $ | nindent 4 }}
     app: {{ $metadataValues.appName }}
