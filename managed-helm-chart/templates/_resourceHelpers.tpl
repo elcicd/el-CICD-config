@@ -245,19 +245,19 @@ Service Prometheus Annotations definition
   {{- $svcValues := index . 1 }}
   {{- $_ := set $svcValues "annotations" ($svcValues.annotations | default dict) }}
 
-  {{- if or $svcValues.prometheus.path default $.Values.defaultPrometheusPath }}
+  {{- if or ($svcValues.prometheus).path default $.Values.defaultPrometheusPath }}
     {{- $_ := set $svcValues.annotations "prometheus.io/path" ($svcValues.prometheus.path | default $.Values.defaultPrometheusPath) }}
   {{- end }}
 
-  {{- if or $svcValues.prometheus.port default $.Values.defaultPrometheusPort }}
+  {{- if or ($svcValues.prometheus).port default $.Values.defaultPrometheusPort }}
     {{- $_ := set $svcValues.annotations "prometheus.io/port" ($svcValues.prometheus.port | default $.Values.defaultPrometheusPort) }}
   {{- end }}
 
-  {{- if or $svcValues.prometheus.scheme default $.Values.defaultPrometheusScheme }}
+  {{- if or ($svcValues.prometheus).scheme default $.Values.defaultPrometheusScheme }}
     {{- $_ := set $svcValues.annotations "prometheus.io/scheme" ($svcValues.prometheus.scheme | default $.Values.defaultPrometheusScheme) }}
   {{- end }}
 
-  {{- if or $svcValues.prometheus.scrape default $.Values.defaultPrometheusScrape }}
+  {{- if or ($svcValues.prometheus).scrape default $.Values.defaultPrometheusScrape }}
     {{- $_ := set $svcValues.annotations "prometheus.io/scrape" ($svcValues.prometheus.scrape | default $.Values.defaultPrometheusScrape) }}
   {{- end }}
 {{- end }}
