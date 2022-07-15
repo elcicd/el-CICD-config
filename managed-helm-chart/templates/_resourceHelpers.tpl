@@ -236,3 +236,25 @@ Default image definition
 {{- define "elCicdChart.microServiceImage" }}
   {{- $.Values.imageRepository }}/{{- $.Values.projectId }}-{{- $.Values.microService }}:{{- $.Values.imageTag }}
 {{- end }}
+
+{{/*
+Service Prometheus Annotations definition
+*/}}
+{{- define "elCicdChart.svcPrometheusAnnotations" }}
+  {{- if or svcValues.prometheus $.Values.usePrometheus }}
+    {{- if or $svcValues.prometheus $svcValues.usePrometheus $.Values.usePrometheus }}
+      {{-if or $svcValues.prometheus.path $.Values.defaultPrometheusPath }}
+prometheus.io/path: {{ $svcValues.prometheus.path | default $.Values.defaultPrometheusPath  }}
+      {{- end }}
+      {{- if or $.prometheus.port $.Values.defaultPrometheusPort }}
+prometheus.io/port: {{ $svcValues.prometheus.port | default $.Values.defaultPrometheusPort }}
+      {{- end }}
+      {{- if or $.prometheus.scheme $.Values.defaultPrometheusScheme }}
+prometheus.io/scheme: {{ $svcValues.prometheus.scheme| default $.Values.defaultPrometheusScheme }}
+      {{- end }}
+      {{- if or $.prometheus.scrape $.Values.defaultPrometheusScrape }}
+prometheus.io/scrape: {{ $svcValues.prometheus.scrape default $.Values.defaultPrometheusScrape }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

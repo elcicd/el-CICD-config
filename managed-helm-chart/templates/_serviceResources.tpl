@@ -4,8 +4,8 @@ Service
 {{- define "elCicdChart.service" }}
 {{- $ := index . 0 }}
 {{- $svcValues := index . 1 }}
-{{- if or svcValues.prometheus $.Values.usePrometheus }}
-  {{- include "elCicdChart.prometheusAnnotations" }}
+{{- if or $svcValues.prometheus $.Values.defaultPrometheus }}
+  {{- append $svcValues.extraAnnotationTemplates "svcPrometheusAnnotations" }}
 {{- end }}
 {{- if or $svcValues.threeScalePort $.Values.use3Scale }}
   {{- $_ := set $svcValues "annotations" ($svcValues.annotations | default dict) }}

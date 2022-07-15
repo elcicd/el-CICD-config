@@ -2,6 +2,7 @@
 {{- $_ := set $.Values "templates" ($.Values.templates | default dict) }}
 {{- include "elCicdChart.processProfiles" $ }}
 {{- range $templateValues := .Values.templates }}
+  {{- $_ := $templateValues "extraAnnotationTemplates" list }}
   {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
   {{ $render := true }}
   {{- if $templateValues.forProfiles }}

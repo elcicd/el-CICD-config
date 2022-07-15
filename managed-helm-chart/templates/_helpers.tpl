@@ -14,11 +14,17 @@ kind: {{ $template.kind }}
 {{- define "elCicdChart.apiMetadata" }}
 {{- $ := index . 0 }}
 {{- $metadataValues := index . 1 }}
+{{- if eq (len .) 3 }}
+  {{- $extraAnnotationTemplates := index . 2 }}
+{{- end }}
 metadata:
   {{- if or $metadataValues.annotations $.Values.defaultAnnotations }}
   annotations:
     {{- if $metadataValues.annotations }}{{- $metadataValues.annotations | toYaml | nindent 4 }}{{- end }}
     {{- if $.Values.defaultAnnotations}}{{- $.Values.defaultAnnotations | toYaml | nindent 4 }}{{- end }}
+    {{- range $extraAnnotationTemplate := $extraAnnotationTemplates }}
+      {{- include $extraAnnotationTemplate . | nindent 4 }}
+    {{- end }}
   {{- end }}
   labels:
     {{- include "elCicdChart.labels" $ | nindent 4 }}
@@ -105,26 +111,6 @@ Selector labels
 {{- define "elCicdChart.selectorLabels" -}}
 projectid: {{ required "Missing projectId!" $.Values.projectId }}
 microservice: {{ required "Missing microservice name!" $.Values.microService }}
-{{- end }}
-
-{{/*
-Prometheus Annotations
-*/}}
-{{- define "elCicdChart.prometheusAnnotations" -}}
-  {{- if or $.prometheus $.usePrometheus }}
-    {{-if or $.prometheus.path $.Values.defaultPrometheusPath }}
-prometheus.io/path: {{ $.prometheus.path | default $.Values.defaultPrometheusPath  }}
-    {{- end }}
-    {{- if or $.prometheus.port $.Values.defaultPrometheusPort }}
-prometheus.io/port: {{ $.prometheus.port | default $.Values.defaultPrometheusPort }}
-    {{- end }}
-    {{- if or $.prometheus.scheme $.Values.defaultPrometheusScheme }}
-prometheus.io/scheme: {{ $.prometheus.scheme| default $.Values.defaultPrometheusScheme }}
-    {{- end }}
-    {{- if or $.prometheus.scrape $.Values.defaultPrometheusScrape }}
-prometheus.io/scrape: {{ $.prometheus.scrape default $.Values.defaultPrometheusScrape }}
-    {{- end }}
-  {{- end }}
 {{- end }}
 
 {{/*
