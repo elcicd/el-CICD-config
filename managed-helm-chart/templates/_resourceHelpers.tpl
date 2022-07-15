@@ -178,21 +178,21 @@ Container definition
   {{- end }}
   {{- if or $containerVals.ports $containerVals.port $.Values.defaultPort }}
   ports:
-  {{- if and $containerVals.ports $containerVals.port }}
-    {{- fail "A Container cannot define both port and ports values (perhaps a merge caused this?)!" }}
-  {{- end }}
-  {{- if $containerVals.ports }}
-    {{- $containerVals.ports | toYaml | nindent 2 }}
-  {{- else if or $containerVals.port $.Values.defaultPort }}
+    {{- if and $containerVals.ports $containerVals.port }}
+      {{- fail "A Container cannot define both port and ports values (perhaps a merge caused this?)!" }}
+    {{- end }}
+    {{- if $containerVals.ports }}
+      {{- $containerVals.ports | toYaml | nindent 2 }}
+    {{- else if or $containerVals.port $.Values.defaultPort }}
   - name: default-port
     containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
     protocol: {{ $containerVals.protocol | default $.Values.defaultProtocol }}
-  {{- end }}
-  {{- if and ($containerVals.prometheus).port (ne ($containerVals.prometheus).port $containerVals.port) }}
-  - name: {{ $containerVals.appName }}-prometheus-port
+    {{- end }}
+    {{- if and ($containerVals.prometheus).port (ne ($containerVals.prometheus).port $containerVals.port) }}
+  - name: prometheus-port
     containerPort: {{ $containerVals.prometheus.port | default $containerVals.port }}
     protocol: {{ $containerVals.prometheus.protocol | default $.Values.defaultPrometheusProtocol }}
-  {{- end }}
+    {{- end }}
   {{- end }}
   {{- if $containerVals.readinessProbe }}
   readinessProbe: {{ $containerVals.readinessProbe | toYaml | nindent 2 }}
