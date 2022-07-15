@@ -243,7 +243,7 @@ Service Prometheus Annotations definition
 {{- define "elCicdChart.svcPrometheusAnnotations" }}
   {{- $ := index . 0 }}
   {{- $promValues := index . 1 }}
-  {{- if or promValues.prometheus $.Values.usePrometheus }}
+  {{- if or $promValues.prometheus $.Values.usePrometheus }}
     {{- if or $promValues.prometheus $promValues.usePrometheus $.Values.usePrometheus }}
       {{-if or $promValues.prometheus.path $.Values.defaultPrometheusPath }}
 prometheus.io/path: {{ $promValues.prometheus.path | default $.Values.defaultPrometheusPath  }}
@@ -251,10 +251,10 @@ prometheus.io/path: {{ $promValues.prometheus.path | default $.Values.defaultPro
       {{- if or $.prometheus.port $.Values.defaultPrometheusPort }}
 prometheus.io/port: {{ $promValues.prometheus.port | default $.Values.defaultPrometheusPort }}
       {{- end }}
-      {{- if or $.prometheus.scheme $.Values.defaultPrometheusScheme }}
+      {{- if or $promValues.prometheus.scheme $.Values.defaultPrometheusScheme }}
 prometheus.io/scheme: {{ $promValues.prometheus.scheme| default $.Values.defaultPrometheusScheme }}
       {{- end }}
-      {{- if or $.prometheus.scrape $.Values.defaultPrometheusScrape }}
+      {{- if or $promValues.prometheus.scrape $.Values.defaultPrometheusScrape }}
 prometheus.io/scrape: {{ $promValues.prometheus.scrape default $.Values.defaultPrometheusScrape }}
       {{- end }}
     {{- end }}

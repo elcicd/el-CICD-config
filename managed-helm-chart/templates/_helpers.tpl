@@ -20,7 +20,8 @@ metadata:
     {{- if $metadataValues.annotations }}{{- $metadataValues.annotations | toYaml | nindent 4 }}{{- end }}
     {{- if $.Values.defaultAnnotations}}{{- $.Values.defaultAnnotations | toYaml | nindent 4 }}{{- end }}
     {{- range $extraAnnotationTemplate := $metadataValues.extraAnnotationTemplates }}
-      {{- include $extraAnnotationTemplate . | nindent 4 }}
+      {{ $template := printf "elCicdChart.%s" $extraAnnotationTemplate }}
+      {{- include $template . | nindent 4 }}
     {{- end }}
   {{- end }}
   labels:
