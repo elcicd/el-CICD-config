@@ -250,7 +250,7 @@ Service Prometheus Annotations definition
   {{- end }}
 
   {{- if or ($svcValues.prometheus).port $.Values.defaultPrometheusPort }}
-    {{- $_ := set $svcValues.annotations "prometheus.io/port" ($svcValues.prometheus.port | default $.Values.defaultPrometheusPort | quote) }}
+    {{- $_ := set $svcValues.annotations "prometheus.io/port" (string $svcValues.prometheus.port) }}
   {{- end }}
 
   {{- if or ($svcValues.prometheus).scheme $.Values.defaultPrometheusScheme }}
