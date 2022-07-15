@@ -183,12 +183,14 @@ Container definition
     {{- end }}
     {{- if $containerVals.ports }}
       {{- $containerVals.ports | toYaml | nindent 2 }}
-    {{- else if $containerVals.port  }}
-    - containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
+    {{- else if or $containerVals.port $.Values.defaultPort }}
+    - name: default-port
+      containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
       protocol: {{ $containerVals.protocol | default $.Values.defaultProtocol }}
     {{- end }}
-    {{- if or ($containerVals.prometheus).port $.Values}}
-    - containerPort: {{ $containerVals.prometheus.port | default $.Values.defaultPrometheusPort }}
+    {{- if and ($containerVals.prometheus).port (ne $containerVals.prometheus).port $containerVals.port) }}
+    - name: {{ $containerVals.appName }}-prometheus-port
+      containerPort: {{ $containerVals.prometheus.port | default $containerVals.port }}
       protocol: {{ $containerVals.prometheus.protocol | default $.Values.defaultPrometheusProtocol }}
     {{- end }}
   {{- end }}
@@ -250,7 +252,7 @@ Service Prometheus Annotations definition
   {{- end }}
 
   {{- if or ($svcValues.prometheus).port $.Values.defaultPrometheusPort }}
-    {{- $_ := set $svcValues.annotations "prometheus.io/port" $svcValues.prometheus.port }}
+    {{- $_ := set $svcValues.annotations "prometheus.io/port" $svcValues.prometheus.port | $svcValues.port }}
   {{- end }}
 
   {{- if or ($svcValues.prometheus).scheme $.Values.defaultPrometheusScheme }}
