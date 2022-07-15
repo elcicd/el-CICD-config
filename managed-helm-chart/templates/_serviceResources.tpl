@@ -33,7 +33,7 @@ spec:
     protocol: {{ $svcValues.protocol | default $.Values.defaultProtocol }}
   {{- end }}
   {{- if or $svcValues.prometheus.port $.Values.usePrometheus }}
-  - name: {{ $svcValues.appName }}-prometheus-port
+  - name: prometheus-port
     port: {{ $svcValues.prometheus.port | default $.Values.defaultPrometheusPort }}
     targetPort: {{ $svcValues.prometheus.port | default $.Values.defaultPrometheusPort }}
     protocol: {{ $svcValues.prometheus.protocol | default $.Values.defaultPrometheusProtocol }}
