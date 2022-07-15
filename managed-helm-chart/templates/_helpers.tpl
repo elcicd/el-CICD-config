@@ -17,8 +17,13 @@ kind: {{ $template.kind }}
 metadata:
   {{- if or $metadataValues.annotations $.Values.defaultAnnotations }}
   annotations:
-    {{- if $metadataValues.annotations }}{{- $metadataValues.annotations | toYaml | nindent 4 }}{{- end }}
-    {{- if $.Values.defaultAnnotations}}{{- $.Values.defaultAnnotations | toYaml | nindent 4 }}{{- end }}
+    {{- if $metadataValues.annotations }}
+      {{- range $key, $value := $metadataValues.annotations }}
+    {{ $key }}: {{ !!string $value }}
+    {{- end }}
+    {{- if $.Values.defaultAnnotations}}
+      {{- $.Values.defaultAnnotations | toYaml | nindent 4 }}
+    {{- end }}
   {{- end }}
   labels:
     {{- include "elCicdChart.labels" $ | nindent 4 }}
