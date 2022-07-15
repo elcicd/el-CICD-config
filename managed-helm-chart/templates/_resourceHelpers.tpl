@@ -188,7 +188,7 @@ Container definition
       containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
       protocol: {{ $containerVals.protocol | default $.Values.defaultProtocol }}
     {{- end }}
-    {{- if and ($containerVals.prometheus).port (ne $containerVals.prometheus).port $containerVals.port) }}
+    {{- if and ($containerVals.prometheus).port (ne ($containerVals.prometheus).port $containerVals.port) }}
     - name: {{ $containerVals.appName }}-prometheus-port
       containerPort: {{ $containerVals.prometheus.port | default $containerVals.port }}
       protocol: {{ $containerVals.prometheus.protocol | default $.Values.defaultPrometheusProtocol }}
