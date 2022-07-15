@@ -115,13 +115,13 @@ Prometheus Annotations
     {{-if or $.prometheus.path $.Values.defaultPrometheusPath }}
 prometheus.io/path: {{ $.prometheus.path | default $.Values.defaultPrometheusPath  }}
     {{- end }}
-    {{-if or $.prometheus.port $.Values.defaultPrometheusPort }}
+    {{- if or $.prometheus.port $.Values.defaultPrometheusPort }}
 prometheus.io/port: {{ $.prometheus.port | default $.Values.defaultPrometheusPort }}
     {{- end }}
-    {{-if or $.prometheus.scheme $.Values.defaultPrometheusScheme }}
+    {{- if or $.prometheus.scheme $.Values.defaultPrometheusScheme }}
 prometheus.io/scheme: {{ $.prometheus.scheme| default $.Values.defaultPrometheusScheme }}
     {{- end }}
-    {{-if or $.prometheus.scrape $.Values.defaultPrometheusScrape }}
+    {{- if or $.prometheus.scrape $.Values.defaultPrometheusScrape }}
 prometheus.io/scrape: {{ $.prometheus.scrape default $.Values.defaultPrometheusScrape }}
     {{- end }}
   {{- end }}
