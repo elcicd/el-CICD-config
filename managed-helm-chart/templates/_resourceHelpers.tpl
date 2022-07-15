@@ -245,7 +245,7 @@ Service Prometheus Annotations definition
   {{- $promValues := index . 1 }}
   {{- if or $promValues.prometheus $.Values.usePrometheus }}
     {{- if or $promValues.prometheus $promValues.usePrometheus $.Values.usePrometheus }}
-      {{-if or $promValues.prometheus.path $.Values.defaultPrometheusPath }}
+      {{- if or $promValues.prometheus.path $.Values.defaultPrometheusPath }}
 prometheus.io/path: {{ $promValues.prometheus.path | default $.Values.defaultPrometheusPath  }}
       {{- end }}
       {{- if or $.prometheus.port $.Values.defaultPrometheusPort }}
