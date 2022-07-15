@@ -34,7 +34,8 @@ spec:
   {{- if or $svcValues.ports ($svcValues.service).ports }}
     {{- (($svcValues.service).ports | default $svcValues.ports) | toYaml | nindent 2 }}
   {{- else if $svcValues.port }}
-  - port: {{ $svcValues.port | default $.Values.defaultPort }}
+  - name: {{ $svcValues.appName }}-port
+    port: {{ $svcValues.port | default $.Values.defaultPort }}
     targetPort: {{ $svcValues.targetPort | default ($svcValues.port | default $.Values.defaultPort) }}
     protocol: {{ $svcValues.protocol | default $.Values.defaultProtocol }}
   {{- end }}
