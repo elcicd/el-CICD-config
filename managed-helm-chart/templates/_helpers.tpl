@@ -14,15 +14,12 @@ kind: {{ $template.kind }}
 {{- define "elCicdChart.apiMetadata" }}
 {{- $ := index . 0 }}
 {{- $metadataValues := index . 1 }}
-{{- if eq (len .) 3 }}
-  {{- $extraAnnotationTemplates := index . 2 }}
-{{- end }}
 metadata:
   {{- if or $metadataValues.annotations $.Values.defaultAnnotations }}
   annotations:
     {{- if $metadataValues.annotations }}{{- $metadataValues.annotations | toYaml | nindent 4 }}{{- end }}
     {{- if $.Values.defaultAnnotations}}{{- $.Values.defaultAnnotations | toYaml | nindent 4 }}{{- end }}
-    {{- range $extraAnnotationTemplate := $extraAnnotationTemplates }}
+    {{- range $extraAnnotationTemplate := $metadataValues.extraAnnotationTemplates }}
       {{- include $extraAnnotationTemplate . | nindent 4 }}
     {{- end }}
   {{- end }}

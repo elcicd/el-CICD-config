@@ -241,19 +241,21 @@ Default image definition
 Service Prometheus Annotations definition
 */}}
 {{- define "elCicdChart.svcPrometheusAnnotations" }}
-  {{- if or svcValues.prometheus $.Values.usePrometheus }}
-    {{- if or $svcValues.prometheus $svcValues.usePrometheus $.Values.usePrometheus }}
-      {{-if or $svcValues.prometheus.path $.Values.defaultPrometheusPath }}
-prometheus.io/path: {{ $svcValues.prometheus.path | default $.Values.defaultPrometheusPath  }}
+  {{- $ := index . 0 }}
+  {{- $promValues := index . 1 }}
+  {{- if or promValues.prometheus $.Values.usePrometheus }}
+    {{- if or $promValues.prometheus $promValues.usePrometheus $.Values.usePrometheus }}
+      {{-if or $promValues.prometheus.path $.Values.defaultPrometheusPath }}
+prometheus.io/path: {{ $promValues.prometheus.path | default $.Values.defaultPrometheusPath  }}
       {{- end }}
       {{- if or $.prometheus.port $.Values.defaultPrometheusPort }}
-prometheus.io/port: {{ $svcValues.prometheus.port | default $.Values.defaultPrometheusPort }}
+prometheus.io/port: {{ $promValues.prometheus.port | default $.Values.defaultPrometheusPort }}
       {{- end }}
       {{- if or $.prometheus.scheme $.Values.defaultPrometheusScheme }}
-prometheus.io/scheme: {{ $svcValues.prometheus.scheme| default $.Values.defaultPrometheusScheme }}
+prometheus.io/scheme: {{ $promValues.prometheus.scheme| default $.Values.defaultPrometheusScheme }}
       {{- end }}
       {{- if or $.prometheus.scrape $.Values.defaultPrometheusScrape }}
-prometheus.io/scrape: {{ $svcValues.prometheus.scrape default $.Values.defaultPrometheusScrape }}
+prometheus.io/scrape: {{ $promValues.prometheus.scrape default $.Values.defaultPrometheusScrape }}
       {{- end }}
     {{- end }}
   {{- end }}
