@@ -19,7 +19,8 @@ metadata:
   annotations:
     {{- if $metadataValues.annotations }}
       {{- range $key, $value := $metadataValues.annotations }}
-    {{ $key }}: {{ !!string $value }}
+    {{ $key }}: "{{ $value }}"
+      {{- end }}
     {{- end }}
     {{- if $.Values.defaultAnnotations}}
       {{- $.Values.defaultAnnotations | toYaml | nindent 4 }}
