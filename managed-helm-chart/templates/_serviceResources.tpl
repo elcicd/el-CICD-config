@@ -8,7 +8,7 @@ Service
   {{- include "elCicdChart.svcPrometheusAnnotations" . }}
 {{- end }}
 {{- if or $svcValues.threeScalePort $.Values.use3Scale }}
-  {{- include "elCicdChart.threeScaleAnnotations" . }}
+  {{- include "elCicdChart.3ScaleAnnotations" . }}
   {{- $_ := set $svcValues "labels" ($svcValues.labels  | default dict) }}
   {{- $_ := set $svcValues.labels "discovery.3scale.net" true }}
 {{- end }}
