@@ -187,9 +187,9 @@ Container definition
     - containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
       protocol: {{ $containerVals.protocol | default $.Values.defaultProtocol }}
     {{- end }}
-    {{- if $containerVals.prometheusPort }}
-    - containerPort: {{ $containerVals.prometheusPort | default $.Values.defaultPrometheusPort }}
-      protocol: {{ $containerVals.prometheusProtocol | default $.Values.defaultPrometheusProtocol }}
+    {{- if or ($containerVals.prometheus).port $.Values}}
+    - containerPort: {{ $containerVals.prometheus.port | default $.Values.defaultPrometheusPort }}
+      protocol: {{ $containerVals.prometheus.protocol | default $.Values.defaultPrometheusProtocol }}
     {{- end }}
   {{- end }}
   {{- if $containerVals.readinessProbe }}
@@ -242,21 +242,22 @@ Service Prometheus Annotations definition
 */}}
 {{- define "elCicdChart.svcPrometheusAnnotations" }}
   {{- $ := index . 0 }}
-  {{- $promValues := index . 1 }}
-  {{- if or $promValues.prometheus $.Values.usePrometheus }}
-    {{- if or $promValues.prometheus $promValues.usePrometheus $.Values.usePrometheus }}
-      {{- if or $promValues.prometheus.path $.Values.defaultPrometheusPath }}
-prometheus.io/path: {{ $promValues.prometheus.path | default $.Values.defaultPrometheusPath  }}
-      {{- end }}
-      {{- if or $.prometheus.port $.Values.defaultPrometheusPort }}
-prometheus.io/port: {{ $promValues.prometheus.port | default $.Values.defaultPrometheusPort }}
-      {{- end }}
-      {{- if or $promValues.prometheus.scheme $.Values.defaultPrometheusScheme }}
-prometheus.io/scheme: {{ $promValues.prometheus.scheme| default $.Values.defaultPrometheusScheme }}
-      {{- end }}
-      {{- if or $promValues.prometheus.scrape $.Values.defaultPrometheusScrape }}
-prometheus.io/scrape: {{ $promValues.prometheus.scrape default $.Values.defaultPrometheusScrape }}
-      {{- end }}
-    {{- end }}
-  {{- end }}
+  {{- $svcValues := index . 1 }}
+  {{- $_ := set $svcValues "annotations" ($svcValues.annotations | default dict) }}
+  {{- $_ := set $svcValues.annotations "prometheus.io/path" ($svcValues.prometheus.path | default $.Values.defaultPrometheusPath) }}
+  {{- $_ := set $svcValues.annotations "prometheus.io/port" ($svcValues.prometheus.port | default $.Values.defaultPrometheusPort) }}
+  {{- $_ := set $svcValues.annotations "prometheus.io/scheme" ($svcValues.prometheus.scheme | default $.Values.defaultPrometheusScheme) }}
+  {{- $_ := set $svcValues.annotations "prometheus.io/scrape" ($svcValues.prometheus.scrape | default $.Values.defaultPrometheusScrape) }}
+{{- end }}
+
+{{/*
+Service Prometheus 3Scale definition
+*/}}
+{{- define "elCicdChart.svcPrometheusAnnotations" }}
+  {{- $ := index . 0 }}
+  {{- $svcValues := index . 1 }}
+  {{- $_ := set $svcValues "annotations" ($svcValues.annotations | default dict) }}
+  {{- $_ := set $svcValues.annotations "discovery.3scale.net/path" ($svcValues.threeScale.port | default $svcValues.port | default $.Values.defaultPort) }}
+  {{- $_ := set $svcValues.annotations "discovery.3scale.net/port" ($svcValues.threeScale.path | default $.Values.default3ScalePath) }}
+  {{- $_ := set $svcValues.annotations "discovery.3scale.net/scheme" ($svcValues.threeScale.scheme | default $.Values.default3ScaleScheme) }}
 {{- end }}

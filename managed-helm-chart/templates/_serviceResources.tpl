@@ -4,15 +4,12 @@ Service
 {{- define "elCicdChart.service" }}
 {{- $ := index . 0 }}
 {{- $svcValues := index . 1 }}
-{{- if or $svcValues.prometheus $.Values.defaultPrometheus }}
-  {{- append $svcValues.extraAnnotationTemplates "svcPrometheusAnnotations" }}
+{{- if or $svcValues.prometheus.port $.Values.usePrometheus }}
+  {{- include "elCicdChart.svcPrometheusAnnotations" . }}
 {{- end }}
 {{- if or $svcValues.threeScalePort $.Values.use3Scale }}
-  {{- $_ := set $svcValues "annotations" ($svcValues.annotations | default dict) }}
-  {{- $_ := set $svcValues.annotations "discovery.3scale.net/path" ($svcValues.threeScalePort | default $svcValues.port | default $.Values.defaultPort) }}
-  {{- $_ := set $svcValues.annotations "discovery.3scale.net/port" ($svcValues.threeScalePath | default $.Values.default3ScalePath) }}
-  {{- $_ := set $svcValues.annotations "discovery.3scale.net/scheme" ($svcValues.threeScaleScheme | default $.Values.default3ScaleScheme) }}
-  {{- $_ := set $svcValues "labels" ($svcValues.labels  | dict) }}
+  {{- include "elCicdChart.threeScaleAnnotations" . }}
+  {{- $_ := set $svcValues "labels" ($svcValues.labels  | default dict) }}
   {{- $_ := set $svcValues.labels "discovery.3scale.net" true }}
 {{- end }}
 ---
@@ -35,11 +32,11 @@ spec:
     targetPort: {{ $svcValues.targetPort | default ($svcValues.port | default $.Values.defaultPort) }}
     protocol: {{ $svcValues.protocol | default $.Values.defaultProtocol }}
   {{- end }}
-  {{- if or $svcValues.prometheusPort $.Values.usePrometheus }}
+  {{- if or $svcValues.prometheus.port $.Values.usePrometheus }}
   - name: {{ $svcValues.appName }}-prometheus-port
-    port: {{ $svcValues.prometheusPort | default $.Values.defaultPrometheusPort }}
-    targetPort: {{ $svcValues.prometheusPort | default $.Values.defaultPrometheusPort }}
-    protocol: {{ $svcValues.prometheusProtocol | default $.Values.defaultPrometheusProtocol }}
+    port: {{ $svcValues.prometheus.port | default $.Values.defaultPrometheusPort }}
+    targetPort: {{ $svcValues.prometheus.port | default $.Values.defaultPrometheusPort }}
+    protocol: {{ $svcValues.prometheus.protocol | default $.Values.defaultPrometheusProtocol }}
   {{- end }}
 {{- end }}
 
