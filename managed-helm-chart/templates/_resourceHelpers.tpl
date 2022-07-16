@@ -176,7 +176,7 @@ Container definition
   {{- if $containerVals.livenessProbe }}
   livenessProbe: {{ $containerVals.livenessProbe | toYaml | nindent 2 }}
   {{- end }}
-  {{- if or $containerVals.ports $containerVals.port $.Values.defaultPort }}
+  {{- if or $containerVals.ports $containerVals.port $.Values.defaultPort $containerVals.usePrometheus }}
   ports:
     {{- if and $containerVals.ports $containerVals.port }}
       {{- fail "A Container cannot define both port and ports values (perhaps a merge caused this?)!" }}
@@ -188,10 +188,10 @@ Container definition
     containerPort: {{ $containerVals.port | default $.Values.defaultPort }}
     protocol: {{ $containerVals.protocol | default $.Values.defaultProtocol }}
     {{- end }}
-    {{- if and ($containerVals.prometheus).port (ne ($containerVals.prometheus).port $containerVals.port) }}
+    {{- if or $containerVals.prometheus).port $.Values.defaultPrometheusPort }}
   - name: prometheus-port
-    containerPort: {{ $containerVals.prometheus.port | default $containerVals.port }}
-    protocol: {{ $containerVals.prometheus.protocol | default $.Values.defaultPrometheusProtocol }}
+    containerPort: {{ $containerVals.prometheus.port | default $.Values.defaultPrometheusPort }}
+    protocol: {{ $containerVals.prometheus.protocol | default ($.Values.defaultPrometheusProtocol | default $.Values.defaultProtocol) }}
     {{- end }}
   {{- end }}
   {{- if $containerVals.readinessProbe }}
