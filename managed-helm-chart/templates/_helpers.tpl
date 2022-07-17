@@ -91,12 +91,12 @@ Common labels
 */}}
 {{- define "elCicdChart.labels" -}}
 {{ include "elCicdChart.selectorLabels" $ }}
+profiles: "{{ join "," $.Values.profiles }}"
 git-repo: {{ $.Values.gitRepoName }}
 src-commit-hash: {{ $.Values.srcCommitHash }}
 deployment-branch: {{ $.Values.deploymentBranch }}
 deployment-commit-hash: {{ $.Values.deploymentCommitHash }}
 release-version: {{ $.Values.releaseVersionTag }}
-release-region: {{ $.Values.releaseRegion }}
 build-number: {{ $.Values.buildNumber | quote }}
 helm.sh/chart: {{ include "elCicdChart.chart" $ }}
 {{- if $.Chart.AppVersion }}

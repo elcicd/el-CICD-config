@@ -1,7 +1,10 @@
 {{- $skippedList := list }}
 {{- $_ := set $.Values "templates" ($.Values.templates | default dict) }}
 {{- include "elCicdChart.processProfiles" $ }}
-{{- range $templateValues := .Values.templates }}
+{{- $_ := set $.Values "templateVars" ($.Values.templateVars | default dict) }}
+{{- include "elCicdChart.defineDefaultVars" $ }}
+{{- include "elCicdChart.interpolateValues" (list $.Values.templates $.Values.templateVars) }}
+{{- range $templateValues := $.Values.templates }}
   {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
   {{ $render := true }}
   {{- if $templateValues.forProfiles }}

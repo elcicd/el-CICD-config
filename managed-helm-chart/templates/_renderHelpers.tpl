@@ -15,6 +15,69 @@
   {{- end }}
 {{- end }}
 
+{{- define "elCicdChart.defineDefaultVars" }}
+  {{- $_ := set $.Values.templateVars "PROJECT_ID" $.Values.projectId }}
+  {{- $_ := set $.Values.templateVars "MICROSERVICE_NAME" $.Values.microService }}
+  {{- $_ := set $.Values.templateVars "APP_NAME" ($.Values.appName | default $.Values.microService) }}
+{{- end }}
+
+{{- define "elCicdChart.interpolateValues" }}
+  {{- $ := index . 0 }}
+  {{- $templateVars := index . 1 }}
+  
+  {{- range $key, $value := $ }}
+    {{- if or (kindIs "slice" $value ) (kindIs "map" $value ) }}
+      {{- include "elCicdChart.interpolateValues" (list $value $templateVars) }}
+    {{- else if (kindIs "string" $value) }}
+      {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $value -1 }}
+      {{- if $matches }}
+        {{- include "elCicdChart.interpolateVars" (list $ $templateVars $matches $key false) }}
+      {{- end }}
+    {{- end  }}
+    
+    {{- if (kindIs "string" $key) }}
+      {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $key -1 }}
+      {{- if $matches }}
+        {{- include "elCicdChart.interpolateVars" (list $ $templateVars $matches $key true) }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- define "elCicdChart.interpolateVars" }}
+  {{- $ := index . 0 }}
+  {{- $templateVars := index . 1 }}
+  {{- $matches := index . 2 }}
+  {{- $key := index . 3 }}
+  {{- $interpolateKey := index . 4 }}
+  
+  {{- $value := get $ $key }}
+  {{- range $varPattern := $matches }}
+    {{- $var := regexReplaceAll "[\\$][\\{]([\\w]+?)[\\}]" $varPattern "${1}" }}
+    {{- $varValue := get $templateVars $var }}
+    
+    {{- if $interpolateKey }}
+      {{ $_ := unset $ $key }}
+      {{- $key = replace $varPattern $varValue $key }}
+      {{- $_ := set $ $key $value }}
+    {{- else }}
+      {{- $value = replace $varPattern $varValue $value }}
+      {{- $_ := set $ $key $value }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+
+{{- define "elCicdChart.populateTemplateMap" }}
+  {{- $ := index . 0 }}
+  {{- $templates := index . 1 }}
+  {{- $templateMap := index . 2 }}
+  {{- range $template := $templates }}
+    {{- $key := printf "%s-%s" ($template.appName | default $.Values.microService) $template.templateName }}
+    {{- $_ := set $templateMap $key $template }}
+  {{- end }}
+{{- end }}
+
 {{- define "elCicdChart.mergeProfileIntoTemplates" }}
   {{- $ := index . 0 }}
   {{- $templateMap := index . 1 }}
@@ -92,16 +155,6 @@
     {{- end }}
   {{- end }}
   {{- $_ := set $template "mergeListOfMapsResult" ((values $destMap) | default $srcList | default $destList) }}
-{{- end }}
-
-{{- define "elCicdChart.populateTemplateMap" }}
-  {{- $ := index . 0 }}
-  {{- $templates := index . 1 }}
-  {{- $templateMap := index . 2 }}
-  {{- range $template := $templates }}
-    {{- $key := printf "%s-%s" ($template.appName | default $.Values.microService) $template.templateName }}
-    {{- $_ := set $templateMap $key $template }}
-  {{- end }}
 {{- end }}
 
 {{ define "elCicdChart.skippedTemplate" }}

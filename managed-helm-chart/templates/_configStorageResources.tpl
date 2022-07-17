@@ -32,15 +32,14 @@ apiVersion: v1
 data:
   projectid: "{{ $.Values.projectId }}"
   microservice: "{{ $.Values.microService }}"
+  profiles: "{{ join "," $.Values.profiles }}"
   git-repo: "{{ $.Values.gitRepoName }}"
   src-commit-hash: "{{ $.Values.srcCommitHash }}"
   deployment-branch: "{{ $.Values.deploymentBranch | default $.Values.UNDEFINED }}"
   deployment-commit-hash: "{{ $.Values.deploymentCommitHash }}"
   release-version: "{{ $.Values.releaseVersionTag  | default $.Values.UNDEFINED }}"
-  release-region: "{{ $.Values.releaseRegion  | default $.Values.UNDEFINED }}"
   build-number: "{{ $.Values.buildNumber }}"
   deploy-time: "{{ now | date "2006-01-02-15:04:05" }}"
-  profiles: "{{ join "," $.Values.profiles }}"
 {{- end }}
 
 {{/*
