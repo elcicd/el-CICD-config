@@ -15,71 +15,6 @@
   {{- end }}
 {{- end }}
 
-{{- define "elCicdChart.defineDefaultVars" }}
-  {{- if $.Values.projectId }}
-    {{- $_ := set $.Values.templateVars "PROJECT_ID" $.Values.projectId }}
-  {{- end }}
-  {{- if $.Values.microService }}
-    {{- $_ := set $.Values.templateVars "MICROSERVICE_NAME" $.Values.microService }}
-  {{- end }}
-  {{- if or $.Values.appName $.Values.microService }}
-    {{- $_ := set $.Values.templateVars "APP_NAME" ($.Values.appName | default $.Values.microService) }}
-  {{- end }}
-  {{- if kindIs "slice" $.Values.profiles }}
-    {{- $_ := set $.Values.templateVars "SDLC_ENV" (first $.Values.profiles) }}
-  {{- end }}
-{{- end }}
-
-{{- define "elCicdChart.interpolateValues" }}
-  {{- $ := index . 0 }}
-  {{- $templateVars := index . 1 }}
-  
-  {{- range $key, $value := $ }}
-    {{- if or (kindIs "slice" $value ) (kindIs "map" $value ) }}
-      {{- include "elCicdChart.interpolateValues" (list $value $templateVars) }}
-    {{- else if (kindIs "string" $value) }}
-      {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $value -1 }}
-      {{- if $matches }}
-        {{- include "elCicdChart.interpolateVars" (list $ $templateVars $matches $key false) }}
-      {{- end }}
-    {{- end  }}
-    
-    {{- if (kindIs "string" $key) }}
-      {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $key -1 }}
-      {{- if $matches }}
-        {{- include "elCicdChart.interpolateVars" (list $ $templateVars $matches $key true) }}
-      {{- end }}
-    {{- end }}
-  {{- end }}
-{{- end }}
-
-{{- define "elCicdChart.interpolateVars" }}
-  {{- $ := index . 0 }}
-  {{- $templateVars := index . 1 }}
-  {{- $matches := index . 2 }}
-  {{- $key := index . 3 }}
-  {{- $interpolateKey := index . 4 }}
-  
-  {{- $value := get $ $key }}
-  {{- range $varPattern := $matches }}
-    {{- $var := regexReplaceAll "[\\$][\\{]([\\w]+?)[\\}]" $varPattern "${1}" }}
-    {{- $varValue := get $templateVars $var }}
-    {{- if not $varValue }}
-      {{- required ( printf "%s is undefined!!" $var ) $varValue }}
-    {{- end }}
-    
-    {{- if $interpolateKey }}
-      {{ $_ := unset $ $key }}
-      {{- $key = replace $varPattern $varValue $key }}
-      {{- $_ := set $ $key $value }}
-    {{- else }}
-      {{- $value = replace $varPattern $varValue $value }}
-      {{- $_ := set $ $key $value }}
-    {{- end }}
-  {{- end }}
-{{- end }}
-
-
 {{- define "elCicdChart.populateTemplateMap" }}
   {{- $ := index . 0 }}
   {{- $templates := index . 1 }}
@@ -172,6 +107,78 @@
     {{- end }}
   {{- end }}
   {{- $_ := set $template "mergeListOfMapsResult" ((values $destMap) | default $srcList | default $destList) }}
+{{- end }}
+
+{{- define "elCicdChart.defineDefaultVars" }}
+  {{- if kindIs "slice" $.Values.profiles }}
+    {{- $sdlcEnv := first $.Values.profiles }}
+    {{- $_ := set $.Values.templateVars "SDLC_ENV" $sdlcEnv }}
+    {{- $profileTemplateVars := get $.Values (printf "templateVars-%s" $sdlcEnv) }}
+    {{- if $profileTemplateVars }}
+      {{- $_ := set $.Values "templateVars" (mergeOverwrite $.Values.templateVars $profileTemplateVars) }}
+    {{- end }}
+  {{- end }}
+  
+  {{- if $.Values.projectId }}
+    {{- $_ := set $.Values.templateVars "PROJECT_ID" $.Values.projectId }}
+  {{- end }}
+  {{- if $.Values.microService }}
+    {{- $_ := set $.Values.templateVars "MICROSERVICE_NAME" $.Values.microService }}
+  {{- end }}
+  {{- if or $.Values.appName $.Values.microService }}
+    {{- $_ := set $.Values.templateVars "APP_NAME" ($.Values.appName | default $.Values.microService) }}
+  {{- end }}
+{{- end }}
+
+{{- define "elCicdChart.interpolateValues" }}
+  {{- $ := index . 0 }}
+  {{- $templateVars := index . 1 }}
+  
+  {{- range $key, $value := $ }}
+    {{- if or (kindIs "slice" $value ) (kindIs "map" $value ) }}
+      {{- include "elCicdChart.interpolateValues" (list $value $templateVars) }}
+    {{- else if (kindIs "string" $value) }}
+      {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $value -1 }}
+      {{- if $matches }}
+        {{- include "elCicdChart.interpolateVars" (list $ $templateVars $matches $key false) }}
+      {{- end }}
+    {{- end  }}
+    
+    {{- if (kindIs "string" $key) }}
+      {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $key -1 }}
+      {{- if $matches }}
+        {{- include "elCicdChart.interpolateVars" (list $ $templateVars $matches $key true) }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- define "elCicdChart.interpolateVars" }}
+  {{- $ := index . 0 }}
+  {{- $templateVars := index . 1 }}
+  {{- $matches := index . 2 }}
+  {{- $key := index . 3 }}
+  {{- $interpolateKey := index . 4 }}
+  
+  {{- $value := get $ $key }}
+  {{- range $varPattern := $matches }}
+    {{- $var := regexReplaceAll "[\\$][\\{]([\\w]+?)[\\}]" $varPattern "${1}" }}
+    {{- $varValue := get $templateVars $var }}
+    {{- if not $varValue }}
+      {{- required ( printf "%s is undefined!!" $var ) $varValue }}
+    {{- end }}
+    
+    {{- if $interpolateKey }}
+      {{ $_ := unset $ $key }}
+      {{- $key = replace $varPattern (toString $varValue) $key }}
+      {{- $_ := set $ $key $value }}
+    {{- else if not (eq $value $varPattern) }}
+      {{- $value = replace $varPattern (toString $varValue) $value }}
+      {{- $_ := set $ $key $value }}
+    {{- else }}
+      {{- $_ := set $ $key $varValue }}
+    {{- end }}
+  {{- end }}
 {{- end }}
 
 {{ define "elCicdChart.skippedTemplate" }}

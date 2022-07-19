@@ -152,7 +152,9 @@ spec:
   {{- end }}
   {{- end }}
   scaleTargetRef:
+    {{- if ($hpaValues.scaleTargetRef).apiVersion }}
     apiVersion: {{ $hpaValues.scaleTargetRef.apiVersion }}
-    kind: {{ required "Missing kind!" $hpaValues.scaleTargetRef.kind }}
-    name: {{ required "Missing name!" $hpaValues.scaleTargetRef.name }}
+    {{- end }}
+    kind: {{ ($hpaValues.scaleTargetRef).kind | default "deployment" }}
+    name: {{ ($hpaValues.scaleTargetRef).name | default $.Values.microService }}
 {{- end }}

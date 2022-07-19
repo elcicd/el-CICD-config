@@ -1,3 +1,8 @@
+{{- if $.Values.profiles }}
+  {{- if not (kindIs "slice" $.Values.profiles) }}
+    {{- fail (printf "Profiles must be specified as an array: %s" $.Values.profiles) }}
+  {{- end }}
+{{- end }}
 {{- $skippedList := list }}
 {{- $_ := set $.Values "templates" ($.Values.templates | default dict) }}
 {{- include "elCicdChart.processProfiles" $ }}
@@ -18,7 +23,7 @@
     {{- end }}
   {{- end }}
   {{- if $render }}
-    {{- $templateName := printf "elCicdChart.%s" $templateValues.templateName }}        
+    {{- $templateName := printf "elCicdChart.%s" $templateValues.templateName }}
     {{- include $templateName (list $ $templateValues) }}
   {{- else }}
     {{- $skippedList = append $skippedList (list $templateValues.templateName $templateValues.appName) }}

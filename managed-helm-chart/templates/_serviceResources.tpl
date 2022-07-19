@@ -4,7 +4,7 @@ Service
 {{- define "elCicdChart.service" }}
 {{- $ := index . 0 }}
 {{- $svcValues := index . 1 }}
-{{- if or $svcValues.prometheus.port $.Values.usePrometheus }}
+{{- if or ($svcValues.prometheus).port $.Values.usePrometheus }}
   {{- include "elCicdChart.svcPrometheusAnnotations" . }}
 {{- end }}
 {{- if or $svcValues.threeScalePort $.Values.use3Scale }}
@@ -26,17 +26,22 @@ spec:
   {{- end }}
   {{- if or $svcValues.ports ($svcValues.service).ports }}
     {{- (($svcValues.service).ports | default $svcValues.ports) | toYaml | nindent 2 }}
-  {{- else if $svcValues.port }}
+  {{- else }}
   - name: {{ $svcValues.appName }}-port
     port: {{ $svcValues.port | default $.Values.defaultPort }}
-    targetPort: {{ $svcValues.targetPort | default ($svcValues.port | default $.Values.defaultPort) }}
+    {{- if $svcValues.targetPort }}
+    targetPort: {{ $svcValues.targetPort }}
+    {{- end }}
+    {{- if or $svcValues.protocol $.Values.defaultProtocol }}
     protocol: {{ $svcValues.protocol | default $.Values.defaultProtocol }}
+    {{- end }}
   {{- end }}
-  {{- if or $svcValues.prometheus.port $svcValues.usePrometheus }}
+  {{- if or ($svcValues.prometheus).port $svcValues.usePrometheus }}
   - name: prometheus-port
-    port: {{ $svcValues.prometheus.port | default $.Values.defaultPrometheusPort }}
-    targetPort: {{ $svcValues.prometheus.port | default $.Values.defaultPrometheusPort }}
-    protocol: {{ $svcValues.prometheus.protocol | default $.Values.defaultPrometheusProtocol }}
+    port: {{ ($svcValues.prometheus).port | default $.Values.defaultPrometheusPort }}
+    {{- if or ($svcValues.prometheus).protocol $.Values.defaultPrometheusProtocol }}
+    protocol: {{ ($svcValues.prometheus).protocol | default $.Values.defaultPrometheusProtocol }}
+    {{- end }}
   {{- end }}
 {{- end }}
 
