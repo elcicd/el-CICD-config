@@ -6,7 +6,7 @@ Deployment and Service combination
 {{- define "elCicdChart.deploymentService" }}
   {{- include "elCicdChart.deployment" . }}
   {{- include "elCicdChart.service" . }}
-{{- end }
+{{- end }}
 
 {{/*
 HorizontalPodAutoscaler Metrics

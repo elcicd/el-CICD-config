@@ -24,3 +24,4 @@ secrets:
 - name: {{ $secret }}
 {{- end }}
 {{- end }}
+{{- end }}
