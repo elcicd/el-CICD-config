@@ -140,15 +140,19 @@ spec:
   {{- range $metric := $hpaValues.metrics }}
   - type: {{ $metric.type }}
     {{ lower $metric.type }}:
-      metric:
-        name: {{ $metric.name }}
-        {{- if $metric.selector }}
-        selector: {{ $metric.selector | toYaml | nindent 8}}
-        {{- end }}
-      target: {{- $metric.target | toYaml | nindent 8 }}
+      {{- if $metric.name }}
+      name: {{ $metric.name }}
+      {{- end }}
+      {{- if $metric.container }}
+      name: {{ $metric.container }}
+      {{- end }}
+      {{- if $metric.metric }}
+      metric: {{- $metric.metric | toYaml | nindent 8 }}
+      {{- end }}
       {{- if $metric.describedObject }}
       describedObject: {{- $metric.describedObject | toYaml | nindent 8 }}
       {{- end }}
+      target: {{- $metric.target | toYaml | nindent 8 }}
   {{- end }}
   {{- end }}
   scaleTargetRef:
