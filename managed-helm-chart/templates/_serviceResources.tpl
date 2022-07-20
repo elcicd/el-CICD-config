@@ -54,7 +54,7 @@ Ingress
 ---
 {{- $_ := set $ingressValues "kind" "Ingress" }}
 {{- $_ := set $ingressValues "apiVersion" "networking.k8s.io/v1" }}
-{{- $_ := set $ingressValues "annotations" ($svcValues.annotations | default dict) }}
+{{- $_ := set $ingressValues "annotations" ($ingressValues.annotations | default dict) }}
 {{- $_ := set $ingressValues.annotations "kubernetes.io/ingress.allow-http" ($ingressValues.allowHttp | default "false") }}
 {{- include "elCicdChart.apiObjectHeader" . }}
 spec:
