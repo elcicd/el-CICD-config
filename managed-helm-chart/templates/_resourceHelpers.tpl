@@ -1,54 +1,12 @@
 {{- $_ := set . "UNDEFINED" "undefined" -}}
 
 {{/*
-Deployment [Short name]
-*/}}
-{{- define "elCicdChart.deploy" }}
-  {{- include "elCicdChart.deployment" . }}
-{{- end }}
-
-{{/*
-Deployment and Service combination [Short name]
-*/}}
-{{- define "elCicdChart.deploySvc" }}
-  {{- include "elCicdChart.deploymentService" . }}
-{{- end }}
-
-{{/*
 Deployment and Service combination
 */}}
 {{- define "elCicdChart.deploymentService" }}
   {{- include "elCicdChart.deployment" . }}
   {{- include "elCicdChart.service" . }}
-{{- end }}
-
-{{/*
-CronJob [Short name]
-*/}}
-{{- define "elCicdChart.cj" }}
-  {{- include "elCicdChart.cronjob" . }}
-{{- end }}
-
-{{/*
-Stateful Set [Short name]
-*/}}
-{{- define "elCicdChart.sts" }}
-  {{- include "elCicdChart.statefulset" . }}
-{{- end }}
-
-{{/*
-HorizontalPodAutoscaler [Short name]
-*/}}
-{{- define "elCicdChart.hpa" }}
-  {{- include "elCicdChart.horizontalPodAutoscaler" . }}
-{{- end }}
-
-{{/*
-ConfigMap [Short name]
-*/}}
-{{- define "elCicdChart.cm" }}
-  {{- include "elCicdChart.configMap" . }}
-{{- end }}
+{{- end }
 
 {{/*
 HorizontalPodAutoscaler Metrics

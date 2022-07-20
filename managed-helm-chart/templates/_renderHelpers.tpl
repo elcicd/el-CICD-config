@@ -125,8 +125,11 @@
   {{- if $.Values.microService }}
     {{- $_ := set $.Values.templateVars "MICROSERVICE_NAME" $.Values.microService }}
   {{- end }}
-  {{- if or $.Values.appName $.Values.microService }}
-    {{- $_ := set $.Values.templateVars "APP_NAME" ($.Values.appName | default $.Values.microService) }}
+  {{- if $.Values.imageRepository }}
+    {{- $_ := set $.Values.templateVars "IMAGE_REPOSITORY" $.Values.imageRepository }}
+  {{- end }}
+  {{- if $.Values.iamgeTag }}
+    {{- $_ := set $.Values.templateVars "IMAGE_TAG" $.Values.imageRepository }}
   {{- end }}
 {{- end }}
 

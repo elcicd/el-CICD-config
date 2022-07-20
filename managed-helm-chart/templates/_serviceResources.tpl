@@ -54,6 +54,8 @@ Ingress
 ---
 {{- $_ := set $ingressValues "kind" "Ingress" }}
 {{- $_ := set $ingressValues "apiVersion" "networking.k8s.io/v1" }}
+{{- $_ := set $ingressValues "annotations" ($svcValues.annotations | default dict) }}
+{{- $_ := set $ingressValues.annotations "kubernetes.io/ingress.allow-http" ($ingressValues.allowHttp | default "false") }}
 {{- include "elCicdChart.apiObjectHeader" . }}
 spec:
   {{- if $ingressValues.defaultBackend }}
@@ -66,7 +68,7 @@ spec:
   rules: {{ $ingressValues.rules | toYaml | nindent 4 }}
   {{- else }}
   rules:
-  - host: {{ $ingressValues.host | default $.Values.defaultIngressHost }}
+  - host: {{ $ingressValues.host | default (printf "%s%s" $ingressValues.appName $.Values.ingressHostSuffix) }}
     http:
       paths:
       - path: {{ $ingressValues.path | default $.Values.defaultIngressRulePath }}
@@ -79,5 +81,8 @@ spec:
   {{- end }}
   {{- if $ingressValues.tls }}
   tls: {{ $ingressValues.tls | toYaml | nindent 4 }}
+  {{- else }}
+  tls:
+  - secretName: {{ $ingressValues.secretName }}
   {{- end }}
 {{- end }}
