@@ -153,7 +153,7 @@ Container definition
     {{- end }}
   {{- end }}
   {{- if $containerVals.readinessProbe }}
-  readinessProbe: {{ $containerVals.readinessProbe | toYaml | nindent 2 }}
+  readinessProbe: {{ $containerVals.readinessProbe | toYaml | nindent 4 }}
   {{- end }}
   resources:
     limits:
