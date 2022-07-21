@@ -112,45 +112,45 @@
 {{- define "elCicdChart.defineDefaultVars" }}
   {{- if kindIs "slice" $.Values.profiles }}
     {{- $sdlcEnv := first $.Values.profiles }}
-    {{- $_ := set $.Values.templateVars "SDLC_ENV" $sdlcEnv }}
-    {{- $profileTemplateVars := get $.Values (printf "templateVars-%s" $sdlcEnv) }}
+    {{- $_ := set $.Values.parameters "SDLC_ENV" $sdlcEnv }}
+    {{- $profileTemplateVars := get $.Values (printf "parameters-%s" $sdlcEnv) }}
     {{- if $profileTemplateVars }}
-      {{- $_ := set $.Values "templateVars" (mergeOverwrite $.Values.templateVars $profileTemplateVars) }}
+      {{- $_ := set $.Values "parameters" (mergeOverwrite $.Values.parameters $profileTemplateVars) }}
     {{- end }}
   {{- end }}
   
   {{- if $.Values.projectId }}
-    {{- $_ := set $.Values.templateVars "PROJECT_ID" $.Values.projectId }}
+    {{- $_ := set $.Values.parameters "PROJECT_ID" $.Values.projectId }}
   {{- end }}
   {{- if $.Values.microService }}
-    {{- $_ := set $.Values.templateVars "MICROSERVICE_NAME" $.Values.microService }}
+    {{- $_ := set $.Values.parameters "MICROSERVICE_NAME" $.Values.microService }}
   {{- end }}
   {{- if $.Values.imageRepository }}
-    {{- $_ := set $.Values.templateVars "IMAGE_REPOSITORY" $.Values.imageRepository }}
+    {{- $_ := set $.Values.parameters "IMAGE_REPOSITORY" $.Values.imageRepository }}
   {{- end }}
   {{- if $.Values.iamgeTag }}
-    {{- $_ := set $.Values.templateVars "IMAGE_TAG" $.Values.imageRepository }}
+    {{- $_ := set $.Values.parameters "IMAGE_TAG" $.Values.imageRepository }}
   {{- end }}
 {{- end }}
 
 {{- define "elCicdChart.interpolateValues" }}
   {{- $ := index . 0 }}
-  {{- $templateVars := index . 1 }}
+  {{- $parameters := index . 1 }}
   
   {{- range $key, $value := $ }}
     {{- if or (kindIs "slice" $value ) (kindIs "map" $value ) }}
-      {{- include "elCicdChart.interpolateValues" (list $value $templateVars) }}
+      {{- include "elCicdChart.interpolateValues" (list $value $parameters) }}
     {{- else if (kindIs "string" $value) }}
       {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $value -1 }}
       {{- if $matches }}
-        {{- include "elCicdChart.interpolateVars" (list $ $templateVars $matches $key false) }}
+        {{- include "elCicdChart.interpolateVars" (list $ $parameters $matches $key false) }}
       {{- end }}
     {{- end  }}
     
     {{- if (kindIs "string" $key) }}
       {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $key -1 }}
       {{- if $matches }}
-        {{- include "elCicdChart.interpolateVars" (list $ $templateVars $matches $key true) }}
+        {{- include "elCicdChart.interpolateVars" (list $ $parameters $matches $key true) }}
       {{- end }}
     {{- end }}
   {{- end }}
@@ -158,7 +158,7 @@
 
 {{- define "elCicdChart.interpolateVars" }}
   {{- $ := index . 0 }}
-  {{- $templateVars := index . 1 }}
+  {{- $parameters := index . 1 }}
   {{- $matches := index . 2 }}
   {{- $key := index . 3 }}
   {{- $interpolateKey := index . 4 }}
@@ -166,7 +166,7 @@
   {{- $value := get $ $key }}
   {{- range $varPattern := $matches }}
     {{- $var := regexReplaceAll "[\\$][\\{]([\\w]+?)[\\}]" $varPattern "${1}" }}
-    {{- $varValue := get $templateVars $var }}
+    {{- $varValue := get $parameters $var }}
     {{- if not $varValue }}
       {{- required ( printf "%s is undefined!!" $var ) $varValue }}
     {{- end }}

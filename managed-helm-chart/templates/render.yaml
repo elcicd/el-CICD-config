@@ -6,9 +6,9 @@
 {{- $skippedList := list }}
 {{- $_ := set $.Values "templates" ($.Values.templates | default dict) }}
 {{- include "elCicdChart.processProfiles" $ }}
-{{- $_ := set $.Values "templateVars" ($.Values.templateVars | default dict) }}
+{{- $_ := set $.Values "parameters" ($.Values.parameters | default dict) }}
 {{- include "elCicdChart.defineDefaultVars" $ }}
-{{- include "elCicdChart.interpolateValues" (list $.Values.templates $.Values.templateVars) }}
+{{- include "elCicdChart.interpolateValues" (list $.Values.templates $.Values.parameters) }}
 {{- range $templateValues := $.Values.templates }}
   {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
   {{ $render := true }}
