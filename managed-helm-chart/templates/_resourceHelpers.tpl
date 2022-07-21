@@ -56,7 +56,6 @@ spec:
   {{- if $jobValues.parallelism }}
   parallelism: {{ $jobValues.parallelism }}
   {{- end }}
-  selector: {{ include "elCicdChart.selector" (list $ $jobValues.appName) | indent 4 }}
   template: {{ include "elCicdChart.podTemplate" (list $ $jobValues false) | indent 4 }}
   {{- if $jobValues.ttlSecondsAfterFinished }}
   ttlSecondsAfterFinished: {{ $jobValues.ttlSecondsAfterFinished }}
@@ -77,9 +76,7 @@ spec:
   {{- if $podValues.affinity }}
   affinity: {{ $podValues.affinity | toYaml | nindent 4 }}
   {{- end }}
-  {{- if $podValues.restartPolicy }}
-  restartPolicy: {{ $podValues.restartPolicy }}
-  {{- end }}
+  restartPolicy: {{ $podValues.restartPolicy | default "Never" }}
   imagePullSecrets:
   - name: {{ $.Values.pullSecret }}
   {{- if $podValues.pullSecrets }}
