@@ -55,7 +55,8 @@ Ingress
 {{- $_ := set $ingressValues "kind" "Ingress" }}
 {{- $_ := set $ingressValues "apiVersion" "networking.k8s.io/v1" }}
 {{- $_ := set $ingressValues "annotations" ($ingressValues.annotations | default dict) }}
-{{- $_ := set $ingressValues.annotations "kubernetes.io/ingress.allow-http" ($ingressValues.allowHttp | default "false") }}
+{{- $_ := set $ingressValues "allowHttp" ($ingressValues.allowHttp | default "false") }}
+{{- $_ := set $ingressValues.annotations "kubernetes.io/ingress.allow-http" $ingressValues.allowHttp }}
 {{- include "elCicdChart.apiObjectHeader" . }}
 spec:
   {{- if $ingressValues.defaultBackend }}
@@ -81,7 +82,7 @@ spec:
   {{- end }}
   {{- if $ingressValues.tls }}
   tls: {{ $ingressValues.tls | toYaml | nindent 4 }}
-  {{- else if or $ingressValues.secretName (not (eq $ingressValues.allowHttp "true")) }}
+  {{- else if or $ingressValues.secretName (eq $ingressValues.allowHttp "false")) }}
   tls:
   - secretName: {{ $ingressValues.secretName }}
   {{- end }}
