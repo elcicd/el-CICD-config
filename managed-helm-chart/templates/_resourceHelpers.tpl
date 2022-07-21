@@ -37,29 +37,29 @@ Job Template
 {{- $ := index . 0 }}
 {{- $jobValues := index . 1 }}
 {{- include "elCicdChart.apiMetadata" . }}
-  {{- if $jobValues.activeDeadlineSeconds }}
-  activeDeadlineSeconds: {{ $jobValues.activeDeadlineSeconds }}
-  {{- end }}
-  {{- if $jobValues.activeDeadlineSeconds }}
-  backoffLimit: {{ $jobValues.activeDeadlineSeconds }}
-  {{- end }}
-  {{- if $jobValues.completionMode }}
-  completionMode: {{ $jobValues.completionMode }}
-  {{- end }}
-  {{- if $jobValues.completions }}
-  completions: {{ $jobValues.completions }}
-  {{- end }}
-  {{- if $jobValues.manualSelector }}
-  manualSelector: {{ $jobValues.manualSelector }}
-  {{- end }}
-  {{- if $jobValues.parallelism }}
-  parallelism: {{ $jobValues.parallelism }}
-  {{- end }}
-  selector: {{ include "elCicdChart.selector" (list $ $jobValues.appName) | indent 4 }}
-  template: {{ include "elCicdChart.podTemplate" (list $ $jobValues false) | nindent 4 }}
-  {{- if $jobValues.ttlSecondsAfterFinished }}
-  ttlSecondsAfterFinished: {{ $jobValues.ttlSecondsAfterFinished }}
-  {{- end }}
+{{- if $jobValues.activeDeadlineSeconds }}
+activeDeadlineSeconds: {{ $jobValues.activeDeadlineSeconds }}
+{{- end }}
+{{- if $jobValues.activeDeadlineSeconds }}
+backoffLimit: {{ $jobValues.activeDeadlineSeconds }}
+{{- end }}
+{{- if $jobValues.completionMode }}
+completionMode: {{ $jobValues.completionMode }}
+{{- end }}
+{{- if $jobValues.completions }}
+completions: {{ $jobValues.completions }}
+{{- end }}
+{{- if $jobValues.manualSelector }}
+manualSelector: {{ $jobValues.manualSelector }}
+{{- end }}
+{{- if $jobValues.parallelism }}
+parallelism: {{ $jobValues.parallelism }}
+{{- end }}
+selector: {{ include "elCicdChart.selector" (list $ $jobValues.appName) | indent 4 }}
+template: {{ include "elCicdChart.podTemplate" (list $ $jobValues false) | indent 2 }}
+{{- if $jobValues.ttlSecondsAfterFinished }}
+ttlSecondsAfterFinished: {{ $jobValues.ttlSecondsAfterFinished }}
+{{- end }}
 {{- end }}
 
 {{/*

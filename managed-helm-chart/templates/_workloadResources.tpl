@@ -63,8 +63,8 @@ spec:
   {{- if $cjValues.failedJobsHistoryLimit }}
   failedJobsHistoryLimit: {{ $cjValues.failedJobsHistoryLimit }}
   {{- end }}
-  jobTemplate: {{ include "elCicdChart.jobTemplate" . }}
-  schedule: {{ toString $cjValues.schedule }}
+  jobTemplate: {{ include "elCicdChart.jobTemplate" . | indent 4 }}
+  schedule: "{{ $cjValues.schedule }}"
   {{- if $cjValues.startingDeadlineSeconds }}
   startingDeadlineSeconds: {{ $cjValues.startingDeadlineSeconds }}
   {{- end }}
