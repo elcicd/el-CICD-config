@@ -1,5 +1,7 @@
 defaultReplicas: "1"
 
+defaultDeploymentRevisionHistoryLimit: 0
+
 defaultImagePullPolicy: "Always"
 
 defaultPort: "8080"

@@ -16,9 +16,7 @@ spec:
   progressDeadlineSeconds: {{ $deployValues.progressDeadlineSeconds }}
   {{- end }}
   replicas: {{ $deployValues.replicas | default $.Values.defaultReplicas }}
-  {{- if $deployValues.revisionHistoryLimit }}
-  revisionHistoryLimit: {{ $deployValues.revisionHistoryLimit }}
-  {{- end }}
+  revisionHistoryLimit: {{ $deployValues.revisionHistoryLimit | default $.Values.defaultDeploymentRevisionHistoryLimit }}
   selector: {{ include "elCicdChart.selector" (list $ $deployValues.appName) | indent 4 }}
   {{- if $deployValues.strategyType }}
   strategy:
