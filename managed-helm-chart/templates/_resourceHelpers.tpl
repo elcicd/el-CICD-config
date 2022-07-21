@@ -132,7 +132,7 @@ Container definition
   lifecycle: {{ $containerVals.lifecycle | toYaml | nindent 4 }}
   {{- end }}
   {{- if $containerVals.livenessProbe }}
-  livenessProbe: {{ $containerVals.livenessProbe | toYaml | nindent 2 }}
+  livenessProbe: {{ $containerVals.livenessProbe | toYaml | nindent 4 }}
   {{- end }}
   {{- if or $containerVals.ports $containerVals.port $.Values.defaultPort $containerVals.usePrometheus }}
   ports:
@@ -163,7 +163,7 @@ Container definition
       cpu: {{ $containerVals.requestsCpu | default $.Values.defaultRequestsCpu }}
       memory: {{ $containerVals.requestsMemory | default $.Values.defaultRequestsMemory }}
   {{- if $containerVals.startupProbe }}
-  startupProbe: {{ $containerVals.startupProbe | toYaml | nindent 2 }}
+  startupProbe: {{ $containerVals.startupProbe | toYaml | nindent 4 }}
   {{- end }}
   {{- if $containerVals.stdin }}
   stdin: {{ $containerVals.stdin }}
