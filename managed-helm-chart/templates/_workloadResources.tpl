@@ -160,5 +160,5 @@ spec:
     apiVersion: {{ $hpaValues.scaleTargetRef.apiVersion }}
     {{- end }}
     kind: {{ ($hpaValues.scaleTargetRef).kind | default "Deployment" }}
-    name: {{ ($hpaValues.scaleTargetRef).name | default $.Values.microService }}
+    name: {{ ($hpaValues.scaleTargetRef).name | default $.Values.appName }}
 {{- end }}

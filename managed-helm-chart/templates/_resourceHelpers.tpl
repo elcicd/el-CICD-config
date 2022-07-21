@@ -56,7 +56,7 @@ Job Template
   parallelism: {{ $jobValues.parallelism }}
   {{- end }}
   selector: {{ include "elCicdChart.selector" (list $ $jobValues.appName) | indent 4 }}
-  template: {{ include "elCicdChart.podTemplate" list ($ $jobValues false) | nindent 4 }}
+  template: {{ include "elCicdChart.podTemplate" (list $ $jobValues false) | nindent 4 }}
   {{- if $jobValues.ttlSecondsAfterFinished }}
   ttlSecondsAfterFinished: {{ $jobValues.ttlSecondsAfterFinished }}
   {{- end }}
