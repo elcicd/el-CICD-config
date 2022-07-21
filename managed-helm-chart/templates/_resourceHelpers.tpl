@@ -56,7 +56,7 @@ spec:
   {{- if $jobValues.parallelism }}
   parallelism: {{ $jobValues.parallelism }}
   {{- end }}
-  {{- $podValues.restartPolicy := $podValues.restartPolicy | default "Never" }}
+  {{- $jobValues.restartPolicy := $jobValues.restartPolicy | default "Never" }}
   template: {{ include "elCicdChart.podTemplate" (list $ $jobValues false) | indent 4 }}
   {{- if $jobValues.ttlSecondsAfterFinished }}
   ttlSecondsAfterFinished: {{ $jobValues.ttlSecondsAfterFinished }}
