@@ -8,7 +8,7 @@
 {{- include "elCicdChart.processProfiles" $ }}
 {{- $_ := set $.Values "parameters" ($.Values.parameters | default dict) }}
 {{- include "elCicdChart.defineDefaultVars" $ }}
-{{- include "elCicdChart.interpolateValues" (list $.Values.templates $.Values.parameters) }}
+{{- include "elCicdChart.interpolateParameters" (list $.Values.templates $.Values.parameters) }}
 {{- range $templateValues := $.Values.templates }}
   {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
   {{ $render := true }}

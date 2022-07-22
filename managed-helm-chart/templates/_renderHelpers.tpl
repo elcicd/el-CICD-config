@@ -133,30 +133,30 @@
   {{- end }}
 {{- end }}
 
-{{- define "elCicdChart.interpolateValues" }}
+{{- define "elCicdChart.interpolateParameters" }}
   {{- $ := index . 0 }}
   {{- $parameters := index . 1 }}
   
   {{- range $key, $value := $ }}
     {{- if or (kindIs "slice" $value ) (kindIs "map" $value ) }}
-      {{- include "elCicdChart.interpolateValues" (list $value $parameters) }}
+      {{- include "elCicdChart.interpolateParameters" (list $value $parameters) }}
     {{- else if (kindIs "string" $value) }}
       {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $value -1 }}
       {{- if $matches }}
-        {{- include "elCicdChart.interpolateVars" (list $ $parameters $matches $key false) }}
+        {{- include "elCicdChart.interpolateParameter" (list $ $parameters $matches $key false) }}
       {{- end }}
     {{- end  }}
     
     {{- if (kindIs "string" $key) }}
       {{- $matches := regexFindAll "[\\$][\\{][\\w]+?[\\}]" $key -1 }}
       {{- if $matches }}
-        {{- include "elCicdChart.interpolateVars" (list $ $parameters $matches $key true) }}
+        {{- include "elCicdChart.interpolateParameter" (list $ $parameters $matches $key true) }}
       {{- end }}
     {{- end }}
   {{- end }}
 {{- end }}
 
-{{- define "elCicdChart.interpolateVars" }}
+{{- define "elCicdChart.interpolateParameter" }}
   {{- $ := index . 0 }}
   {{- $parameters := index . 1 }}
   {{- $matches := index . 2 }}
