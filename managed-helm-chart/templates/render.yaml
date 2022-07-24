@@ -3,12 +3,15 @@
     {{- fail (printf "Profiles must be specified as an array: %s" $.Values.profiles) }}
   {{- end }}
 {{- end }}
-{{- $skippedList := list }}
+
 {{- $_ := set $.Values "templates" ($.Values.templates | default dict) }}
-{{- include "elCicdChart.processProfiles" $ }}
+{{- include "elCicdChart.mergeProfileTemplateData" $ }}
+
 {{- $_ := set $.Values "parameters" ($.Values.parameters | default dict) }}
-{{- include "elCicdChart.defineDefaultVars" $ }}
-{{- include "elCicdChart.interpolateParameters" (list $.Values.templates $.Values.parameters) }}
+{{- include "elCicdChart.initParameters" $ }}
+{{- include "elCicdChart.interpolateTemplateParameters" (list $ $.Values.templates $.Values.parameters) }}
+
+{{- $skippedList := list }}
 {{- range $templateValues := $.Values.templates }}
   {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
   {{ $render := true }}
@@ -29,9 +32,11 @@
     {{- $skippedList = append $skippedList (list $templateValues.templateName $templateValues.appName) }}
   {{- end}}
 {{- end }}
+
 {{- if $.Values.microService }}
  {{- include "elCicdChart.microServiceMetaInfo" . }}
 {{- end }}
+
 ---
 # Profiles: {{ $.Values.profiles }}
 {{- range $skipped := $skippedList }}
