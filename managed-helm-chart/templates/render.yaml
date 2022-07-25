@@ -4,14 +4,12 @@
   {{- end }}
 {{- end }}
 
-{{- $_ := set $.Values "templates" ($.Values.templates | default dict) }}
-{{- include "elCicdChart.mergeProfileTemplateData" $ }}
-
 {{- $_ := set $.Values "parameters" ($.Values.parameters | default dict) }}
 {{- include "elCicdChart.initParameters" $ }}
 {{- include "elCicdChart.interpolateTemplateParameters" (list $ $.Values.templates $.Values.parameters) }}
 
 {{- $skippedList := list }}
+{{- $_ := set $.Values "templates" ($.Values.templates | default dict) }}
 {{- range $templateValues := $.Values.templates }}
   {{- $_ := set $templateValues "appName" ($templateValues.appName | default $.Values.microService) }}
   {{ $render := true }}
