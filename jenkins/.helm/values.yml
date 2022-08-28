@@ -13,6 +13,8 @@ elCicdChart:
   templates:
   - templateName: deploymentServiceIngress
     appName: ${JENKINS_SERVICE_NAME}
+    labels:
+      name: ${JENKINS_SERVICE_NAME}
     parameters-non-prod:
       # override non-prod values here
     parameters-prod:
@@ -82,6 +84,14 @@ elCicdChart:
   #   annotations:
   #     config.openshift.io/inject-trusted-cabundle: "true"
 
+  - templateName: service
+    appName: ${JNLP_SERVICE_NAME}
+    ports:
+    - name: agent
+      port: 50000
+    selector:
+      name: ${JENKINS_SERVICE_NAME}
+
   - templateName: serviceAccount
     appName: ${JENKINS_SERVICE_NAME}
     annotations:
@@ -96,12 +106,6 @@ elCicdChart:
     subjects:
     - kind: ServiceAccount
       name: ${JENKINS_SERVICE_NAME}
-
-  - templateName: service
-    appName: ${JNLP_SERVICE_NAME}
-    ports:
-    - name: agent
-      port: 50000
         
   - templateName: persistentVolumeClaim
     appName: ${JENKINS_SERVICE_NAME}-data
