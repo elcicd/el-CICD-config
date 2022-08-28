@@ -31,15 +31,16 @@ RUN adduser -g 0 -u 1001 jenkins && \
     mkdir -p /var/lib/origin && \
     chmod 775 /var/lib/origin && \
     chmod 775 /var/log && \
+    chmod 400 /etc/ssh/ssh_config && \
+    chmod 777 /var/lib/jenkins && \
     rm -rf /var/log/*
-
+        
 ENV HOME=/var/lib/jenkins \
     JENKINS_HOME=/var/lib/jenkins \
     JENKINS_UC=https://updates.jenkins.io \
     CASC_JENKINS_CONFIG=${CONFIG_FILE_PATH}/${CASC_FILE} \
     PLUGINS_FILE_PATH=${CONFIG_FILE_PATH}/${PLUGINS_FILE} \
-    LANG=en_US.UTF-8 \
-    LC_ALL=en_US.UTF-8
+    LANG=en_US.UTF-8
 
 USER 1001
 

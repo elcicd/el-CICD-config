@@ -1,93 +1,106 @@
-ace-editor:1.1
-ant:1.11
-apache-httpcomponents-client-4-api:4.5.13-1.0
-authentication-tokens:1.4
-bootstrap4-api:4.6.0-3
-bouncycastle-api:2.25
-branch-api:2.7.0
-build-user-vars-plugin:1.8
-caffeine-api:2.9.2-29.v717aac953ff3
-checks-api:1.7.2
-cloudbees-bitbucket-branch-source:746.v350d2781c184
-cloudbees-folder:6.16
-config-file-provider:3.8.1
-configuration-as-code:1.55.1
-configuration-as-code-groovy:1.1
-credentials:2.6.1
-credentials-binding:1.27.1
-display-url-api:2.3.5
-docker-commons:1.18
-durable-task:493.v195aefbb0ff2
-echarts-api:5.0.2-1
-favorite:2.3.1
-font-awesome-api:5.15.2-2
-git:4.10.1
-git-client:3.10.0
-github:1.34.0
-github-api:1.114.2
-github-branch-source:2.6.0
-git-server:1.10
-google-oauth-plugin:1.0.6
-groovy:2.4
-handy-uri-templates-2-api:2.1.8-1.0
-htmlpublisher:1.25
-jackson2-api:2.13.1-242.v1a45bad25ceb
-javax-activation-api:1.2.0-2
-javax-mail-api:1.6.2-2
-jenkins-design-language:1.24.8
-jira:3.5
-job-dsl:1.77
-jquery3-api:3.6.0-1
-jsch:0.1.55.2
-junit:1.52
-kubernetes:1.31.0
-kubernetes-client-api:5.10.1-171.vaa0774fb8c20
-kubernetes-credentials:0.9.0
-lockable-resources:2.11
-mailer:408.vd726a_1130320
-mapdb-api:1.0.9.0
-matrix-auth:2.6.8
-matrix-project:1.20
-mercurial:2.15
-metrics:4.0.2.8.1
-oauth-credentials:0.4
-okhttp-api:3.12.12.2
-openshift-login:1.0.27
-pam-auth:1.6
-pipeline-build-step:2.16
-pipeline-graph-analysis:1.10
-pipeline-input-step:2.12
-pipeline-milestone-step:1.3.1
-pipeline-model-api:1.9.3
-pipeline-model-definition:1.8.4
-pipeline-model-extensions:1.9.3
-pipeline-rest-api:2.15
-pipeline-stage-step:2.5
-pipeline-stage-tags-metadata:1.8.4
-pipeline-utility-steps:2.12.0
-plain-credentials:1.7
-plugin-util-api:2.4.0
-popper-api:1.16.1-2
-prometheus:2.0.10
-pubsub-light:1.13
-scm-api:2.6.5
-script-security:1131.v8b_b_5eda_c328e
-snakeyaml-api:1.29.1
-sse-gateway:1.24
-ssh-credentials:1.19
-sshd:3.0.4
-structs:308.v852b473a2b8c
-subversion:2.15.1
-token-macro:267.vcdaea6462991
-trilead-api:1.0.13
-variant:1.4
-workflow-api:2.47
-workflow-basic-steps:2.20
-workflow-cps:2660.vb_c0412dc4e6d
-workflow-cps-global-lib:564.ve62a_4eb_b_e039
-workflow-durable-task-step:2.35
-workflow-job:2.41
-workflow-multibranch:711.vdfef37cda_816
-workflow-scm-step:2.13
-workflow-step-api:622.vb_8e7c15b_c95a_
-workflow-support:3.8
+ace-editor: 1.1
+ant: 475.vf34069fef73c
+apache-httpcomponents-client-4-api: 4.5.13-138.v4e7d9a_7b_a_e61
+authentication-tokens: 1.4
+bootstrap4-api: 4.6.0-5
+bootstrap5-api: 5.2.0-3
+bouncycastle-api: 2.26
+branch-api: 2.1046.v0ca_37783ecc5
+build-user-vars-plugin: 1.8
+caffeine-api: 2.9.3-65.v6a_47d0f4d1fe
+checks-api: 1.7.5
+cloudbees-bitbucket-branch-source: 785.ve724eb_44e286
+cloudbees-folder: 6.740.ve4f4ffa_dea_54
+command-launcher: 84.v4a_97f2027398
+commons-lang3-api: 3.12.0-36.vd97de6465d5b_
+config-file-provider: 3.11.1
+configuration-as-code-groovy: 1.1
+configuration-as-code: 1512.vb_79d418d5fc8
+credentials-binding: 523.vd859a_4b_122e6
+credentials: 1139.veb_9579fca_33b_
+display-url-api: 2.3.6
+docker-commons: 1.21
+durable-task: 500.v8927d9fd99d8
+echarts-api: 5.3.3-1
+favorite: 2.4.1
+font-awesome-api: 6.1.2-1
+git-client: 3.11.2
+git-server: 1.11
+git: 4.11.5
+github-api: 1.303-400.v35c2d8258028
+github-branch-source: 1687.v7618247e672d
+github: 1.34.5
+google-oauth-plugin: 1.0.6
+groovy: 442.v817e6d937d6c
+handy-uri-templates-2-api: 2.1.8-22.v77d5b_75e6953
+htmlpublisher: 1.30
+jackson2-api: 2.13.3-285.vc03c0256d517
+jakarta-activation-api: 2.0.1-1
+jakarta-mail-api: 2.0.1-1
+javax-activation-api: 1.2.0-4
+javax-mail-api: 1.6.2-7
+jaxb: 2.3.6-1
+jdk-tool: 55.v1b_32b_6ca_f9ca
+jenkins-design-language: 1.25.6
+jersey2-api: 2.36-2
+jira: 3.8
+jjwt-api: 0.11.5-77.v646c772fddb_0
+job-dsl: 1.81
+jquery3-api: 3.6.0-4
+jsch: 0.1.55.61.va_e9ee26616e7
+junit: 1119.1121.vc43d0fc45561
+kubernetes-client-api: 5.12.2-193.v26a_6078f65a_9
+kubernetes-credentials: 0.9.0
+kubernetes: 3697.v771155683e38
+lockable-resources: 2.16
+mailer: 435.v79ef3972b_5c7
+mapdb-api: 1.0.9-28.vf251ce40855d
+matrix-auth: 3.1.5
+matrix-project: 772.v494f19991984
+mercurial: 1251.va_b_121f184902
+metrics: 4.2.10-389.v93143621b_050
+mina-sshd-api-common: 2.8.0-36.v8e25ce90d4b_1
+mina-sshd-api-core: 2.8.0-36.v8e25ce90d4b_1
+oauth-credentials: 0.5
+okhttp-api: 4.9.3-108.v0feda04578cf
+openshift-login: 1.0.27
+pam-auth: 1.10
+pipeline-build-step: 2.18
+pipeline-graph-analysis: 195.v5812d95a_a_2f9
+pipeline-graph-view: 51.v5a693b766483
+pipeline-groovy-lib: 612.v84da_9c54906d
+pipeline-input-step: 449.v77f0e8b_845c4
+pipeline-milestone-step: 101.vd572fef9d926
+pipeline-model-api: 2.2114.v2654ca_721309
+pipeline-model-definition: 2.2114.v2654ca_721309
+pipeline-model-extensions: 2.2114.v2654ca_721309
+pipeline-rest-api: 2.24
+pipeline-stage-step: 293.v200037eefcd5
+pipeline-stage-tags-metadata: 2.2114.v2654ca_721309
+pipeline-utility-steps: 2.13.0
+plain-credentials: 139.ved2b_9cf7587b
+plugin-util-api: 2.17.0
+popper-api: 1.16.1-3
+popper2-api: 2.11.6-1
+prometheus: 2.0.11
+pubsub-light: 1.16
+scm-api: 621.vda_a_b_055e58f7
+script-security: 1175.v4b_d517d6db_f0
+snakeyaml-api: 1.30.2-76.vc104f7ce9870
+sse-gateway: 1.25
+ssh-credentials: 295.vced876c18eb_4
+sshd: 3.242.va_db_9da_b_26a_c3
+structs: 324.va_f5d6774f3a_d
+subversion: 2.16.0
+token-macro: 308.v4f2b_ed62b_b_16
+trilead-api: 1.67.vc3938a_35172f
+variant: 59.vf075fe829ccb
+workflow-api: 1192.v2d0deb_19d212
+workflow-basic-steps: 991.v43d80fea_ff66
+workflow-cps: 2759.v87459c4eea_ca_
+workflow-durable-task-step: 1199.v02b_9244f8064
+workflow-job: 1207.ve6191ff089f8
+workflow-multibranch: 716.vc692a_e52371b_
+workflow-scm-step: 400.v6b_89a_1317c9a_
+workflow-step-api: 639.v6eca_cd8c04a_a_
+workflow-support: 838.va_3a_087b_4055b
