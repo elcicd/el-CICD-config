@@ -1,7 +1,6 @@
 elCicdChart:
   parameters:
     JENKINS_SERVICE_NAME: jenkins
-    ENABLE_OAUTH: "true"
     DISABLE_ADMINISTRATIVE_MONITORS: "false"
     KUBERNETES_MASTER: https://kubernetes.default:443
     ENABLE_FATAL_ERROR_LOG_FILE: "false"
