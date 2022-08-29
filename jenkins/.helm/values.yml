@@ -11,10 +11,8 @@ elCicdChart:
     MEMORY_REQUEST: 256Mi
     
   templates:
-  - templateName: deploymentServiceIngress
+  - templateName: deploymentService
     appName: ${JENKINS_SERVICE_NAME}
-    labels:
-      name: ${JENKINS_SERVICE_NAME}
     parameters-non-prod:
       # override non-prod values here
     parameters-prod:
@@ -44,6 +42,11 @@ elCicdChart:
       value: ${ENABLE_FATAL_ERROR_LOG_FILE}
     - name: JENKINS_UC_INSECURE
       value: ${JENKINS_UC_INSECURE}
+    ports:
+      - name: httpport
+        containerPort: 8080
+      - name: jnlpport
+        containerPort: 50000
     readinessProbe:
       httpGet:
         path: /login
@@ -73,7 +76,7 @@ elCicdChart:
     volumes:
     - name: ${JENKINS_SERVICE_NAME}-data
       persistentVolumeClaim:
-        claimName: ${JENKINS_SERVICE_NAME}-data
+        claimName: ${JENKINS_SERVICE_NAME}
     # - configMap:
     #     name: ${JENKINS_SERVICE_NAME}-trusted-ca-bundle
     #     optional: true
@@ -84,13 +87,8 @@ elCicdChart:
   #   annotations:
   #     config.openshift.io/inject-trusted-cabundle: "true"
 
-  - templateName: service
+  - templateName: ingress
     appName: ${JNLP_SERVICE_NAME}
-    ports:
-    - name: agent
-      port: 50000
-    selector:
-      name: ${JENKINS_SERVICE_NAME}
 
   - templateName: serviceAccount
     appName: ${JENKINS_SERVICE_NAME}
@@ -108,6 +106,11 @@ elCicdChart:
       name: ${JENKINS_SERVICE_NAME}
         
   - templateName: persistentVolumeClaim
-    appName: ${JENKINS_SERVICE_NAME}-data
+    appName: ${JENKINS_SERVICE_NAME}
+    storageCapacity: ${VOLUME_CAPACITY}
+    accessMode: ReadWriteOnce
+        
+  - templateName: persistentVolume
+    appName: ${JENKINS_SERVICE_NAME}
     storageCapacity: ${VOLUME_CAPACITY}
     accessMode: ReadWriteOnce
