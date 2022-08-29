@@ -4,15 +4,16 @@ elCicdChart:
     ENABLE_OAUTH: "true"
     DISABLE_ADMINISTRATIVE_MONITORS: "false"
     KUBERNETES_MASTER: https://kubernetes.default:443
-    JNLP_SERVICE_NAME: jenkins-jnlp
     ENABLE_FATAL_ERROR_LOG_FILE: "false"
     JENKINS_UC_INSECURE: "false"
     CPU_REQUEST: 500m
     MEMORY_REQUEST: 256Mi
     
   templates:
-  - templateName: deploymentService
+  - templateName: deployment
     appName: ${JENKINS_SERVICE_NAME}
+    labels:
+      name: ${JENKINS_SERVICE_NAME}
     parameters-non-prod:
       # override non-prod values here
     parameters-prod:
@@ -21,7 +22,6 @@ elCicdChart:
     strategyType: Recreate
     imagePullPolicy: Always
     imagePullSecret: ${JENKINS_IMAGE_PULL_SECRET}
-    host: ${JENKINS_URL}
     serviceAccountName: ${JENKINS_SERVICE_NAME}
     env:
     - name: JENKINS_JAVA_OVERRIDES
@@ -37,7 +37,7 @@ elCicdChart:
     - name: JENKINS_SERVICE_NAME
       value: ${JENKINS_SERVICE_NAME}
     - name: JNLP_SERVICE_NAME
-      value: ${JNLP_SERVICE_NAME}
+      value: ${JENKINS_SERVICE_NAME}
     - name: ENABLE_FATAL_ERROR_LOG_FILE
       value: ${ENABLE_FATAL_ERROR_LOG_FILE}
     - name: JENKINS_UC_INSECURE
@@ -87,8 +87,17 @@ elCicdChart:
   #   annotations:
   #     config.openshift.io/inject-trusted-cabundle: "true"
 
+  - templateName: service
+    appName: ${JENKINS_SERVICE_NAME}
+    ports:
+    - name: https
+      port: 8080
+    - name: jnlpport
+      port: 50000
+
   - templateName: ingress
-    appName: ${JNLP_SERVICE_NAME}
+    appName: ${JENKINS_SERVICE_NAME}
+    host: ${JENKINS_URL}
 
   - templateName: serviceAccount
     appName: ${JENKINS_SERVICE_NAME}
@@ -106,11 +115,6 @@ elCicdChart:
       name: ${JENKINS_SERVICE_NAME}
         
   - templateName: persistentVolumeClaim
-    appName: ${JENKINS_SERVICE_NAME}
-    storageCapacity: ${VOLUME_CAPACITY}
-    accessMode: ReadWriteOnce
-        
-  - templateName: persistentVolume
     appName: ${JENKINS_SERVICE_NAME}
     storageCapacity: ${VOLUME_CAPACITY}
     accessMode: ReadWriteOnce
