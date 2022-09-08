@@ -1,0 +1,13 @@
+rbacGroup: devops
+scmHost: github.com
+scmRestApiHost: api.github.com
+scmOrganization: kafka-test
+gitBranch: development
+gitTestBranch: development
+microServices:
+- gitRepoName: kafka-consumer
+  codeBase: python
+  tester: pytest
+  status: ACTIVE
+resourceQuotas:
+  default: small.yml
