@@ -117,3 +117,8 @@ elCicdChart:
     appName: ${JENKINS_SERVICE_NAME}
     storageCapacity: ${VOLUME_CAPACITY}
     accessMode: ReadWriteOnce
+        
+  - templateName: persistentVolumeClaim
+    appName: ${JENKINS_SERVICE_NAME}-agent-home
+    storageCapacity: ${VOLUME_CAPACITY}
+    accessMode: ReadWriteMany
