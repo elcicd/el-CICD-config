@@ -1,5 +1,5 @@
 elCicdChart:
-  parameters:
+  elcicdDefs:
     JENKINS_SERVICE_NAME: jenkins
     DISABLE_ADMINISTRATIVE_MONITORS: "false"
     KUBERNETES_MASTER: https://kubernetes.default:443
@@ -13,9 +13,9 @@ elCicdChart:
     appName: ${JENKINS_SERVICE_NAME}
     labels:
       name: ${JENKINS_SERVICE_NAME}
-    parameters-non-prod:
+    elcicdDefs-non-prod:
       # override non-prod values here
-    parameters-prod:
+    elcicdDefs-prod:
       # override prod values here
     image: ${JENKINS_IMAGE}
     strategyType: Recreate
@@ -115,10 +115,10 @@ elCicdChart:
         
   - templateName: persistentVolumeClaim
     appName: ${JENKINS_SERVICE_NAME}
-    storageCapacity: ${VOLUME_CAPACITY}
+    storageRequest: ${VOLUME_CAPACITY}
     accessMode: ReadWriteOnce
         
   - templateName: persistentVolumeClaim
     appName: ${JENKINS_SERVICE_NAME}-agent-home
-    storageCapacity: ${VOLUME_CAPACITY}
+    storageRequest: ${VOLUME_CAPACITY}
     accessMode: ReadWriteMany
