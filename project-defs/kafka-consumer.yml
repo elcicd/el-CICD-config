@@ -10,4 +10,4 @@ microServices:
   tester: pytest
   status: ACTIVE
 resourceQuotas:
-  default: small.yml
+  default: large.yml
