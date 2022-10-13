@@ -16,8 +16,8 @@ objects:
     name: ${PVC_NAME}
   spec:
 #######################################################################################
-## Specify the access mode. Choices are "ReadWriteMany" for volumes to be shared across microservices,
-## "ReadWriteOnce" for volumes accessed by a single microservice, or "ReadOnly", which as implies,
+## Specify the access mode. Choices are "ReadWriteMany" for volumes to be shared across components,
+## "ReadWriteOnce" for volumes accessed by a single component, or "ReadOnly", which as implies,
 ## does not allow writes.
 #######################################################################################
     accessModes:

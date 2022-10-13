@@ -1,5 +1,5 @@
 elCicdChart:
-  elcicdDefs:
+  elCicdDefs:
     JENKINS_SERVICE_NAME: jenkins
     DISABLE_ADMINISTRATIVE_MONITORS: "false"
     KUBERNETES_MASTER: https://kubernetes.default:443
@@ -13,9 +13,9 @@ elCicdChart:
     appName: ${JENKINS_SERVICE_NAME}
     labels:
       name: ${JENKINS_SERVICE_NAME}
-    elcicdDefs-non-prod:
+    elCicdDefs-non-prod:
       # override non-prod values here
-    elcicdDefs-prod:
+    elCicdDefs-prod:
       # override prod values here
     image: ${JENKINS_IMAGE}
     strategyType: Recreate

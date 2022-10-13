@@ -1,5 +1,5 @@
 /*
- * pre-microservice-promotion-removal test script 
+ * pre-component-promotion-removal test script 
  */
 
 def call(Map args) {

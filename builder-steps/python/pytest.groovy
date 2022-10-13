@@ -4,7 +4,7 @@
  * Utility method for running Python pytest based unit tests
  */
 
-def test(def projectInfo, def microService) {
+def test(def projectInfo, def component) {
     sh """
         if [[ -f ${el.cicd.BUILDER_SECRETS_DIR}/pip.conf ]]
         then

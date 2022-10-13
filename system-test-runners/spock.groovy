@@ -4,9 +4,9 @@
  * Example script where system tests can be run...
  */
 
-def runTests(def projectInfo, def microServiceToTest, def systemTestNamespace, def systemTestEnv) {
+def runTests(def projectInfo, def componentToTest, def testModuleNamespace, def testModuleEnv) {
     def msgs = ["[SPOCK RUNNER EXAMPLE PLACEHOLDER]",
-                "Testing ${microServiceToTest.name} in ${systemTestNamespace} for the ${systemTestEnv.toUpperCase()} environment"]
+                "Testing ${componentToTest.name} in ${testModuleNamespace} for the ${testModuleEnv.toUpperCase()} environment"]
 
     loggingUtils.echoBanner(msgs)
 }

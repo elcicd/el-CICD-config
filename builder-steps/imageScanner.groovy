@@ -4,7 +4,7 @@
  * Utility method for scanning images
  */
 
-def scanImage(def projectInfo, def microService) {
+def scanImage(def projectInfo, def component) {
     echo 'EXAMPLE IMAGE SCAN COMPLETED (FAKE): replace sample script to do actual scan of images before pushing to registry'
 }
 

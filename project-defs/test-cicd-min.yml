@@ -2,28 +2,28 @@ rbacGroup: devops
 scmHost: github.com
 scmRestApiHost: api.github.com
 scmOrganization: elcicd
-gitBranch: development
-microServices:
-- gitRepoName: test-cicd-stationdemo
+scmBranch: development
+components:
+- scmRepoName: test-cicd-stationdemo
   codeBase: java-maven
   status: ACTIVE
-- gitRepoName: Test-CICD1
+- scmRepoName: Test-CICD1
   codeBase: python
   tester: pytest
   status: ACTIVE
-- gitRepoName: test_CICD2
+- scmRepoName: test_CICD2
   codeBase: python
   tester: pytest
   status: INACTIVE
-- gitRepoName: TeSt-CiCd3
+- scmRepoName: TeSt-CiCd3
   codeBase: python
   tester: pytest
   status: ACTIVE
-- gitRepoName: Test_CICD4
+- scmRepoName: Test_CICD4
   codeBase: python
   tester: pytest
   status: ACTIVE
-- gitRepoName: test-cicd-R
+- scmRepoName: test-cicd-R
   codeBase: r-lang
   status: ACTIVE
 enabledTestEnvs:

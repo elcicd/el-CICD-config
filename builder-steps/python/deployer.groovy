@@ -1,13 +1,13 @@
 /* 
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
- * Utility method for deploying a library to an artifact repository
+ * Utility method for deploying a artifact to an artifact repository
  */
 
-def deploy(def projectInfo, def library) {
-    echo 'WARNING: library deployments not currently enabled for Python builds'
+def deploy(def projectInfo, def artifact) {
+    echo 'WARNING: artifact deployments not currently enabled for Python builds'
 
-    // if (library.type == 'EGG') {
+    // if (artifact.type == 'EGG') {
     //     sh 'python setup.py sdist upload -r local'
     // }
     // else {

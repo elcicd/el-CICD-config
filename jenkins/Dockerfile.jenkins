@@ -3,11 +3,11 @@ FROM fedora:latest
 ARG OKD_VERSION
 ARG CONFIG_FILE_PATH
 ARG CASC_FILE
-ARG PLUGINS_FILE
+ARG JENKINS_PLUGINS_FILE
 
 USER root
 
-COPY ["${CASC_FILE}", "${PLUGINS_FILE}", "${CONFIG_FILE_PATH}"]
+COPY ["${CASC_FILE}", "${JENKINS_PLUGINS_FILE}", "${CONFIG_FILE_PATH}"]
 COPY jenkins-startup.sh /usr/local/bin/
 
 ARG INSTALL_PKGS="git fontconfig java-11-openjdk-headless java-11-openjdk-devel"
@@ -23,6 +23,7 @@ RUN adduser -g 0 -u 1001 jenkins && \
     dnf clean all && \
     curl -fsSLo /usr/share/java/jenkins-plugin-manager.jar \
         https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.8/jenkins-plugin-manager-2.12.8.jar && \
+    chmod 777 /usr/share/java/jenkins-plugin-manager.jar && \
     chmod -R 775 /etc/alternatives && \
     chmod -R 775 /var/lib/alternatives && \
     chmod -R 775 /usr/lib/jvm && \
@@ -32,14 +33,15 @@ RUN adduser -g 0 -u 1001 jenkins && \
     chmod 775 /var/lib/origin && \
     chmod 775 /var/log && \
     chmod 400 /etc/ssh/ssh_config && \
-    chmod 777 /var/lib/jenkins && \
+    mkdir -p /var/lib/jenkins/jobs && \
+    chmod 777 -R /var/lib/jenkins && \
     rm -rf /var/log/*
         
 ENV HOME=/var/lib/jenkins \
     JENKINS_HOME=/var/lib/jenkins \
     JENKINS_UC=https://updates.jenkins.io \
     CASC_JENKINS_CONFIG=${CONFIG_FILE_PATH}/${CASC_FILE} \
-    PLUGINS_FILE_PATH=${CONFIG_FILE_PATH}/${PLUGINS_FILE} \
+    JENKINS_PLUGINS_FILE=${CONFIG_FILE_PATH}/${JENKINS_PLUGINS_FILE} \
     LANG=en_US.UTF-8
 
 USER 1001

@@ -2,10 +2,10 @@ rbacGroup: devops
 scmHost: github.com
 scmRestApiHost: api.github.com
 scmOrganization: kafka-test
-gitBranch: development
-gitTestBranch: development
-microServices:
-- gitRepoName: kafka-producer
+scmBranch: development
+scmTestBranch: development
+components:
+- scmRepoName: kafka-producer
   codeBase: python
   tester: pytest
   status: ACTIVE

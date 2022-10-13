@@ -1,10 +1,10 @@
 /* 
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
- * Utility method for scanning R language based microservices
+ * Utility method for scanning R language based components
  */
 
-def scan(def projectId, def microService) {
+def scan(def projectId, def component) {
     /*withCredentials([string(credentialsId: el.cicd.SONARQUBE_ACCESS_TOKEN_ID, variable: 'SONARQUBE_ACCESS_TOKEN')]) {
         // sonar.sources=. -> define source code directory
         // sonar.tests=./tests ->  define directory for test code; ./tests must exist or the build will fail
@@ -16,8 +16,8 @@ def scan(def projectId, def microService) {
             unset JAVA_TOOL_OPTIONS
             export SONAR_SCANNER_OPTS="-Xmx512m"
             sonar-scanner -Dsonar.sources=. \
-                          -Dsonar.projectName=${microService.name} \
-                          -Dsonar.projectKey=${projectInfo.id}-${microService.name} \
+                          -Dsonar.projectName=${component.name} \
+                          -Dsonar.projectKey=${projectInfo.id}-${component.name} \
                           -Dsonar.host.url=http://sonarqube.jenkins-pipeline.svc.cluster.local:9000 \
                           -Dsonar.login=${SONARQUBE_ACCESS_TOKEN} \
                           -Dproject.settings=/usr/local/sonar-scanner/conf/sonar-scanner.properties \

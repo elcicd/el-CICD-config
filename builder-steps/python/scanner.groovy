@@ -1,10 +1,10 @@
 /* 
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
- * Utility method for scanning Python based microservices
+ * Utility method for scanning Python based components
  */
 
-def scan(def projectInfo, def microService) {
+def scan(def projectInfo, def component) {
     /*withCredentials([string(credentialsId: el.cicd.SONARQUBE_ACCESS_TOKEN_ID, variable: 'SONARQUBE_ACCESS_TOKEN')]) {
         // sonar.sources=. -> define source code directory
         // sonar.tests=./tests ->  define directory for test code; ./tests must exist or the build will fail
@@ -16,8 +16,8 @@ def scan(def projectInfo, def microService) {
             export SONAR_SCANNER_OPTS="-Xmx512m"
             sonar-scanner -Dsonar.sources=. \
                           -Dsonar.tests=./tests \
-                          -Dsonar.projectName=${microService.name} \
-                          -Dsonar.projectKey=${projectId}-${microService.name} \
+                          -Dsonar.projectName=${component.name} \
+                          -Dsonar.projectKey=${projectId}-${component.name} \
                           -Dsonar.host.url=http://sonarqube.sonarqube.svc.cluster.local:9000 \
                           -Dsonar.login=${SONARQUBE_ACCESS_TOKEN} \
                           -Dproject.settings=/usr/local/sonar-scanner/conf/sonar-scanner.properties \

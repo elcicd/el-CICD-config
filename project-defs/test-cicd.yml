@@ -2,49 +2,49 @@ rbacGroup: devops
 scmHost: github.com
 scmRestApiHost: api.github.com
 scmOrganization: elcicd
-gitBranch: development
-gitTestBranch: development
-microServices:
-- gitRepoName: test-cicd-stationdemo
+scmBranch: development
+scmTestBranch: development
+components:
+- scmRepoName: test-cicd-stationdemo
   codeBase: java-maven
   status: ACTIVE
-- gitRepoName: Test-CICD1
+- scmRepoName: Test-CICD1
   codeBase: python
   tester: pytest
   status: ACTIVE
-- gitRepoName: test_CICD2
+- scmRepoName: test_CICD2
   codeBase: python
   tester: pytest
   status: INACTIVE
-- gitRepoName: TeSt-CiCd3
+- scmRepoName: TeSt-CiCd3
   codeBase: python
   tester: pytest
   status: ACTIVE
-- gitRepoName: Test_CICD4
+- scmRepoName: Test_CICD4
   codeBase: python
   tester: pytest
   status: ACTIVE
-- gitRepoName: test-cicd-R
+- scmRepoName: test-cicd-R
   codeBase: r-lang
   status: ACTIVE
-libraries:
-- gitRepoName: test-cicd-stationdemo-lib
+artifacts:
+- scmRepoName: test-cicd-stationdemo-lib
   codeBase: java-maven
   status: ACTIVE
-- gitRepoName: Test-CICD1-lib
+- scmRepoName: Test-CICD1-lib
   codeBase: python
   tester: pytest
   status: ACTIVE
-systemTests:
-- gitRepoName: Test-CICD-Cucumber-Tests
+testModules:
+- scmRepoName: Test-CICD-Cucumber-Tests
   codeBase: cucumber
-  microServiceRepos:
+  componentRepos:
   - Test-CICD1
   - test_CICD2
   - Test_CICD4
-- gitRepoName: Test-CICD-Spock-Tests
+- scmRepoName: Test-CICD-Spock-Tests
   codeBase: spock
-  microServiceRepos:
+  componentRepos:
   - test-cicd-stationdemo
   - test-cicd-R
 enabledTestEnvs:

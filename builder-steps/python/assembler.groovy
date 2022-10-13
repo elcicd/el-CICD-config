@@ -1,10 +1,10 @@
 /* 
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
- * Utility method for running post processing of microservice code before the image build
+ * Utility method for running post processing of component code before the image build
  */
 
-def assemble(def projectInfo, def microService) {
+def assemble(def projectInfo, def component) {
     // clean python workspace after scanner step complete
     sh """
         git clean -fxd
