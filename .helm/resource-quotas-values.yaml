@@ -1,0 +1,79 @@
+elCicdTemplates-resourcequotas:
+- templateName: resourceQuota
+  appName: sandbox-mem-cpu
+  anyProfiles:
+  - sandbox-mem-cpu
+  namespace: ${${APP_NAME}_NAMESPACE}
+  hard:
+    limits.cpu: "4"
+    limits.memory: 10Gi
+  scopes:
+  - NotTerminating
+
+- templateName: resourceQuota
+  appName: sandbox-storage
+  anyProfiles:
+  - sandbox-storage
+  namespace: ${${APP_NAME}_NAMESPACE}
+  hard:
+    requests.storage: 25Gi
+    
+- templateName: resourceQuota
+  appName: small-mem-cpu
+  anyProfiles:
+  - small-mem-cpu
+  namespace: ${${APP_NAME}_NAMESPACE}
+  hard:
+    limits.cpu: "4"
+    limits.memory: 10Gi
+  scopes:
+  - NotTerminating
+
+- templateName: resourceQuota
+  appName: small-storage
+  anyProfiles:
+  - small-storage
+  namespace: ${${APP_NAME}_NAMESPACE}
+  hard:
+    requests.storage: 25Gi
+    
+- templateName: resourceQuota
+  appName: medium-mem-cpu
+  anyProfiles:
+  - medium-mem-cpu
+  namespace: ${${APP_NAME}_NAMESPACE}
+  hard:
+    limits.cpu: "8"
+    limits.memory: 48Gi
+  scopes:
+  - NotTerminating
+
+- templateName: resourceQuota
+  appName: medium-storage
+  anyProfiles:
+  - medium-storage
+  namespace: ${${APP_NAME}_NAMESPACE}
+  hard:
+    requests.storage: 256Gi
+    
+- templateName: resourceQuota
+  appName: large-mem-cpu
+  anyProfiles:
+  - large-mem-cpu
+  namespace: ${${APP_NAME}_NAMESPACE}
+  hard:
+    limits.cpu: "16"
+    limits.memory: 95Gi
+  scopes:
+  - NotTerminating
+
+- templateName: resourceQuota
+  appName: large-storage
+  anyProfiles:
+  - large-storage
+  namespace: ${${APP_NAME}_NAMESPACE}
+  hard:
+    requests.storage: 1024Gi
+  
+  
+  
