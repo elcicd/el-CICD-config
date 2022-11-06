@@ -46,4 +46,4 @@ ENV HOME=/var/lib/jenkins \
 
 USER 1001
 
-ENTRYPOINT jenkins-startup.sh ${PLUGINS_FILE_PATH} > /var/log/jenkins-startup.log
+ENTRYPOINT jenkins-startup.sh ${JENKINS_PLUGINS_FILE} > /var/log/jenkins-startup.log

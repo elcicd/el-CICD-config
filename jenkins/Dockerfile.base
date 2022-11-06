@@ -27,6 +27,7 @@ RUN curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-
     dnf install -y --nodocs ${INSTALL_PKGS} && \
     dnf clean all  && \
     adduser -g 0 -u ${USER_UID} ${USER} && \
+    chmod 777 /home/${USER} && \
     chmod 755 /usr/share/${USER} && \
     chmod 644 /usr/share/${USER}/agent.jar && \
     ln -sf /usr/share/${USER}/agent.jar /usr/share/${USER}/slave.jar && \

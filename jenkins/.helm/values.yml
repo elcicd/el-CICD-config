@@ -1,4 +1,4 @@
-elCicdChart:
+elCicdRenderer:
   elCicdDefs:
     JENKINS_SERVICE_NAME: jenkins
     DISABLE_ADMINISTRATIVE_MONITORS: "false"
@@ -8,7 +8,7 @@ elCicdChart:
     CPU_REQUEST: 500m
     MEMORY_REQUEST: 256Mi
     
-  templates:
+  elCicdTemplates:
   - templateName: deployment
     appName: ${JENKINS_SERVICE_NAME}
     labels:
