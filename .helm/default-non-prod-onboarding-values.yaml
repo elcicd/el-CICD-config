@@ -1,6 +1,6 @@
 ############################################################################
 ##
-## Override the default values for the elCicdResources
+## Override the default values for the elCicdResources non-prod onboarding process
 ## To use:
 ##   1) Uncomment any default values you wish to override, and set the default values.
 ##   2) Save the file, commit, and push.  The file will be automatically picked up
@@ -35,3 +35,6 @@ elCicdDefaults:
   # prometheusProtocol: "TCP"
 
   # 3ScaleScheme: "https"
+
+  # nodeSelector:
+  #   cicd: "true"
