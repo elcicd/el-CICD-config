@@ -1,4 +1,7 @@
-rbacGroup: devops
+rbacGroups:
+  dev: devops
+  qa: devops
+  stg: devops
 scmHost: github.com
 scmRestApiHost: api.github.com
 scmOrganization: elcicd
@@ -51,14 +54,22 @@ enabledTestEnvs:
 - qa
 sandboxEnvs: 2
 allowsHotfixes: true
-releaseRegions:
-- east
-- west
 resourceQuotas:
-  default: small.yml
-  qa: medium.yml
-  stg: large.yml
-  prod: large.yml
+  default:
+  - small-cpu-mem
+  - small-storage
+  dev:
+  - medium-cpu-mem
+  - small-storage
+  qa:
+  - medium-cpu-mem
+  - medium-storage
+  stg:
+  - large-cpu-mem
+  - medium-storage
+  prod:
+  - large-cpu-mem
+  - large-storage
 nfsShares:
 - envs:
   - qa
