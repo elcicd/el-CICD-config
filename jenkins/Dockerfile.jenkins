@@ -8,7 +8,6 @@ ARG JENKINS_PLUGINS_FILE
 USER root
 
 COPY ["${CASC_FILE}", "${JENKINS_PLUGINS_FILE}", "${CONFIG_FILE_PATH}"]
-COPY jenkins-startup.sh /usr/local/bin/
 
 ARG INSTALL_PKGS="git fontconfig java-11-openjdk-headless java-11-openjdk-devel"
 RUN adduser -g 0 -u 1001 jenkins && \
@@ -46,4 +45,7 @@ ENV HOME=/var/lib/jenkins \
 
 USER 1001
 
-ENTRYPOINT jenkins-startup.sh ${JENKINS_PLUGINS_FILE} > /var/log/jenkins-startup.log
+ENTRYPOINT java -Djenkins.install.runSetupWizard=false \
+                -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true \
+                ${JENKINS_JAVA_OVERRIDES} \
+                -jar /usr/share/java/jenkins.war > /var/log/jenkins-startup.log
