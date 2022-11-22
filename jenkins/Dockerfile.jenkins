@@ -21,7 +21,7 @@ RUN adduser -g 0 -u 1001 jenkins && \
     dnf -y --nodocs install jenkins && \
     dnf clean all && \
     curl -fsSLo /usr/share/java/jenkins-plugin-manager.jar \
-        https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.8/jenkins-plugin-manager-2.12.8.jar && \
+        https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.9/jenkins-plugin-manager-2.12.9.jar && \
     chmod 777 /usr/share/java/jenkins-plugin-manager.jar && \
     chmod -R 775 /etc/alternatives && \
     chmod -R 775 /var/lib/alternatives && \
@@ -34,6 +34,7 @@ RUN adduser -g 0 -u 1001 jenkins && \
     chmod 400 /etc/ssh/ssh_config && \
     mkdir -p /var/lib/jenkins/jobs && \
     chmod 777 -R /var/lib/jenkins && \
+    chmod 777 -R ${CONFIG_FILE_PATH} && \
     rm -rf /var/log/*
         
 ENV HOME=/var/lib/jenkins \
