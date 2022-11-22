@@ -8,9 +8,9 @@ jenkins:
   clouds:
     - kubernetes:
         name: "openshift"
-        serverUrl: "https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}"
-        jenkinsTunnel: "${JENKINS_JNLP_SERVICE_HOST}:${JENKINS_JNLP_SERVICE_PORT}"
-        jenkinsUrl: "http://${JENKINS_SERVICE_HOST}:${JENKINS_SERVICE_PORT}"
+        serverUrl: "https://${ KUBERNETES_SERVICE_HOST }:${KUBERNETES_SERVICE_PORT }"
+        jenkinsTunnel: "${ JENKINS_JNLP_SERVICE_HOST }:${ JENKINS_JNLP_SERVICE_PORT }"
+        jenkinsUrl: "http://${ JENKINS_SERVICE_HOST }:${ JENKINS_SERVICE_PORT }"
         skipTlsVerify: false
         connectTimeout: 5
         containerCapStr: "100"
@@ -45,7 +45,7 @@ security:
 tool:
   git:
     installations:
-      - name: git
+      - name: "Default"./
         home: /usr/bin/git
 jobs:
 - script: >

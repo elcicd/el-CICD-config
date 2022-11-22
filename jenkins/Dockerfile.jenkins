@@ -1,8 +1,13 @@
 FROM fedora:latest
 
 ARG OKD_VERSION
+ARG CONFIG_FILE_PATH
+ARG CASC_FILE
+ARG JENKINS_PLUGINS_FILE
 
 USER root
+
+COPY ["${CASC_FILE}", "${JENKINS_PLUGINS_FILE}", "${CONFIG_FILE_PATH}"]
 
 ARG INSTALL_PKGS="git fontconfig java-11-openjdk-headless java-11-openjdk-devel"
 RUN adduser -g 0 -u 1001 jenkins && \
@@ -34,6 +39,8 @@ RUN adduser -g 0 -u 1001 jenkins && \
 ENV HOME=/var/lib/jenkins \
     JENKINS_HOME=/var/lib/jenkins \
     JENKINS_UC=https://updates.jenkins.io \
+    CASC_JENKINS_CONFIG=${CONFIG_FILE_PATH}/${CASC_FILE} \
+    JENKINS_PLUGINS_FILE=${CONFIG_FILE_PATH}/${JENKINS_PLUGINS_FILE} \
     LANG=en_US.UTF-8
 
 USER 1001
