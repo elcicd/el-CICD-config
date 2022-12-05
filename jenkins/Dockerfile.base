@@ -18,7 +18,8 @@ ENV HOME=/home/${USER} \
 USER root
 
 ARG INSTALL_PKGS="bc git java-11-openjdk-headless tar unzip which zip bzip2 jq podman skopeo buildah helm"
-RUN curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-ci.org/public/org/${USER}-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar && \
+RUN set -x && \
+    curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-ci.org/public/org/${USER}-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar && \
     curl -fsSLo /tmp/oc.tar.gz  https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
@@ -27,12 +28,15 @@ RUN curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-
     dnf install -y --nodocs ${INSTALL_PKGS} && \
     dnf clean all  && \
     adduser -g 0 -u ${USER_UID} ${USER} && \
-    chmod 777 /home/${USER} && \
+    umask 000 && \
+    chgrp -R 0 /home && \
+    chmod -R g+s /home  && \
+    chown -R ${USER_UID} /home && \
+    chmod -R 777 /home && \
     chmod 755 /usr/share/${USER} && \
     chmod 644 /usr/share/${USER}/agent.jar && \
     ln -sf /usr/share/${USER}/agent.jar /usr/share/${USER}/slave.jar && \
     mkdir -p /var/lib/jenkins && \
-    chown -R ${USER_UID}:0 /var/lib/jenkins && \
     chmod -R 775 /var/lib/jenkins && \
     chmod -R 775 /etc/alternatives && \
     chmod -R 775 /var/lib/alternatives && \
@@ -50,10 +54,11 @@ RUN curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-
     rm -f /var/logs/*
 
 WORKDIR /home/${USER}
+               
+USER ${USER_UID}
 
 ENTRYPOINT exec java -cp /usr/share/jenkins/agent.jar \
                hudson.remoting.jnlp.Main -headless -tunnel ${JENKINS_TUNNEL} \
                -url ${JENKINS_URL} -workDir ${JENKINS_AGENT_WORKDIR} \
                ${JENKINS_SECRET} ${JENKINS_AGENT_NAME}
 
-USER ${USER_UID}
