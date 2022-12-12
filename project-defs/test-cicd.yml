@@ -1,7 +1,8 @@
 rbacGroups:
-  dev: devops
-  qa: devops
-  stg: devops
+  default: devs
+  qa: testers
+  stg: testers
+  prod: cluster-admins
 scmHost: github.com
 scmRestApiHost: api.github.com
 scmOrganization: elcicd

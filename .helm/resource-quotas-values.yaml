@@ -1,28 +1,9 @@
 elCicdTemplates-resourcequotas:
 - templateName: resourceQuota
-  appName: sandbox-cpu-mem
-  anyProfiles:
-  - sandbox-cpu-mem
-  namespace: ${${APP_NAME}_NAMESPACE}
-  hard:
-    limits.cpu: "4"
-    limits.memory: 10Gi
-  scopes:
-  - NotTerminating
-
-- templateName: resourceQuota
-  appName: sandbox-storage
-  anyProfiles:
-  - sandbox-storage
-  namespace: ${${APP_NAME}_NAMESPACE}
-  hard:
-    requests.storage: 25Gi
-    
-- templateName: resourceQuota
   appName: small-cpu-mem
   anyProfiles:
   - small-cpu-mem
-  namespace: ${${APP_NAME}_NAMESPACE}
+  namespaces: ${${APP_NAME}_NAMESPACES}
   hard:
     limits.cpu: "4"
     limits.memory: 10Gi
@@ -33,7 +14,7 @@ elCicdTemplates-resourcequotas:
   appName: small-storage
   anyProfiles:
   - small-storage
-  namespace: ${${APP_NAME}_NAMESPACE}
+  namespaces: ${${APP_NAME}_NAMESPACES}
   hard:
     requests.storage: 25Gi
     
@@ -41,7 +22,7 @@ elCicdTemplates-resourcequotas:
   appName: medium-cpu-mem
   anyProfiles:
   - medium-cpu-mem
-  namespace: ${${APP_NAME}_NAMESPACE}
+  namespaces: ${${APP_NAME}_NAMESPACES}
   hard:
     limits.cpu: "8"
     limits.memory: 48Gi
@@ -52,7 +33,7 @@ elCicdTemplates-resourcequotas:
   appName: medium-storage
   anyProfiles:
   - medium-storage
-  namespace: ${${APP_NAME}_NAMESPACE}
+  namespaces: ${${APP_NAME}_NAMESPACES}
   hard:
     requests.storage: 256Gi
     
@@ -60,7 +41,7 @@ elCicdTemplates-resourcequotas:
   appName: large-cpu-mem
   anyProfiles:
   - large-cpu-mem
-  namespace: ${${APP_NAME}_NAMESPACE}
+  namespaces: ${${APP_NAME}_NAMESPACES}
   hard:
     limits.cpu: "16"
     limits.memory: 95Gi
@@ -71,7 +52,7 @@ elCicdTemplates-resourcequotas:
   appName: large-storage
   anyProfiles:
   - large-storage
-  namespace: ${${APP_NAME}_NAMESPACE}
+  namespaces: ${${APP_NAME}_NAMESPACES}
   hard:
     requests.storage: 1024Gi
   
