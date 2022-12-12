@@ -3,7 +3,7 @@ elCicdTemplates-resourcequotas:
   appName: small-cpu-mem
   anyProfiles:
   - small-cpu-mem
-  namespaces: ${${APP_NAME}_NAMESPACES}
+  namespaces: ${small-cpu-mem_NAMESPACES}
   hard:
     limits.cpu: "4"
     limits.memory: 10Gi
@@ -14,7 +14,7 @@ elCicdTemplates-resourcequotas:
   appName: small-storage
   anyProfiles:
   - small-storage
-  namespaces: ${${APP_NAME}_NAMESPACES}
+  namespaces: ${small-storage_NAMESPACES}
   hard:
     requests.storage: 25Gi
     
@@ -22,7 +22,7 @@ elCicdTemplates-resourcequotas:
   appName: medium-cpu-mem
   anyProfiles:
   - medium-cpu-mem
-  namespaces: ${${APP_NAME}_NAMESPACES}
+  namespaces: ${medium-cpu-mem_NAMESPACES}
   hard:
     limits.cpu: "8"
     limits.memory: 48Gi
@@ -33,7 +33,7 @@ elCicdTemplates-resourcequotas:
   appName: medium-storage
   anyProfiles:
   - medium-storage
-  namespaces: ${${APP_NAME}_NAMESPACES}
+  namespaces: ${medium-storage_NAMESPACES}
   hard:
     requests.storage: 256Gi
     
@@ -41,7 +41,7 @@ elCicdTemplates-resourcequotas:
   appName: large-cpu-mem
   anyProfiles:
   - large-cpu-mem
-  namespaces: ${${APP_NAME}_NAMESPACES}
+  namespaces: ${large-cpu-mem_NAMESPACES}
   hard:
     limits.cpu: "16"
     limits.memory: 95Gi
@@ -52,7 +52,7 @@ elCicdTemplates-resourcequotas:
   appName: large-storage
   anyProfiles:
   - large-storage
-  namespaces: ${${APP_NAME}_NAMESPACES}
+  namespaces: ${large-storage_NAMESPACES}
   hard:
     requests.storage: 1024Gi
   
