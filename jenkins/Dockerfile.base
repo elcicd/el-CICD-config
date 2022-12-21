@@ -1,4 +1,4 @@
-FROM fedora:36
+FROM fedora:latest
 
 ARG OKD_VERSION=4
 ARG VERSION=4.12
