@@ -28,7 +28,16 @@ elCicdTemplates-resourcequotas:
     limits.memory: 48Gi
   scopes:
   - NotTerminating
-
+    
+- templateName: limitRange
+  appName: medium-cpu-range
+  anyProfiles:
+  - medium-cpu-mem
+  namespaces: ${medium-cpu-mem_NAMESPACES}
+  default:
+    cpu: "8"
+  type: Container
+  
 - templateName: resourceQuota
   appName: medium-storage
   anyProfiles:
