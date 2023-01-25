@@ -37,7 +37,7 @@ elCicdTemplates-resourcequotas:
   limits:
   - default:
       cpu: 8000m
-  - defaultRequest:
+    defaultRequest:
       cpu: 200m
     type: Container
   
