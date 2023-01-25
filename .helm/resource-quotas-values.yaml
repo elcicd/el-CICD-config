@@ -5,7 +5,7 @@ elCicdTemplates-resourcequotas:
   - small-cpu-mem
   namespaces: ${small-cpu-mem_NAMESPACES}
   hard:
-    limits.cpu: 40000m
+    limits.cpu: "4"
     limits.memory: 10Gi
   scopes:
   - NotTerminating
@@ -24,23 +24,11 @@ elCicdTemplates-resourcequotas:
   - medium-cpu-mem
   namespaces: ${medium-cpu-mem_NAMESPACES}
   hard:
-    limits.cpu: 8000m
+    limits.cpu: "8"
     limits.memory: 48Gi
   scopes:
   - NotTerminating
-    
-- templateName: limitRange
-  appName: medium-cpu-range
-  anyProfiles:
-  - medium-cpu-mem
-  namespaces: ${medium-cpu-mem_NAMESPACES}
-  limits:
-  - default:
-      cpu: 8000m
-    defaultRequest:
-      cpu: 200m
-    type: Container
-  
+
 - templateName: resourceQuota
   appName: medium-storage
   anyProfiles:
@@ -55,7 +43,7 @@ elCicdTemplates-resourcequotas:
   - large-cpu-mem
   namespaces: ${large-cpu-mem_NAMESPACES}
   hard:
-    limits.cpu: 16000m
+    limits.cpu: "16"
     limits.memory: 95Gi
   scopes:
   - NotTerminating
