@@ -64,7 +64,8 @@ resourceQuotas:
   - medium-mem
   - small-storage
   qa:
-  - medium-cpu-mem
+  - medium-cpu
+  - medium-mem
   - medium-storage
   stg:
   - large-cpu-mem
