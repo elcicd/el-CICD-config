@@ -34,7 +34,8 @@ elCicdTemplates-resourceQuotas:
   - medium-cpu
   namespaces: ${medium-cpu_NAMESPACES}
   limits:
-    cpu: "8"
+  - default:
+      cpu: "8"
 
 - templateName: resourceQuota
   appName: medium-storage
