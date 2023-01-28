@@ -36,6 +36,7 @@ elCicdTemplates-resourceQuotas:
   limits:
   - default:
       cpu: "8"
+      type: Container
 
 - templateName: resourceQuota
   appName: medium-storage
