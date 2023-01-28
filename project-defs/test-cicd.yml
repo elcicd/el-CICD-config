@@ -60,7 +60,8 @@ resourceQuotas:
   - small-cpu-mem
   - small-storage
   dev:
-  - medium-cpu-mem
+  - medium-cpu
+  - medium-mem
   - small-storage
   qa:
   - medium-cpu-mem
