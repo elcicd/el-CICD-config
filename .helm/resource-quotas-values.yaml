@@ -19,7 +19,7 @@ elCicdTemplates-resourceQuotas:
       cpu: 2000m
     max:
       cpu: 3500m
-    defaultRequests:
+    defaultRequest:
       cpu: 100m
     type: Container
 
@@ -51,7 +51,7 @@ elCicdTemplates-resourceQuotas:
       cpu: 4000m
     max:
       cpu: 6000m
-    defaultRequests:
+    defaultRequest:
       cpu: 100m
     type: Container
 
@@ -83,7 +83,7 @@ elCicdTemplates-resourceQuotas:
       cpu: 6000m
     max:
       cpu: 7500m
-    defaultRequests:
+    defaultRequest:
       cpu: 100m
     type: Container
 
