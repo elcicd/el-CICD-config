@@ -69,7 +69,7 @@ elCicdTemplates-resourceQuotas:
   - large-mem
   namespaces: ${large-mem_NAMESPACES}
   hard:
-    limits.memory: 95Gi
+    limits.memory: 96Gi
   scopes:
   - NotTerminating
 
