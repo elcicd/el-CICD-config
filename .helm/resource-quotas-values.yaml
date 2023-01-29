@@ -1,14 +1,27 @@
 elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
-  appName: small-cpu-mem
+  appName: small-mem
   anyProfiles:
-  - small-cpu-mem
-  namespaces: ${small-cpu-mem_NAMESPACES}
+  - small-mem
+  namespaces: ${small-mem_NAMESPACES}
   hard:
-    limits.cpu: "4"
     limits.memory: 10Gi
   scopes:
-  - NotTerminating
+  - NotTerminating++
+
+- templateName: limitRange
+  appName: small-cpu
+  anyProfiles:
+  - small-cpu
+  namespaces: ${small-cpu_NAMESPACES}
+  limits:
+  - default:
+      cpu: 2000m
+    max:
+      cpu: 3500m
+    defaultRequests:
+      cpu: 100m
+  type: Container
 
 - templateName: resourceQuota
   appName: small-storage
@@ -16,8 +29,8 @@ elCicdTemplates-resourceQuotas:
   - small-storage
   namespaces: ${small-storage_NAMESPACES}
   hard:
-    requests.storage: 25Gi
-    
+    limits.storage: 25Gi
+
 - templateName: resourceQuota
   appName: medium-mem
   anyProfiles:
@@ -27,7 +40,7 @@ elCicdTemplates-resourceQuotas:
     limits.memory: 48Gi
   scopes:
   - NotTerminating
-  
+
 - templateName: limitRange
   appName: medium-cpu
   anyProfiles:
@@ -35,8 +48,12 @@ elCicdTemplates-resourceQuotas:
   namespaces: ${medium-cpu_NAMESPACES}
   limits:
   - default:
-      cpu: "8"
-    type: Container
+      cpu: 4000m
+    max:
+      cpu: 6000m
+    defaultRequests:
+      cpu: 100m
+  type: Container
 
 - templateName: resourceQuota
   appName: medium-storage
@@ -44,18 +61,31 @@ elCicdTemplates-resourceQuotas:
   - medium-storage
   namespaces: ${medium-storage_NAMESPACES}
   hard:
-    requests.storage: 256Gi
+    limits.storage: 256Gi
     
 - templateName: resourceQuota
-  appName: large-cpu-mem
+  appName: large-mem
   anyProfiles:
-  - large-cpu-mem
-  namespaces: ${large-cpu-mem_NAMESPACES}
+  - large-mem
+  namespaces: ${large-mem_NAMESPACES}
   hard:
-    limits.cpu: "16"
     limits.memory: 95Gi
   scopes:
   - NotTerminating
+
+- templateName: limitRange
+  appName: large-cpu
+  anyProfiles:
+  - large-cpu
+  namespaces: ${large-cpu_NAMESPACES}
+  limits:
+  - default:
+      cpu: 6000m
+    max:
+      cpu: 7500m
+    defaultRequests:
+      cpu: 100m
+  type: Container
 
 - templateName: resourceQuota
   appName: large-storage
@@ -63,7 +93,7 @@ elCicdTemplates-resourceQuotas:
   - large-storage
   namespaces: ${large-storage_NAMESPACES}
   hard:
-    requests.storage: 1024Gi
+    limits.storage: 1024Gi
   
   
   

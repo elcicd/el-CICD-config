@@ -57,7 +57,8 @@ sandboxEnvs: 2
 allowsHotfixes: true
 resourceQuotas:
   default:
-  - small-cpu-mem
+  - small-cpu
+  - small-mem
   - small-storage
   dev:
   - medium-cpu
@@ -68,10 +69,12 @@ resourceQuotas:
   - medium-mem
   - medium-storage
   stg:
-  - large-cpu-mem
+  - large-cpu
+  - large-mem
   - medium-storage
   prod:
-  - large-cpu-mem
+  - large-cpu
+  - large-mem
   - large-storage
 nfsShares:
 - envs:
