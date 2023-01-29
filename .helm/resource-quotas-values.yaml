@@ -29,7 +29,7 @@ elCicdTemplates-resourceQuotas:
   - small-storage
   namespaces: ${small-storage_NAMESPACES}
   hard:
-    limits.storage: 25Gi
+    requests.storage: 25Gi
 
 - templateName: resourceQuota
   appName: medium-mem
@@ -61,7 +61,7 @@ elCicdTemplates-resourceQuotas:
   - medium-storage
   namespaces: ${medium-storage_NAMESPACES}
   hard:
-    limits.storage: 256Gi
+    requests.storage: 256Gi
     
 - templateName: resourceQuota
   appName: large-mem
@@ -93,7 +93,7 @@ elCicdTemplates-resourceQuotas:
   - large-storage
   namespaces: ${large-storage_NAMESPACES}
   hard:
-    limits.storage: 1024Gi
+    requests.storage: 1024Gi
   
   
   
