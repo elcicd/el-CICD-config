@@ -16,7 +16,6 @@
   # port: "8080"
   # protocol: "TCP"
 
-  # limitsCpu: "200m"
   # limitsMemory: "500Mi"
 
   # requestsCpu: "100m"
