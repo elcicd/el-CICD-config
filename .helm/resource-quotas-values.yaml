@@ -7,7 +7,7 @@ elCicdTemplates-resourceQuotas:
   hard:
     limits.memory: 10Gi
   scopes:
-  - NotTerminating++
+  - NotTerminating
 
 - templateName: limitRange
   appName: small-cpu
