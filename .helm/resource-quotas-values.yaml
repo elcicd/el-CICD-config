@@ -21,7 +21,7 @@ elCicdTemplates-resourceQuotas:
       cpu: 3500m
     defaultRequests:
       cpu: 100m
-  type: Container
+    type: Container
 
 - templateName: resourceQuota
   appName: small-storage
@@ -53,7 +53,7 @@ elCicdTemplates-resourceQuotas:
       cpu: 6000m
     defaultRequests:
       cpu: 100m
-  type: Container
+    type: Container
 
 - templateName: resourceQuota
   appName: medium-storage
@@ -85,7 +85,7 @@ elCicdTemplates-resourceQuotas:
       cpu: 7500m
     defaultRequests:
       cpu: 100m
-  type: Container
+    type: Container
 
 - templateName: resourceQuota
   appName: large-storage
