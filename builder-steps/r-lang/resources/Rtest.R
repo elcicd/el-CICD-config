@@ -1,7 +1,7 @@
 renv::consent(provided = T)
 renv::init()
 options(repos="https://CRAN.R-project.org")
-renv::install(packages="xml2,covr,DT,testthat", type = "binary")
+renv::install(packages=c("xml2, covr, DT, testthat"), type = "binary")
 library(covr)
 library(DT)
 library(testthat)
