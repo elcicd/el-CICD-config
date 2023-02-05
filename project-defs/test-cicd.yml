@@ -58,24 +58,29 @@ sandboxEnvs: 2
 allowsHotfixes: true
 resourceQuotas:
   default:
-  - small-cpu
-  - small-mem
+  - small-cpu-limit
+  - small-mem-quota
+  - small-mem-limit
   - small-storage
   dev:
-  - medium-cpu
-  - medium-mem
-  - small-storage
+  - medium-cpu-limit
+  - medium-mem-quota
+  - medium-mem-limit
+  - small-storage-quota
   qa:
-  - medium-cpu
-  - medium-mem
-  - medium-storage
+  - medium-cpu-limit
+  - medium-mem-quota
+  - medium-mem-limit
+  - medium-storage-quota
   stg:
-  - large-cpu
-  - large-mem
-  - medium-storage
+  - large-cpu-limit
+  - large-mem-quota
+  - large-mem-limit
+  - medium-storage-quota
   prod:
-  - large-cpu
-  - large-mem
+  - large-cpu-limit
+  - large-mem-quota
+  - large-mem-limit
   - large-storage
 nfsShares:
 - envs:

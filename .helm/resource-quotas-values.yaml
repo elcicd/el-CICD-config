@@ -1,19 +1,33 @@
 elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
-  appName: small-mem
+  appName: small-mem-quota
   anyProfiles:
-  - small-mem
-  namespaces: ${small-mem_NAMESPACES}
+  - small-mem-quota
+  namespaces: ${small-mem-quota_NAMESPACES}
   hard:
-    limits.memory: 10Gi
+    limits.memory: 12Gi
   scopes:
   - NotTerminating
 
 - templateName: limitRange
-  appName: small-cpu
+  appName: small-mem-limit
   anyProfiles:
-  - small-cpu
-  namespaces: ${small-cpu_NAMESPACES}
+  - small-mem-limit
+  namespaces: ${small-mem-limit_NAMESPACES}
+  limits:
+  - default:
+      memory: 500Mi
+    max:
+      memory: 1Gi
+    defaultRequest:
+      memory: 50Mi
+    type: Container
+
+- templateName: limitRange
+  appName: small-cpu-limit
+  anyProfiles:
+  - small-cpu-limit
+  namespaces: ${small-cpu-limit_NAMESPACES}
   limits:
   - default:
       cpu: 2000m
@@ -24,28 +38,28 @@ elCicdTemplates-resourceQuotas:
     type: Container
 
 - templateName: resourceQuota
-  appName: small-storage
+  appName: small-storage-quota
   anyProfiles:
-  - small-storage
-  namespaces: ${small-storage_NAMESPACES}
+  - small-storage-quota
+  namespaces: ${small-storage-quota_NAMESPACES}
   hard:
-    requests.storage: 25Gi
+    requests.storage: 24Gi
 
 - templateName: resourceQuota
-  appName: medium-mem
+  appName: medium-mem-quota
   anyProfiles:
-  - medium-mem
-  namespaces: ${medium-mem_NAMESPACES}
+  - medium-mem-quota
+  namespaces: ${medium-mem-quota_NAMESPACES}
   hard:
     limits.memory: 48Gi
   scopes:
   - NotTerminating
 
 - templateName: limitRange
-  appName: medium-cpu
+  appName: medium-cpu-limit
   anyProfiles:
-  - medium-cpu
-  namespaces: ${medium-cpu_NAMESPACES}
+  - medium-cpu-limit
+  namespaces: ${medium-cpu-limit_NAMESPACES}
   limits:
   - default:
       cpu: 4000m
@@ -55,29 +69,43 @@ elCicdTemplates-resourceQuotas:
       cpu: 100m
     type: Container
 
-- templateName: resourceQuota
-  appName: medium-storage
+- templateName: limitRange
+  appName: medium-mem-limit
   anyProfiles:
-  - medium-storage
-  namespaces: ${medium-storage_NAMESPACES}
+  - medium-mem-limit
+  namespaces: ${medium-mem-limit_NAMESPACES}
+  limits:
+  - default:
+      memory: 1Gi
+    max:
+      memory: 2Gi
+    defaultRequest:
+      memory: 50Mi
+    type: Container
+
+- templateName: resourceQuota
+  appName: medium-storage-quota
+  anyProfiles:
+  - medium-storage-quota
+  namespaces: ${medium-storage-quota_NAMESPACES}
   hard:
     requests.storage: 256Gi
-    
+
 - templateName: resourceQuota
-  appName: large-mem
+  appName: large-mem-quota
   anyProfiles:
-  - large-mem
-  namespaces: ${large-mem_NAMESPACES}
+  - large-mem-quota
+  namespaces: ${large-mem-quota_NAMESPACES}
   hard:
     limits.memory: 96Gi
   scopes:
   - NotTerminating
 
 - templateName: limitRange
-  appName: large-cpu
+  appName: large-cpu-limit
   anyProfiles:
-  - large-cpu
-  namespaces: ${large-cpu_NAMESPACES}
+  - large-cpu-limit
+  namespaces: ${large-cpu-limit_NAMESPACES}
   limits:
   - default:
       cpu: 6000m
@@ -87,11 +115,25 @@ elCicdTemplates-resourceQuotas:
       cpu: 100m
     type: Container
 
-- templateName: resourceQuota
-  appName: large-storage
+- templateName: limitRange
+  appName: large-mem-limit
   anyProfiles:
-  - large-storage
-  namespaces: ${large-storage_NAMESPACES}
+  - large-mem-limit
+  namespaces: ${large-mem-limit_NAMESPACES}
+  limits:
+  - default:
+      memory: 2Gi
+    max:
+      memory: 4Gi
+    defaultRequest:
+      memory: 50Mi
+    type: Container
+
+- templateName: resourceQuota
+  appName: large-storage-quota
+  anyProfiles:
+  - large-storage-quota
+  namespaces: ${large-storage-quota_NAMESPACES}
   hard:
     requests.storage: 1024Gi
   
