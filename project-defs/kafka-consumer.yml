@@ -1,4 +1,6 @@
-rbacGroup: devops
+rbacGroups:
+  default: devs
+  prod: cluster-admins
 scmHost: github.com
 scmRestApiHost: api.github.com
 scmOrganization: kafka-test
@@ -10,4 +12,8 @@ components:
   tester: pytest
   status: ACTIVE
 resourceQuotas:
-  default: large.yml
+  default:
+  - large-cpu-limit
+  - large-mem-quota
+  - large-mem-limit
+  - large-storage
