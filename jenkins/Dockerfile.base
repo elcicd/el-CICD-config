@@ -60,6 +60,6 @@ USER ${USER_UID}
 
 ENTRYPOINT exec java -cp /usr/share/jenkins/agent.jar \
                hudson.remoting.jnlp.Main -headless -tunnel ${JENKINS_TUNNEL} \
-               -url ${JENKINS_URL} -workDir ${JENKINS_AGENT_WORKDIR} \
+               -url ${JENKINS_MASTER_URL} -workDir ${JENKINS_AGENT_WORKDIR} \
                ${JENKINS_SECRET} ${JENKINS_AGENT_NAME}
 
