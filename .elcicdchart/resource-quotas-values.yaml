@@ -16,25 +16,12 @@ elCicdTemplates-resourceQuotas:
   namespaces: ${small-mem-limit_NAMESPACES}
   limits:
   - default:
-      memory: 500Mi
+      memory: 256Mi
     max:
       memory: 1Gi
     defaultRequest:
       memory: 50Mi
-    type: Container
-
-- templateName: limitRange
-  appName: small-cpu-limit
-  anyProfiles:
-  - small-cpu-limit
-  namespaces: ${small-cpu-limit_NAMESPACES}
-  limits:
-  - default:
-      cpu: 2000m
-    max:
-      cpu: 3500m
-    defaultRequest:
-      cpu: 100m
+      cpu: 150m
     type: Container
 
 - templateName: resourceQuota
@@ -56,31 +43,18 @@ elCicdTemplates-resourceQuotas:
   - NotTerminating
 
 - templateName: limitRange
-  appName: medium-cpu-limit
-  anyProfiles:
-  - medium-cpu-limit
-  namespaces: ${medium-cpu-limit_NAMESPACES}
-  limits:
-  - default:
-      cpu: 4000m
-    max:
-      cpu: 6000m
-    defaultRequest:
-      cpu: 100m
-    type: Container
-
-- templateName: limitRange
   appName: medium-mem-limit
   anyProfiles:
   - medium-mem-limit
   namespaces: ${medium-mem-limit_NAMESPACES}
   limits:
   - default:
-      memory: 1Gi
+      memory: 512Mi
     max:
       memory: 2Gi
     defaultRequest:
       memory: 50Mi
+      cpu: 150m
     type: Container
 
 - templateName: resourceQuota
@@ -102,31 +76,18 @@ elCicdTemplates-resourceQuotas:
   - NotTerminating
 
 - templateName: limitRange
-  appName: large-cpu-limit
-  anyProfiles:
-  - large-cpu-limit
-  namespaces: ${large-cpu-limit_NAMESPACES}
-  limits:
-  - default:
-      cpu: 6000m
-    max:
-      cpu: 7500m
-    defaultRequest:
-      cpu: 100m
-    type: Container
-
-- templateName: limitRange
   appName: large-mem-limit
   anyProfiles:
   - large-mem-limit
   namespaces: ${large-mem-limit_NAMESPACES}
   limits:
   - default:
-      memory: 2Gi
+      memory: 1Gi
     max:
       memory: 4Gi
     defaultRequest:
       memory: 50Mi
+      cpu: 150m
     type: Container
 
 - templateName: resourceQuota
