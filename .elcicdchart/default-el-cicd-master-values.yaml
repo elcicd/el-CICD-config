@@ -1,0 +1,39 @@
+############################################################################
+##
+## Override the default values for the elCicdK8s non-prod onboarding process
+## To use:
+##   1) Uncomment any default values you wish to override, and set the default values.
+##   2) Save the file, commit, and push.  The file will be automatically picked up
+##      when processing elCicdK8s dependent charts
+##
+#############################################################################
+
+# elCicdDefaults:
+  # deploymentRevisionHistoryLimit: 0
+
+  # imagePullPolicy: "Always"
+
+  # port: "8080"
+  # protocol: "TCP"
+
+  # limitsMemory: "500Mi"
+
+  # requestsCpu: "100m"
+  # requestsMemory: "50Mi"
+
+  # ingressRulePath: "/"
+  # ingressRulePathType: "Prefix"
+
+  # pvReclaimPolicy: "Reclaim"
+  # pvAccessMode: "ReadWriteOnce"
+
+  # prometheusPort: "9090"
+  # prometheusPath: "/metrics"
+  # prometheusScheme: "https"
+  # prometheusScrape: "false"
+  # prometheusProtocol: "TCP"
+
+  # 3ScaleScheme: "https"
+
+  # nodeSelector:
+  #   cicd: "true"
