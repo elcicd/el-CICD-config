@@ -1,7 +1,7 @@
 elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
   appName: small-mem-quota
-  anyProfiles:
+  mustHaveAnyProfile:
   - small-mem-quota
   namespaces: ${small-mem-quota_NAMESPACES}
   hard:
@@ -11,7 +11,7 @@ elCicdTemplates-resourceQuotas:
 
 - templateName: limitRange
   appName: small-mem-limit
-  anyProfiles:
+  mustHaveAnyProfile:
   - small-mem-limit
   namespaces: ${small-mem-limit_NAMESPACES}
   limits:
@@ -26,7 +26,7 @@ elCicdTemplates-resourceQuotas:
 
 - templateName: resourceQuota
   appName: small-storage-quota
-  anyProfiles:
+  mustHaveAnyProfile:
   - small-storage-quota
   namespaces: ${small-storage-quota_NAMESPACES}
   hard:
@@ -34,7 +34,7 @@ elCicdTemplates-resourceQuotas:
 
 - templateName: resourceQuota
   appName: medium-mem-quota
-  anyProfiles:
+  mustHaveAnyProfile:
   - medium-mem-quota
   namespaces: ${medium-mem-quota_NAMESPACES}
   hard:
@@ -44,7 +44,7 @@ elCicdTemplates-resourceQuotas:
 
 - templateName: limitRange
   appName: medium-mem-limit
-  anyProfiles:
+  mustHaveAnyProfile:
   - medium-mem-limit
   namespaces: ${medium-mem-limit_NAMESPACES}
   limits:
@@ -59,7 +59,7 @@ elCicdTemplates-resourceQuotas:
 
 - templateName: resourceQuota
   appName: medium-storage-quota
-  anyProfiles:
+  mustHaveAnyProfile:
   - medium-storage-quota
   namespaces: ${medium-storage-quota_NAMESPACES}
   hard:
@@ -67,7 +67,7 @@ elCicdTemplates-resourceQuotas:
 
 - templateName: resourceQuota
   appName: large-mem-quota
-  anyProfiles:
+  mustHaveAnyProfile:
   - large-mem-quota
   namespaces: ${large-mem-quota_NAMESPACES}
   hard:
@@ -77,7 +77,7 @@ elCicdTemplates-resourceQuotas:
 
 - templateName: limitRange
   appName: large-mem-limit
-  anyProfiles:
+  mustHaveAnyProfile:
   - large-mem-limit
   namespaces: ${large-mem-limit_NAMESPACES}
   limits:
@@ -92,7 +92,7 @@ elCicdTemplates-resourceQuotas:
 
 - templateName: resourceQuota
   appName: large-storage-quota
-  anyProfiles:
+  mustHaveAnyProfile:
   - large-storage-quota
   namespaces: ${large-storage-quota_NAMESPACES}
   hard:
