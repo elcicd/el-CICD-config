@@ -3,7 +3,7 @@
  */
 
 def call(Map args) {
-    loggingUtils.echoBanner("RUNNING IN THE EXAMPLE BUILD ARTIFACTS AND COMPONENTS POST USER INPUT HOOK SCRIPT")
+    loggingUtils.echoBanner("RUNNING IN THE EXAMPLE BUILD ARTIFACTS AND COMPONENTS POST fUSER INPUT HOOK SCRIPT", "${args.projectInfo.id})
 }
 
 return this
