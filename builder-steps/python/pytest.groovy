@@ -18,7 +18,7 @@ def test(def projectInfo, def component) {
             source ./venv/bin/activate
             # if using artifact repository for caching:
             # PIP_HOST=http://svc_acct_username:svc_acct_token@https://artifact.repository.com/artifact repository/python/artifacts
-            python -m pip install pytest coverage -r ./requirements.txt
+            python -m pip install wheel pytest coverage -r ./requirements.txt
             python -m coverage run --omit './venv/*' -m pytest ./tests
             python -m coverage xml -o ./coverage.xml
             deactivate
