@@ -1,6 +1,6 @@
 elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
-  appName: small-mem-quota
+  objName: small-mem-quota
   mustHaveAnyProfile:
   - small-mem-quota
   namespaces: ${small-mem-quota_NAMESPACES}
@@ -10,7 +10,7 @@ elCicdTemplates-resourceQuotas:
   - NotTerminating
 
 - templateName: limitRange
-  appName: small-mem-limit
+  objName: small-mem-limit
   mustHaveAnyProfile:
   - small-mem-limit
   namespaces: ${small-mem-limit_NAMESPACES}
@@ -25,7 +25,7 @@ elCicdTemplates-resourceQuotas:
     type: Container
 
 - templateName: resourceQuota
-  appName: small-storage-quota
+  objName: small-storage-quota
   mustHaveAnyProfile:
   - small-storage-quota
   namespaces: ${small-storage-quota_NAMESPACES}
@@ -33,7 +33,7 @@ elCicdTemplates-resourceQuotas:
     requests.storage: 24Gi
 
 - templateName: resourceQuota
-  appName: medium-mem-quota
+  objName: medium-mem-quota
   mustHaveAnyProfile:
   - medium-mem-quota
   namespaces: ${medium-mem-quota_NAMESPACES}
@@ -43,7 +43,7 @@ elCicdTemplates-resourceQuotas:
   - NotTerminating
 
 - templateName: limitRange
-  appName: medium-mem-limit
+  objName: medium-mem-limit
   mustHaveAnyProfile:
   - medium-mem-limit
   namespaces: ${medium-mem-limit_NAMESPACES}
@@ -58,7 +58,7 @@ elCicdTemplates-resourceQuotas:
     type: Container
 
 - templateName: resourceQuota
-  appName: medium-storage-quota
+  objName: medium-storage-quota
   mustHaveAnyProfile:
   - medium-storage-quota
   namespaces: ${medium-storage-quota_NAMESPACES}
@@ -66,7 +66,7 @@ elCicdTemplates-resourceQuotas:
     requests.storage: 256Gi
 
 - templateName: resourceQuota
-  appName: large-mem-quota
+  objName: large-mem-quota
   mustHaveAnyProfile:
   - large-mem-quota
   namespaces: ${large-mem-quota_NAMESPACES}
@@ -76,7 +76,7 @@ elCicdTemplates-resourceQuotas:
   - NotTerminating
 
 - templateName: limitRange
-  appName: large-mem-limit
+  objName: large-mem-limit
   mustHaveAnyProfile:
   - large-mem-limit
   namespaces: ${large-mem-limit_NAMESPACES}
@@ -91,7 +91,7 @@ elCicdTemplates-resourceQuotas:
     type: Container
 
 - templateName: resourceQuota
-  appName: large-storage-quota
+  objName: large-storage-quota
   mustHaveAnyProfile:
   - large-storage-quota
   namespaces: ${large-storage-quota_NAMESPACES}
