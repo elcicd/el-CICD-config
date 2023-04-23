@@ -8,7 +8,7 @@ scmRestApiHost: api.github.com
 scmOrganization: elcicd
 scmBranch: development
 scmTestBranch: development
-agentBuildDependencyCache: true
+agentBuildDependencyCache: false
 components:
 - scmRepoName: test-cicd-stationdemo
   codeBase: java-maven

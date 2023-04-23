@@ -10,7 +10,7 @@ RUN adduser -g 0 -u 1001 jenkins && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
     curl -fsSLo /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
-    rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key && \
+    rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key && \
     dnf -y --refresh --nodocs upgrade && \
     dnf -y --nodocs --best install ${INSTALL_PKGS} && \
     dnf -y --nodocs install jenkins && \
