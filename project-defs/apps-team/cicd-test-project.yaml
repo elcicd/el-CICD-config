@@ -48,7 +48,6 @@ testModules:
   codeBase: spock
   componentRepos:
   - test-cicd-stationdemo
-  - test-cicd-R
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
