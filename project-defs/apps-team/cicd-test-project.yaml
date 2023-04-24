@@ -29,9 +29,6 @@ components:
   codeBase: python
   tester: pytest
   status: ACTIVE
-- scmRepoName: test-cicd-R
-  codeBase: r-lang
-  status: ACTIVE
 artifacts:
 - scmRepoName: test-cicd-stationdemo-lib
   codeBase: java-maven

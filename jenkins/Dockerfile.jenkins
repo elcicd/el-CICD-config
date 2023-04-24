@@ -1,20 +1,19 @@
-FROM fedora:latest
+FROM fedora-minimal:latest
 
 ARG OKD_VERSION
 
 USER root
 
-ARG INSTALL_PKGS="git fontconfig java-11-openjdk-headless java-11-openjdk-devel"
-RUN adduser -g 0 -u 1001 jenkins && \
+ARG INSTALL_PKGS="git fontconfig java-11-openjdk-headless java-11-openjdk-devel shadow-utils tar"
+RUN microdnf -y --nodocs upgrade && \
+    microdnf -y --nodocs --best install ${INSTALL_PKGS} && \
+    curl -fsSLo /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
+    rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key && \
+    microdnf -y --nodocs install jenkins && \
+    microdnf clean all && \
     curl -fsSLo /tmp/oc.tar.gz  https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
-    curl -fsSLo /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
-    rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key && \
-    dnf -y --refresh --nodocs upgrade && \
-    dnf -y --nodocs --best install ${INSTALL_PKGS} && \
-    dnf -y --nodocs install jenkins && \
-    dnf clean all && \
     curl -fsSLo /usr/share/java/jenkins-plugin-manager.jar \
         https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.9/jenkins-plugin-manager-2.12.9.jar && \
     chmod 777 /usr/share/java/jenkins-plugin-manager.jar && \
