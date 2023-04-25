@@ -9,6 +9,7 @@ branch-api: 2.1071.v1a_188a_562481
 build-user-vars-plugin: 1.9
 caffeine-api: 2.9.3-65.v6a_47d0f4d1fe
 checks-api: 2.0.0
+cloudbees-disk-usage-simple: 178.v1a_4d2f6359a_8
 cloudbees-folder: 6.815.v0dd5a_cb_40e0e
 command-launcher: 90.v669d7ccb_7c31
 commons-lang3-api: 3.12.0-36.vd97de6465d5b_
@@ -46,7 +47,7 @@ jjwt-api: 0.11.5-77.v646c772fddb_0
 job-dsl: 1.83
 jquery3-api: 3.6.4-1
 jsch: 0.1.55.61.va_e9ee26616e7
-junit: 1196.vb_4cf28b_c7724
+junit: 1198.ve38db_d1b_c975
 kubernetes-client-api: 6.4.1-215.v2ed17097a_8e9
 kubernetes-credentials-provider: 1.211.vc236a_f5a_2f3c
 kubernetes-credentials: 0.10.0
@@ -59,7 +60,7 @@ metrics: 4.2.13-420.vea_2f17932dd6
 mina-sshd-api-common: 2.9.2-62.v199162f0a_2f8
 mina-sshd-api-core: 2.9.2-62.v199162f0a_2f8
 momentjs: 1.1.1
-oauth-credentials: 0.5
+oauth-credentials: 0.645.ve666a_c332668
 okhttp-api: 4.10.0-132.v7a_7b_91cef39c
 openshift-login: 1.0.29
 pam-auth: 1.10
