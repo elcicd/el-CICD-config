@@ -1,0 +1,20 @@
+ARG JENKINS_IMAGE_REGISTRY
+FROM ${JENKINS_IMAGE_REGISTRY}/el-cicd-jenkins-agent-base
+
+USER root
+
+ARG INSTALL_PKGS="libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-libGLU-devel libpng-devel \
+    libxml2 libxml2-devel R ShellCheck xz openssl-devel"
+
+COPY requirements.R /tmp/requirements.R
+
+RUN dnf install -y --nodocs ${INSTALL_PKGS} && \
+    dnf install -y --nodocs 'dnf-command(copr)' && \
+    dnf copr -y enable iucar/cran && \
+    dnf install -y --nodocs R-CoprManager && \
+    dnf clean all && \
+    Rscript /tmp/requirements.R && \
+    chmod -R 775 /usr/lib64/R && \
+    rm -rf /var/logs/* /tmp/*
+
+USER 1001

@@ -4,8 +4,8 @@ FROM ${JENKINS_IMAGE_REGISTRY}/el-cicd-jenkins-agent-base
 USER root
 
 ARG INSTALL_PKGS="java-11-openjdk-devel maven"
-RUN microdnf install -y --nodocs ${INSTALL_PKGS} && \
-    microdnf clean all && \
+RUN dnf install -y --nodocs ${INSTALL_PKGS} && \
+    dnf clean all && \
     rm -f /var/logs/*
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk

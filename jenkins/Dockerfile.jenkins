@@ -5,12 +5,12 @@ ARG OKD_VERSION
 USER root
 
 ARG INSTALL_PKGS="git fontconfig java-11-openjdk-headless java-11-openjdk-devel shadow-utils tar"
-RUN microdnf -y --nodocs upgrade && \
-    microdnf -y --nodocs --best install ${INSTALL_PKGS} && \
+RUN dnf -y --nodocs upgrade && \
+    dnf -y --nodocs --best install ${INSTALL_PKGS} && \
     curl -fsSLo /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
     rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key && \
-    microdnf -y --nodocs install jenkins && \
-    microdnf clean all && \
+    dnf -y --nodocs install jenkins && \
+    dnf clean all && \
     curl -fsSLo /tmp/oc.tar.gz  https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
