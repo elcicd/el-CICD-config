@@ -10,6 +10,9 @@ scmBranch: development
 scmTestBranch: development
 agentBuildDependencyCache: false
 components:
+- scmRepoName: test-cicd-R
+  codeBase: r-lang
+  status: ACTIVE
 - scmRepoName: test-cicd-stationdemo
   codeBase: java-maven
   status: ACTIVE
