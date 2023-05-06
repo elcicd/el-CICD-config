@@ -1,4 +1,4 @@
-FROM fedora-minimal:latest
+FROM fedora:37
 
 ARG OKD_VERSION
 
@@ -28,6 +28,8 @@ RUN dnf -y --nodocs upgrade && \
     chmod 400 /etc/ssh/ssh_config && \
     mkdir -p /var/lib/jenkins/jobs && \
     chmod 777 -R /var/lib/jenkins && \
+    mkdir -p /usr/local/etc && \
+    chmod 777 -R /usr/local && \
     rm -rf /var/log/*
         
 ENV HOME=/var/lib/jenkins \

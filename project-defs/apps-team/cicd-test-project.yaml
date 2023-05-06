@@ -8,7 +8,6 @@ scmRestApiHost: api.github.com
 scmOrganization: elcicd
 scmBranch: development
 scmTestBranch: development
-agentBuildDependencyCache: false
 components:
 - scmRepoName: test-cicd-R
   codeBase: r-lang
