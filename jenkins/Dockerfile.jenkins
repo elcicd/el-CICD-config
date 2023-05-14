@@ -1,6 +1,7 @@
 FROM fedora:latest
 
 ARG OKD_VERSION
+ARG JENKINS_CONFIG_FILE_PATH
 
 USER root
 
@@ -15,7 +16,7 @@ RUN dnf -y --nodocs upgrade && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
     curl -fsSLo /usr/share/java/jenkins-plugin-manager.jar \
-        https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.9/jenkins-plugin-manager-2.12.9.jar && \
+        https://github.com/jenkinsci/plugin-installation-manager-tool/releases/latest/download/jenkins-plugin-manager-2.12.11.jar && \
     chmod 777 /usr/share/java/jenkins-plugin-manager.jar && \
     chmod -R 775 /etc/alternatives && \
     chmod -R 775 /var/lib/alternatives && \
@@ -28,8 +29,8 @@ RUN dnf -y --nodocs upgrade && \
     chmod 400 /etc/ssh/ssh_config && \
     mkdir -p /var/lib/jenkins/jobs && \
     chmod 777 -R /var/lib/jenkins && \
-    mkdir -p /usr/local/etc && \
-    chmod 777 -R /usr/local && \
+    mkdir -p ${JENKINS_CONFIG_FILE_PATH} && \
+    chmod 777 -R ${JENKINS_CONFIG_FILE_PATH}  && \
     rm -rf /var/log/*
         
 ENV HOME=/var/lib/jenkins \
