@@ -47,6 +47,3 @@ tool:
     installations:
       - name: Default
         home: /usr/bin/git
-jobs:
-- script: >
-    //

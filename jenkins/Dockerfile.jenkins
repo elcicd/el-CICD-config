@@ -6,10 +6,13 @@ ARG JENKINS_CONFIG_FILE_PATH
 USER root
 
 ARG INSTALL_PKGS="git fontconfig java-11-openjdk-headless java-11-openjdk-devel shadow-utils tar"
-RUN dnf -y --nodocs upgrade && \
-    dnf -y --nodocs --best install ${INSTALL_PKGS} && \
+RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
+    echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf && \
+    cat /etc/dnf/dnf.conf  && \
     curl -fsSLo /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
     rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key && \
+    dnf -y --nodocs upgrade && \
+    dnf -y --nodocs --best install ${INSTALL_PKGS} && \
     dnf -y --nodocs install jenkins && \
     dnf clean all && \
     curl -fsSLo /tmp/oc.tar.gz  https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz && \
@@ -35,7 +38,6 @@ RUN dnf -y --nodocs upgrade && \
         
 ENV HOME=/var/lib/jenkins \
     JENKINS_HOME=/var/lib/jenkins \
-    JENKINS_UC=https://updates.jenkins.io \
     LANG=en_US.UTF-8
 
 USER 1001
