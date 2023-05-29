@@ -83,7 +83,7 @@ persistenVolumes:
   capacity: 5Gi
   accessMode: ReadWriteMany
   volumeType: nfs
-  volumeInfo:
+  volumeDef:
     path: /mnt/nfs-test
     server: my-test-server.mydomain
 - claimName: test-nfs-dir
@@ -92,6 +92,6 @@ persistenVolumes:
   capacity: 15Gi
   accessMode: ReadWriteMany
   volumeType: nfs
-  volumeInfo:
+  volumeDef:
     path: /mnt/nfs-prod
     server: my-prod-server.mydomain
