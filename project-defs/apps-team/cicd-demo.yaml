@@ -76,21 +76,21 @@ resourceQuotas:
   - large-mem-limit
   - large-storage
 persistenVolumes:
-- envs:
+- claimName: test-nfs-dir
+  envs:
   - qa
   - stg
   capacity: 5Gi
   accessMode: ReadWriteMany
-  claimName: test-dir
   volumeType: nfs
   volumeInfo:
     path: /mnt/nfs-test
     server: my-test-server.mydomain
-- envs:
+- claimName: test-nfs-dir
+  envs:
   - prod
   capacity: 15Gi
   accessMode: ReadWriteMany
-  claimName: prod-dir
   volumeType: nfs
   volumeInfo:
     path: /mnt/nfs-prod
