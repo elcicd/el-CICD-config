@@ -19,6 +19,8 @@ components:
   codeBase: python
   tester: pytest
   status: ACTIVE
+  staticVolumes:
+  - test-nfs-dir
 - scmRepoName: test_CICD2
   codeBase: python
   tester: pytest
@@ -75,8 +77,8 @@ resourceQuotas:
   - large-mem-quota
   - large-mem-limit
   - large-storage
-persistenVolumes:
-- claimName: test-nfs-dir
+staticPvs:
+- name: test-nfs-dir
   envs:
   - qa
   - stg
@@ -86,7 +88,7 @@ persistenVolumes:
   volumeDef:
     path: /mnt/nfs-test
     server: my-test-server.mydomain
-- claimName: test-nfs-dir
+- name: test-nfs-dir
   envs:
   - prod
   capacity: 15Gi
