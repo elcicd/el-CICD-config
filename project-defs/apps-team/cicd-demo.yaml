@@ -20,7 +20,8 @@ components:
   tester: pytest
   status: ACTIVE
   staticPvs:
-  - test-nfs-dir
+  - eng-nfs-dir
+  - prod-nfs-dir
 - scmRepoName: test_CICD2
   codeBase: python
   tester: pytest
