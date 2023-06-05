@@ -78,7 +78,7 @@ resourceQuotas:
   - large-mem-limit
   - large-storage
 staticPvs:
-- name: test-nfs-dir
+- name: eng-nfs-dir
   envs:
   - qa
   - stg
@@ -88,7 +88,7 @@ staticPvs:
   volumeDef:
     path: /mnt/nfs-test
     server: my-test-server.mydomain
-- name: test-nfs-dir
+- name: prod-nfs-dir
   envs:
   - prod
   capacity: 15Gi
