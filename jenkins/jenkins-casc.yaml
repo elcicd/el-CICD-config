@@ -50,4 +50,4 @@ tool:
         
 unclassified:
   location:
-    url: https://\${JENKINS_SERVICE_HOST}
+    url: https://${JENKINS_URL}
