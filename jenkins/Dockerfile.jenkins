@@ -2,11 +2,16 @@ FROM fedora:latest
 
 ARG OKD_VERSION
 ARG JENKINS_CONFIG_FILE_PATH
+ARG OC_CLI_URL=https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/clients/oc/latest/linux/oc.tar.gz
+ARG JENKINS_PLUGIN_MGR_VERSION=2.12.13
+ARG JENKINS_PLUGIN_MGR_JAR_PATH=${JENKINS_PLUGIN_MGR_VERSION}/jenkins-plugin-manager-${JENKINS_PLUGIN_MGR_VERSION}.jar
+ARG JENKINS_PLUGIN_JAR_URL=https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/${JENKINS_PLUGIN_MGR_JAR_PATH}
 
 USER root
 
 ARG INSTALL_PKGS="git fontconfig java-11-openjdk-headless java-11-openjdk-devel shadow-utils tar"
-RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
+RUN set -x && \
+    echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
     echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf && \
     cat /etc/dnf/dnf.conf  && \
     curl -fsSLo /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
@@ -15,11 +20,10 @@ RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
     dnf -y --nodocs --best install ${INSTALL_PKGS} && \
     dnf -y --nodocs install jenkins && \
     dnf clean all && \
-    curl -fsSLo /tmp/oc.tar.gz  https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz && \
+    curl -fsSLo /tmp/oc.tar.gz ${OC_CLI_URL} && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
-    curl -fsSLo /usr/share/java/jenkins-plugin-manager.jar \
-        https://github.com/jenkinsci/plugin-installation-manager-tool/releases/latest/download/jenkins-plugin-manager-2.12.11.jar && \
+    curl -fsSLo /usr/share/java/jenkins-plugin-manager.jar ${JENKINS_PLUGIN_JAR_URL} && \
     chmod 777 /usr/share/java/jenkins-plugin-manager.jar && \
     chmod -R 775 /etc/alternatives && \
     chmod -R 775 /var/lib/alternatives && \
@@ -34,7 +38,8 @@ RUN echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
     chmod 777 -R /var/lib/jenkins && \
     mkdir -p ${JENKINS_CONFIG_FILE_PATH} && \
     chmod 777 -R ${JENKINS_CONFIG_FILE_PATH}  && \
-    rm -rf /var/log/*
+    rm -rf /var/log/* && \
+    set +x 
         
 ENV HOME=/var/lib/jenkins \
     JENKINS_HOME=/var/lib/jenkins \

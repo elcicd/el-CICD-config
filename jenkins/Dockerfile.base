@@ -1,7 +1,9 @@
 FROM fedora:latest
 
-ARG OKD_VERSION=4
-ARG VERSION=4.12
+ARG OKD_VERSION
+ARG OC_CLI_URL=https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/clients/oc/latest/linux/oc.tar.gz
+ARG VERSION=4.14
+ARG JENKINS_AGENT_URL=https://repo.jenkins-ci.org/artifactory/releases/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar
 ARG USER=jenkins
 ARG USER_UID=1001
 
@@ -24,8 +26,8 @@ RUN set -x && \
     dnf -y --nodocs upgrade && \
     dnf install -y --nodocs ${INSTALL_PKGS} && \
     dnf clean all  && \
-    curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar https://repo.${USER}-ci.org/public/org/${USER}-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar && \
-    curl -fsSLo /tmp/oc.tar.gz  https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz && \
+    curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar ${JENKINS_AGENT_URL} && \
+    curl -fsSLo /tmp/oc.tar.gz ${OC_CLI_URL} && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
     adduser -g 0 -u ${USER_UID} ${USER} && \
@@ -53,7 +55,8 @@ RUN set -x && \
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash && \
     curl -s "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3" | bash && \
     mv ./kustomize /usr/local/bin && \
-    rm -f /var/logs/*
+    rm -f /var/logs/* && \
+    set +x
 
 WORKDIR /home/${USER}
                
