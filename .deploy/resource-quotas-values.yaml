@@ -3,7 +3,7 @@ elCicdTemplates-resourceQuotas:
   objName: small-mem-quota
   mustHaveAnyProfile:
   - small-mem-quota
-  namespaces: ${small-mem-quota_NAMESPACES}
+  namespaces: $<small-mem-quota_NAMESPACES>
   hard:
     limits.memory: 12Gi
   scopes:
@@ -13,7 +13,7 @@ elCicdTemplates-resourceQuotas:
   objName: small-mem-limit
   mustHaveAnyProfile:
   - small-mem-limit
-  namespaces: ${small-mem-limit_NAMESPACES}
+  namespaces: $<small-mem-limit_NAMESPACES>
   limits:
   - default:
       memory: 256Mi
@@ -28,7 +28,7 @@ elCicdTemplates-resourceQuotas:
   objName: small-storage-quota
   mustHaveAnyProfile:
   - small-storage-quota
-  namespaces: ${small-storage-quota_NAMESPACES}
+  namespaces: $<small-storage-quota_NAMESPACES>
   hard:
     requests.storage: 24Gi
 
@@ -36,7 +36,7 @@ elCicdTemplates-resourceQuotas:
   objName: medium-mem-quota
   mustHaveAnyProfile:
   - medium-mem-quota
-  namespaces: ${medium-mem-quota_NAMESPACES}
+  namespaces: $<medium-mem-quota_NAMESPACES>
   hard:
     limits.memory: 48Gi
   scopes:
@@ -46,7 +46,7 @@ elCicdTemplates-resourceQuotas:
   objName: medium-mem-limit
   mustHaveAnyProfile:
   - medium-mem-limit
-  namespaces: ${medium-mem-limit_NAMESPACES}
+  namespaces: $<medium-mem-limit_NAMESPACES>
   limits:
   - default:
       memory: 512Mi
@@ -61,7 +61,7 @@ elCicdTemplates-resourceQuotas:
   objName: medium-storage-quota
   mustHaveAnyProfile:
   - medium-storage-quota
-  namespaces: ${medium-storage-quota_NAMESPACES}
+  namespaces: $<medium-storage-quota_NAMESPACES>
   hard:
     requests.storage: 256Gi
 
@@ -69,7 +69,7 @@ elCicdTemplates-resourceQuotas:
   objName: large-mem-quota
   mustHaveAnyProfile:
   - large-mem-quota
-  namespaces: ${large-mem-quota_NAMESPACES}
+  namespaces: $<large-mem-quota_NAMESPACES>
   hard:
     limits.memory: 96Gi
   scopes:
@@ -79,7 +79,7 @@ elCicdTemplates-resourceQuotas:
   objName: large-mem-limit
   mustHaveAnyProfile:
   - large-mem-limit
-  namespaces: ${large-mem-limit_NAMESPACES}
+  namespaces: $<large-mem-limit_NAMESPACES>
   limits:
   - default:
       memory: 1Gi
@@ -94,7 +94,7 @@ elCicdTemplates-resourceQuotas:
   objName: large-storage-quota
   mustHaveAnyProfile:
   - large-storage-quota
-  namespaces: ${large-storage-quota_NAMESPACES}
+  namespaces: $<large-storage-quota_NAMESPACES>
   hard:
     requests.storage: 1024Gi
   
