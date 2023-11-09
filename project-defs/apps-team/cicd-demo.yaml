@@ -50,6 +50,10 @@ testModules:
   codeBase: spock
   componentRepos:
   - test-cicd-stationdemo
+releaseProfiles:
+- pre-prod
+- east
+- west
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
