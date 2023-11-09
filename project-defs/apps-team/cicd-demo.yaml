@@ -51,7 +51,7 @@ testModules:
   componentRepos:
   - test-cicd-stationdemo
 releaseProfiles:
-- pre-prod
+- preprod
 - east
 - west
 enabledTestEnvs:
