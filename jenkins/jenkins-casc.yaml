@@ -4,7 +4,7 @@ jenkins:
       env:
         # WARNING: DO NOT CHANGE THIS VALUE
       - key: EL_CICD_META_INFO_NAME
-        value: el-cicd-meta-info
+        value: elcicd-meta-info
   clouds:
     - kubernetes:
         name: "openshift"

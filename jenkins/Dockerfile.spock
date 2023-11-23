@@ -1,2 +1,2 @@
-ARG JENKINS_IMAGE_REGISTRY
-FROM ${JENKINS_IMAGE_REGISTRY}/el-cicd-jenkins-agent-java-maven
+ARG JENKINS_OCI_REGISTRY
+FROM ${JENKINS_OCI_REGISTRY}/elcicd-jenkins-agent-java-maven
