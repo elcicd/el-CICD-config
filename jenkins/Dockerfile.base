@@ -19,7 +19,7 @@ ENV HOME=/home/${USER} \
 
 USER root
 
-ARG INSTALL_PKGS="openssl bc git java-11-openjdk-headless tar unzip which zip bzip2 jq podman skopeo buildah"
+ARG INSTALL_PKGS="openssl bc git java-17-openjdk-headless tar unzip which zip bzip2 jq podman skopeo buildah"
 RUN set -x && \
     echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
     rpm -qv --verify fedora-repos && \
