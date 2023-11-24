@@ -19,9 +19,6 @@ components:
   codeBase: python
   tester: pytest
   status: ACTIVE
-  staticPvs:
-  - eng-nfs-dir
-  - prod-nfs-dir
 - scmRepoName: test_CICD2
   codeBase: python
   tester: pytest
@@ -53,6 +50,10 @@ testModules:
   codeBase: spock
   componentRepos:
   - test-cicd-stationdemo
+releaseProfiles:
+- preprod
+- east
+- west
 enabledTestEnvs:
 - qa
 sandboxEnvs: 2
