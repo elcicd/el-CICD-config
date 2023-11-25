@@ -1,13 +1,13 @@
 rbacGroups:
   default: devs
   prod: cluster-admins
-scmHost: github.com
-scmRestApiHost: api.github.com
-scmOrganization: kafka-test
-scmBranch: development
-scmTestBranch: development
+gitHost: github.com
+gitRestApiHost: api.github.com
+gitOrganization: kafka-test
+gitBranch: development
+gitTestBranch: development
 components:
-- scmRepoName: kafka-consumer
+- gitRepoName: kafka-consumer
   codeBase: python
   tester: pytest
   status: ACTIVE
