@@ -19,6 +19,9 @@ components:
   codeBase: python
   tester: pytest
   status: ACTIVE
+  staticPvs:
+  - eng-nfs-dir
+  - prod-nfs-dir
 - gitRepoName: test_CICD2
   codeBase: python
   tester: pytest
