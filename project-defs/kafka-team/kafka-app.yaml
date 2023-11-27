@@ -11,6 +11,10 @@ components:
   codeBase: python
   tester: pytest
   status: ACTIVE
+- gitRepoName: kafka-producer
+  codeBase: python
+  tester: pytest
+  status: ACTIVE
 resourceQuotas:
   default:
   - large-cpu-limit
