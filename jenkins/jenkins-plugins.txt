@@ -26,7 +26,7 @@ favorite: 2.4.3
 font-awesome-api: 6.4.2-1
 git-client: 4.5.0
 git: 5.2.1
-google-oauth-plugin: 1.318.vb_39c5db_e3041
+google-oauth-plugin: 1.0.9
 groovy: 457.v99900cb_85593
 handy-uri-templates-2-api: 2.1.8-22.v77d5b_75e6953
 htmlpublisher: 1.32
