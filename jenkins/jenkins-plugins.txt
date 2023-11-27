@@ -76,7 +76,7 @@ plugin-util-api: 3.6.0
 prism-api: 1.29.0-9
 prometheus: 2.3.3
 pubsub-light: 1.18
-git-api: 683.vb_16722fb_b_80b_
+scm-api: 683.vb_16722fb_b_80b_
 script-security: 1281.v22fb_899df1a_e
 snakeyaml-api: 2.2-111.vc6598e30cc65
 sse-gateway: 1.26
@@ -93,7 +93,7 @@ workflow-cps: 3806.va_3a_6988277b_2
 workflow-durable-task-step: 1289.v4d3e7b_01546b_
 workflow-job: 1360.vc6700e3136f5
 workflow-multibranch: 756.v891d88f2cd46
-workflow-git-step: 415.v434365564324
+workflow-scm-step: 415.v434365564324
 workflow-step-api: 639.v6eca_cd8c04a_a_
 workflow-support: 865.v43e78cc44e0d
 yet-another-build-visualizer: 1.16
