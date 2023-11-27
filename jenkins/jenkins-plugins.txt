@@ -76,7 +76,7 @@ plugin-util-api: 3.6.0
 prism-api: 1.29.0-9
 prometheus: 2.3.3
 pubsub-light: 1.18
-git-api: 683.vb_16722fb_b_80b_
+scm-api: 683.vb_16722fb_b_80b_
 script-security: 1281.v22fb_899df1a_e
 snakeyaml-api: 2.2-111.vc6598e30cc65
 sse-gateway: 1.26
