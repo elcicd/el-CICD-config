@@ -9,7 +9,7 @@ ARG JENKINS_PLUGIN_JAR_URL=https://github.com/jenkinsci/plugin-installation-mana
 
 USER root
 
-ARG INSTALL_PKGS="git fontconfig java-17-openjdk-headless java-17-openjdk-devel shadow-utils tar"
+ARG INSTALL_PKGS="git fontconfig java-17-openjdk shadow-utils tar"
 RUN set -x && \
     echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
     echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf && \

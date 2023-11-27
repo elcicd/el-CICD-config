@@ -26,7 +26,7 @@ jenkins:
     globalMatrix:
       permissions:
   numExecutors: 5
-  gitCheckoutRetryCount: 0
+  scmCheckoutRetryCount: 0
   mode: NORMAL
   slaveAgentPort: 50000
   
