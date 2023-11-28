@@ -45,14 +45,8 @@ artifacts:
 testModules:
 - gitRepoName: Test-CICD-Cucumber-Tests
   codeBase: cucumber
-  componentRepos:
-  - Test-CICD1
-  - test_CICD2
-  - Test_CICD4
 - gitRepoName: Test-CICD-Spock-Tests
   codeBase: spock
-  componentRepos:
-  - test-cicd-stationdemo
 releaseProfiles:
 - preprod
 - east
