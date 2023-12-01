@@ -4,9 +4,9 @@
  * Example script where system tests can be run...
  */
 
-def runTests(def projectInfo, def componentToTest, def testModuleNamespace, def testModuleEnv) {
+def runTests(def projectInfo, def componentToTest, def testComponentNamespace, def testComponentEnv) {
     def msgs = ["[CUCUMBER RUNNER EXAMPLE PLACEHOLDER]",
-                "Testing ${componentToTest.name} in ${testModuleNamespace} for the ${testModuleEnv.toUpperCase()} environment"]
+                "Testing ${componentToTest.name} in ${testComponentNamespace} for the ${testComponentEnv.toUpperCase()} environment"]
 
     loggingUtils.echoBanner(msgs)
 }

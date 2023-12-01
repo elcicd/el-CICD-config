@@ -8,6 +8,14 @@ gitRestApiHost: api.github.com
 gitOrganization: elcicd
 gitBranch: development
 gitTestBranch: development
+artifacts:
+- gitRepoName: test-cicd-stationdemo-lib
+  codeBase: java-maven
+  status: ACTIVE
+- gitRepoName: Test-CICD1-lib
+  codeBase: python
+  tester: pytest
+  status: ACTIVE
 components:
 - gitRepoName: test-cicd-R
   codeBase: r-lang
@@ -34,15 +42,7 @@ components:
   codeBase: python
   tester: pytest
   status: ACTIVE
-artifacts:
-- gitRepoName: test-cicd-stationdemo-lib
-  codeBase: java-maven
-  status: ACTIVE
-- gitRepoName: Test-CICD1-lib
-  codeBase: python
-  tester: pytest
-  status: ACTIVE
-testModules:
+testComponents:
 - gitRepoName: Test-CICD-Cucumber-Tests
   codeBase: cucumber
 - gitRepoName: Test-CICD-Spock-Tests
