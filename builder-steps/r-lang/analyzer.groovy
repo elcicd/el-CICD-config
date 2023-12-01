@@ -4,7 +4,7 @@
  * Utility method for scanning R language based components
  */
 
-def scan(def projectId, def component) {
+def analyze(def projecInfo, def module) {
     /*withCredentials([string(credentialsId: el.cicd.SONARQUBE_ACCESS_TOKEN_ID, variable: 'SONARQUBE_ACCESS_TOKEN')]) {
         // sonar.sources=. -> define source code directory
         // sonar.tests=./tests ->  define directory for test code; ./tests must exist or the build will fail
@@ -28,6 +28,7 @@ def scan(def projectId, def component) {
                           -Dsonar.exclusions=tests/**,renv/**,*.xml
         """
     }*/
+    echo "--> FAKE R-LANG CODE ANALYSIS"
 }
 
 return this

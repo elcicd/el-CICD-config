@@ -4,7 +4,7 @@
  * Utility methods for building R components
  */
 
-def build(def projectInfo, def component) {
+def build(def projectInfo, def module) {
     echo 'R only projects require no build...'
 }
 

@@ -4,7 +4,7 @@
  * Utility method for running post processing of component code before the image build
  */
 
-def assemble(def projectInfo, def component) {
+def assemble(def projectInfo, def module) {
     // clean r-lang workspace after scanner step complete
     sh "git clean -fxd"
 }

@@ -4,7 +4,7 @@
  * Utility method for scanning Python based components
  */
 
-def scan(def projectInfo, def component) {
+def analyze(def projectInfo, def component) {
     /*withCredentials([string(credentialsId: el.cicd.SONARQUBE_ACCESS_TOKEN_ID, variable: 'SONARQUBE_ACCESS_TOKEN')]) {
         // sonar.sources=. -> define source code directory
         // sonar.tests=./tests ->  define directory for test code; ./tests must exist or the build will fail
@@ -28,6 +28,7 @@ def scan(def projectInfo, def component) {
                           -Dsonar.exclusions=tests/**,venv/**,*.xml
         """
     }*/
+    echo "--> FAKE PYTHON CODE ANALYSIS"
 }
 
 return this

@@ -4,8 +4,9 @@
  * Utility method for running Python pytest based unit tests
  */
 
-def scan(def projectInfo, def component) {
+def analyze(def projectInfo, def component) {
     // sh "mvn sonar:sonar -DskipTests -Dsonar.host.url=el.cicd.SONARQUBE_HOST_URL"
+    echo "--> FAKE JAVA-MAVEN CODE ANALYSIS"
 }
 
 return this
