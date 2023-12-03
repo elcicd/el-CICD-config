@@ -43,10 +43,8 @@ components:
   tester: pytest
   status: ACTIVE
 testComponents:
-- gitRepoName: Test-CICD-Cucumber-Tests
+- gitRepoName: test-cicd-int-tests
   codeBase: cucumber
-- gitRepoName: Test-CICD-Spock-Tests
-  codeBase: spock
 releaseProfiles:
 - preprod
 - east

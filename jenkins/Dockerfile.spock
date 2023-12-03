@@ -1,2 +1,0 @@
-ARG JENKINS_OCI_REGISTRY
-FROM ${JENKINS_OCI_REGISTRY}/elcicd-jenkins-agent-java-maven
