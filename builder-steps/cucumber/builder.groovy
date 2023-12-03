@@ -5,7 +5,7 @@
  */
 
 def build(def projectInfo, def component) {
-    echo 'CUCUMBER: BUILD EXECUTES AT RUNTIME'
+    echo 'Cucumber-only projects are built on the fly during testing...'
 }
 
 return this

@@ -7,9 +7,9 @@
 def test(def projectInfo, def component) {
     sh """
         export JAVA_TOOL_OPTIONS=
-        if [[ -f ${el.cicd.BUILDER_SECRETS_DIR}/settings.xml ]]
+        if [[ -f ${el.cicd.BUILDER_SECRETS_DIR}/maven-settings.xml ]]
         then
-            mvn -s ${el.cicd.BUILDER_SECRETS_DIR}/settings.xml test
+            mvn -s ${el.cicd.BUILDER_SECRETS_DIR}/maven-settings.xml test
         else
             mvn test
         fi
