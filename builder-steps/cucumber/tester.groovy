@@ -9,9 +9,9 @@ def test(def projectInfo, def component) {
         export JAVA_TOOL_OPTIONS=
         if [[ -f ${el.cicd.BUILDER_SECRETS_DIR}/maven-settings.xml ]]
         then
-            mvn -s ${el.cicd.BUILDER_SECRETS_DIR}/maven-settings.xml test
+            mvn -D SDLC_ENV=${projectInfo.deployToEnv} -s ${el.cicd.BUILDER_SECRETS_DIR}/maven-settings.xml test
         else
-            mvn test
+            mvn -D SDLC_ENV=${projectInfo.deployToEnv} test
         fi
     """
 }
