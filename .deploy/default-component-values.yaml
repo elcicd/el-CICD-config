@@ -8,7 +8,9 @@
 ##
 #############################################################################
 
-# elCicdDefaults:
+elCicdDefaults:
+  annotations:
+    test.cicd.io/proof-org-defaults-work: 'exactly'
   # deploymentRevisionHistoryLimit: 0
 
   # imagePullPolicy: "Always"

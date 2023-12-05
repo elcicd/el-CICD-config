@@ -23,6 +23,11 @@ components:
 - gitRepoName: test-cicd-stationdemo
   codeBase: java-maven
   status: ACTIVE
+  tests:
+    qa:
+    - test-cicd-int-tests
+    stg:
+    - test-cicd-int-tests
 - gitRepoName: Test-CICD1
   codeBase: python
   tester: pytest
@@ -42,6 +47,9 @@ components:
   codeBase: python
   tester: pytest
   status: ACTIVE
+elCicdDefaults:
+  annotations:
+    test.cicd.io/proof-project-defaults-work: 'yup'
 testComponents:
 - gitRepoName: test-cicd-int-tests
   codeBase: cucumber
