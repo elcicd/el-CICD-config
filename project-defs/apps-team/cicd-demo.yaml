@@ -25,9 +25,11 @@ components:
   status: ACTIVE
   tests:
     qa:
-    - test-cicd-int-tests
+    - name: test-cicd-int-tests
+      enabled: true
     stg:
-    - test-cicd-int-tests
+    - name: test-cicd-int-tests
+      enabled: true
 - gitRepoName: Test-CICD1
   codeBase: python
   tester: pytest
