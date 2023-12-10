@@ -1,4 +1,4 @@
-FROM fedora:latest
+FROM quay.io/centos/centos:stream9-minimal
 
 ARG OKD_VERSION
 ARG JENKINS_CONFIG_FILE_PATH
@@ -9,17 +9,16 @@ ARG JENKINS_PLUGIN_JAR_URL=https://github.com/jenkinsci/plugin-installation-mana
 
 USER root
 
-ARG INSTALL_PKGS="git fontconfig java-17-openjdk shadow-utils tar"
+ARG INSTALL_PKGS="git fontconfig java-17-openjdk shadow-utils tar jenkins"
+
 RUN set -x && \
     echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
     echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf && \
-    cat /etc/dnf/dnf.conf  && \
     curl -fsSLo /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
     rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key && \
-    dnf -y --nodocs upgrade && \
-    dnf -y --nodocs --best install ${INSTALL_PKGS} && \
-    dnf -y --nodocs install jenkins && \
-    dnf clean all && \
+    microdnf upgrade -y --nodocs && \
+    microdnf install -y --nodocs ${INSTALL_PKGS} && \
+    microdnf clean all && \
     curl -fsSLo /tmp/oc.tar.gz ${OC_CLI_URL} && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \

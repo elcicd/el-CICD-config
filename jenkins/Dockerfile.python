@@ -4,8 +4,8 @@ FROM ${JENKINS_OCI_REGISTRY}/elcicd-jenkins-agent-base
 USER root
 
 ARG INSTALL_PKGS="gcc python3-devel python3-setuptools python3-pip python3-wheel"
-RUN dnf install -y --nodocs ${INSTALL_PKGS} && \
-    dnf clean all && \
+RUN microdnf install -y --nodocs ${INSTALL_PKGS} && \
+    microdnf clean all && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install wheel bzt virtualenv && \
     rm -f /var/logs/*

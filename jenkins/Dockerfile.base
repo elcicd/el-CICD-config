@@ -1,4 +1,4 @@
-FROM fedora:latest
+FROM quay.io/centos/centos:stream9-minimal
 
 ARG OKD_VERSION
 ARG OC_CLI_URL=https://mirror.openshift.com/pub/openshift-v${OKD_VERSION}/clients/oc/latest/linux/oc.tar.gz
@@ -20,12 +20,16 @@ ENV HOME=/home/${USER} \
 USER root
 
 ARG INSTALL_PKGS="openssl bc git java-17-openjdk-headless tar unzip which zip bzip2 jq podman skopeo buildah"
+
 RUN set -x && \
     echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
-    rpm -qv --verify fedora-repos && \
-    dnf -y --nodocs upgrade && \
-    dnf install -y --nodocs ${INSTALL_PKGS} && \
-    dnf clean all  && \
+    echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf && \
+    microdnf install -y --nodocs -y epel-release epel-next-release && \
+    sed -i '/\['"crb"'\]/,/^ *\[/ s/enabled=0/enabled=1/' /etc/yum.repos.d/centos.repo &&  \
+    mkdir /var/lib/rhsm && \
+    microdnf upgrade -y --nodocs && \
+    microdnf install -y --nodocs ${INSTALL_PKGS} && \
+    microdnf clean all  && \
     curl --create-dirs -fsSLo /usr/share/${USER}/agent.jar ${JENKINS_AGENT_URL} && \
     curl -fsSLo /tmp/oc.tar.gz ${OC_CLI_URL} && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \

@@ -3,18 +3,15 @@ FROM ${JENKINS_OCI_REGISTRY}/elcicd-jenkins-agent-base
 
 USER root
 
-ARG INSTALL_PKGS="libcurl libcurl-devel libpng-devel mesa-libGL-devel mesa-libGLU-devel libpng-devel \
-    libxml2 libxml2-devel R ShellCheck xz openssl-devel"
-
+ARG INSTALL_PKGS="R ShellCheck"
+    
 COPY requirements.R /tmp/requirements.R
 
-RUN dnf install -y --nodocs ${INSTALL_PKGS} && \
-    dnf install -y --nodocs 'dnf-command(copr)' && \
-    dnf copr -y enable iucar/cran && \
-    dnf install -y --nodocs R-CoprManager && \
-    dnf clean all && \
+RUN microdnf install -y --nodocs yum-utils && \
+    microdnf install -y --nodocs ${INSTALL_PKGS} && \
     Rscript /tmp/requirements.R && \
     chmod -R 775 /usr/lib64/R && \
+    microdnf clean all && \
     rm -rf /var/logs/* /tmp/*
 
 USER 1001

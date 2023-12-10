@@ -5,9 +5,9 @@ install.opts <- c("--no-help", "--no-html", "--no-docs")
 
 install.packages(
   cran.packages,
-  repos = "https://cloud.r-project.org/",
+  repos = "http://cran.us.r-project.org/",
   dependencies = TRUE,
-  type = "binary",
+  type = "source",
   Ncpus = "4",
   clean = TRUE,
   INSTALL_opts = install.opts
