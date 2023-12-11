@@ -3,12 +3,15 @@ FROM ${JENKINS_OCI_REGISTRY}/elcicd-jenkins-agent-base
 
 USER root
 
-ARG INSTALL_PKGS="R ShellCheck"
+ARG INSTALL_PKGS="gdal gdal-devel libcurl-minimal libcurl-devel mesa-libGL-devel mesa-libGLU-devel \
+                  libxml2 libxml2-devel xz openssl openssl-devel harfbuzz harfbuzz-devel fribidi fribidi-devel \
+                  udunits2 udunits2-devel freetype freetype-devel libtiff libtiff-devel \
+                  libpng libpng-devel libjpeg libjpeg-devel sqlite sqlite-devel proj-devel geos geos-devel \
+                  R ShellCheck"
     
 COPY requirements.R /tmp/requirements.R
 
-RUN microdnf install -y --nodocs yum-utils && \
-    microdnf install -y --nodocs ${INSTALL_PKGS} && \
+RUN microdnf install -y --nodocs ${INSTALL_PKGS} && \
     Rscript /tmp/requirements.R && \
     chmod -R 775 /usr/lib64/R && \
     microdnf clean all && \

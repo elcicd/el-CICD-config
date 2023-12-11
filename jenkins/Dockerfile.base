@@ -19,7 +19,7 @@ ENV HOME=/home/${USER} \
 
 USER root
 
-ARG INSTALL_PKGS="openssl bc git java-17-openjdk-headless tar unzip which zip bzip2 jq podman skopeo buildah"
+ARG INSTALL_PKGS="openssl bc git java-17-openjdk-headless vim tar unzip which zip bzip2 jq podman skopeo buildah"
 
 RUN set -x && \
     echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
@@ -36,19 +36,17 @@ RUN set -x && \
     rm /tmp/oc.tar.gz && \
     adduser -g 0 -u ${USER_UID} ${USER} && \
     umask 000 && \
-    chgrp -R 0 /home && \
-    chmod -R g+s /home  && \
-    chown -R ${USER_UID} /home && \
+    mkdir -p /home/${USER}/agent /home/${USER}/.cache && \
+    chown -R ${USER_UID}:0 /home && \
     chmod -R 777 /home && \
     chmod 755 /usr/share/${USER} && \
-    chmod 644 /usr/share/${USER}/agent.jar && \
+    chmod 775 /usr/share/${USER}/agent.jar && \
     ln -sf /usr/share/${USER}/agent.jar /usr/share/${USER}/slave.jar && \
     mkdir -p /var/lib/jenkins && \
     chmod -R 775 /var/lib/jenkins && \
     chmod -R 775 /etc/alternatives && \
     chmod -R 775 /var/lib/alternatives && \
     chmod -R 775 /usr/lib/jvm && \
-    chmod -R 775 /usr/bin && \
     chmod 775 /usr/share/man/man1 && \
     mkdir -p /var/lib/origin && \
     chmod 775 /var/lib/origin && \
@@ -59,7 +57,8 @@ RUN set -x && \
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash && \
     curl -s "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3" | bash && \
     mv ./kustomize /usr/local/bin && \
-    rm -f /var/logs/* && \
+    chmod -R 775 /usr/bin && \
+    chmod -R 775 /usr/local/bin && \
     set +x
 
 WORKDIR /home/${USER}
