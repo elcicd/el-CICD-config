@@ -6,8 +6,11 @@ ARG VERSION=4.14
 ARG JENKINS_AGENT_URL=https://repo.jenkins-ci.org/artifactory/releases/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar
 ARG USER=jenkins
 ARG USER_UID=1001
+ARG HOME=/home/${USER}
 
-ENV HOME=/home/${USER} \
+ENV HOME=${HOME} \
+    AGENT_WORKDIR=${HOME}/agent \
+    CACHE_DIR=${HOME}/.cache \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
     LC_COLLATE=C \
@@ -36,7 +39,7 @@ RUN set -x && \
     rm /tmp/oc.tar.gz && \
     adduser -g 0 -u ${USER_UID} ${USER} && \
     umask 000 && \
-    mkdir -p /home/${USER}/agent /home/${USER}/.cache && \
+    mkdir -p ${HOME}/.${USER} ${AGENT_WORKDIR} ${CACHE_DIR} && \
     chown -R ${USER_UID}:0 /home && \
     chmod -R 777 /home && \
     chmod 755 /usr/share/${USER} && \
@@ -61,12 +64,18 @@ RUN set -x && \
     chmod -R 775 /usr/local/bin && \
     set +x
 
-WORKDIR /home/${USER}
-               
+VOLUME ${HOME}/.${USER}
+VOLUME ${CACHE_DIR}
+VOLUME ${AGENT_WORKDIR}
+WORKDIR ${HOME}
+
 USER ${USER_UID}
 
-ENTRYPOINT exec java -cp /usr/share/jenkins/agent.jar \
-               hudson.remoting.jnlp.Main -headless -tunnel ${JENKINS_TUNNEL} \
-               -url ${JENKINS_URL} -workDir ${JENKINS_AGENT_WORKDIR} \
-               ${JENKINS_SECRET} ${JENKINS_AGENT_NAME}
+ENTRYPOINT exec java -cp /usr/share/jenkins/agent.jar hudson.remoting.jnlp.Main \
+                     -headless \
+                     -tunnel ${JENKINS_TUNNEL} \
+                     -url ${JENKINS_URL} \
+                     -workDir ${JENKINS_AGENT_WORKDIR} \
+                     ${JENKINS_SECRET} \
+                     ${JENKINS_AGENT_NAME}
 

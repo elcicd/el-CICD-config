@@ -8,7 +8,7 @@ ARG INSTALL_PKGS="gdal gdal-devel libcurl-minimal libcurl-devel mesa-libGL-devel
                   udunits2 udunits2-devel freetype freetype-devel libtiff libtiff-devel \
                   libpng libpng-devel libjpeg libjpeg-devel sqlite sqlite-devel proj-devel geos geos-devel \
                   R ShellCheck"
-    
+
 COPY requirements.R /tmp/requirements.R
 
 RUN microdnf install -y --nodocs ${INSTALL_PKGS} && \
