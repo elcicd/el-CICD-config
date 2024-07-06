@@ -64,9 +64,6 @@ RUN set -x && \
     chmod -R 775 /usr/local/bin && \
     set +x
 
-VOLUME ${HOME}/.${USER}
-VOLUME ${CACHE_DIR}
-VOLUME ${AGENT_WORKDIR}
 WORKDIR ${HOME}
 
 USER ${USER_UID}
@@ -78,4 +75,3 @@ ENTRYPOINT exec java -cp /usr/share/jenkins/agent.jar hudson.remoting.jnlp.Main 
                      -workDir ${JENKINS_AGENT_WORKDIR} \
                      ${JENKINS_SECRET} \
                      ${JENKINS_AGENT_NAME}
-
