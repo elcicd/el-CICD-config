@@ -33,7 +33,7 @@ RUN set -x && \
     chmod 775 /var/lib/origin && \
     chmod 775 /var/log && \
     chmod 400 /etc/ssh/ssh_config && \
-    mkdir -p /var/lib/jenkins/jobs && \
+    mkdir -p /var/lib/jenkins && \
     chmod 777 -R /var/lib/jenkins && \
     mkdir -p ${JENKINS_CONFIG_FILE_PATH} && \
     chmod 777 -R ${JENKINS_CONFIG_FILE_PATH}  && \
@@ -44,7 +44,7 @@ ENV HOME=/var/lib/jenkins \
     JENKINS_HOME=/var/lib/jenkins \
     LANG=en_US.UTF-8
 
-USER 1001
+USER 1001:1001
 
 ENTRYPOINT java -Djenkins.install.runSetupWizard=false \
                 -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true \
