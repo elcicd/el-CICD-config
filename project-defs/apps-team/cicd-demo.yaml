@@ -17,9 +17,6 @@ artifacts:
   tester: pytest
   status: ACTIVE
 components:
-- gitRepoName: test-cicd-R
-  codeBase: r-lang
-  status: ACTIVE
 - gitRepoName: test-cicd-stationdemo
   codeBase: java-maven
   status: ACTIVE

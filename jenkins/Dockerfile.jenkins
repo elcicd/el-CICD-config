@@ -44,7 +44,7 @@ ENV HOME=/var/lib/jenkins \
     JENKINS_HOME=/var/lib/jenkins \
     LANG=en_US.UTF-8
 
-USER 1001:1001
+USER 1001
 
 ENTRYPOINT java -Djenkins.install.runSetupWizard=false \
                 -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true \
