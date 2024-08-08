@@ -2,7 +2,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
   objName: small-mem-quota
   mustHaveAnyProfile:
-  - small-mem-quota
+  - SMALL_MEM_QUOTA
   namespaces: $<small-mem-quota_NAMESPACES>
   hard:
     limits.memory: 12Gi
@@ -12,7 +12,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: limitRange
   objName: small-mem-limit
   mustHaveAnyProfile:
-  - small-mem-limit
+  - SMALL_MEM_LIMIT
   namespaces: $<small-mem-limit_NAMESPACES>
   limits:
   - default:
@@ -27,7 +27,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
   objName: small-storage-quota
   mustHaveAnyProfile:
-  - small-storage-quota
+  - SMALL_STORAGE_QUOTA
   namespaces: $<small-storage-quota_NAMESPACES>
   hard:
     requests.storage: 24Gi
@@ -35,7 +35,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
   objName: medium-mem-quota
   mustHaveAnyProfile:
-  - medium-mem-quota
+  - MEDIUM_MEM_QUOTA
   namespaces: $<medium-mem-quota_NAMESPACES>
   hard:
     limits.memory: 48Gi
@@ -45,7 +45,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: limitRange
   objName: medium-mem-limit
   mustHaveAnyProfile:
-  - medium-mem-limit
+  - MEDIUM_MEM_LIMIT
   namespaces: $<medium-mem-limit_NAMESPACES>
   limits:
   - default:
@@ -60,7 +60,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
   objName: medium-storage-quota
   mustHaveAnyProfile:
-  - medium-storage-quota
+  - MEDIUM_STORAGE_QUOTA
   namespaces: $<medium-storage-quota_NAMESPACES>
   hard:
     requests.storage: 256Gi
@@ -68,7 +68,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
   objName: large-mem-quota
   mustHaveAnyProfile:
-  - large-mem-quota
+  - LARGE_MEM_QUOTA
   namespaces: $<large-mem-quota_NAMESPACES>
   hard:
     limits.memory: 96Gi
@@ -78,7 +78,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: limitRange
   objName: large-mem-limit
   mustHaveAnyProfile:
-  - large-mem-limit
+  - LARGE_MEM_LIMIT
   namespaces: $<large-mem-limit_NAMESPACES>
   limits:
   - default:
@@ -93,7 +93,7 @@ elCicdTemplates-resourceQuotas:
 - templateName: resourceQuota
   objName: large-storage-quota
   mustHaveAnyProfile:
-  - large-storage-quota
+  - LARGE_STORAGE_QUOTA
   namespaces: $<large-storage-quota_NAMESPACES>
   hard:
     requests.storage: 1024Gi

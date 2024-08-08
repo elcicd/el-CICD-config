@@ -1,8 +1,8 @@
 rbacGroups:
   default: devs
-  qa: testers
-  stg: testers
-  prod: cluster-admins
+  QA: testers
+  STG: testers
+  PROD: cluster-admins
 gitHost: github.com
 gitRestApiHost: api.github.com
 gitOrganization: elcicd
@@ -21,10 +21,10 @@ components:
   codeBase: java-maven
   status: ACTIVE
   tests:
-    qa:
+    QA:
     - name: test-cicd-int-tests
       enabled: true
-    stg:
+    STG:
     - name: test-cicd-int-tests
       enabled: true
 - gitRepoName: Test-CICD1
@@ -57,35 +57,35 @@ releaseProfiles:
 - east
 - west
 enabledTestEnvs:
-- qa
+- QA
 sandboxEnvs: 2
 allowsHotfixes: true
 resourceQuotas:
   default:
-  - small-mem-quota
-  - small-mem-limit
-  - small-storage
-  dev:
-  - medium-mem-quota
-  - medium-mem-limit
-  - small-storage-quota
-  qa:
-  - medium-mem-quota
-  - medium-mem-limit
-  - medium-storage-quota
-  stg:
-  - large-mem-quota
-  - large-mem-limit
-  - medium-storage-quota
-  prod:
-  - large-mem-quota
-  - large-mem-limit
-  - large-storage
+  - SMALL_MEM_QUOTA
+  - SMALL_MEM_LIMIT
+  - SMALL_STORAGE_QUOTA
+  DEV:
+  - MEDIUM_MEM_QUOTA
+  - MEDIUM_MEM_LIMIT
+  - SMALL_STORAGE_QUOTA
+  QA:
+  - MEDIUM_MEM_QUOTA
+  - MEDIUM_MEM_LIMIT
+  - MEDIUM_STORAGE_QUOTA
+  STG:
+  - LARGE_MEM_QUOTA
+  - LARGE_MEM_LIMIT
+  - MEDIUM_STORAGE_QUOTA
+  PROD:
+  - LARGE_MEM_QUOTA
+  - LARGE_MEM_LIMIT
+  - LARGE-STORAGE_QUOTA
 staticPvs:
 - name: eng-nfs-dir
   envs:
-  - qa
-  - stg
+  - QA
+  - STG
   capacity: 5Gi
   accessMode: ReadWriteMany
   volumeType: nfs
@@ -94,7 +94,7 @@ staticPvs:
     server: hippys-bfs.localdomain
 - name: prod-nfs-dir
   envs:
-  - prod
+  - PROD
   capacity: 15Gi
   accessMode: ReadWriteMany
   volumeType: nfs
