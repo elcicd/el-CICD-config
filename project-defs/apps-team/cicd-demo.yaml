@@ -80,7 +80,7 @@ resourceQuotas:
   PROD:
   - LARGE_MEM_QUOTA
   - LARGE_MEM_LIMIT
-  - LARGE-STORAGE_QUOTA
+  - LARGE_STORAGE_QUOTA
 staticPvs:
 - name: eng-nfs-dir
   envs:
