@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream9
+FROM quay.io/centos/centos:stream9-minimal
 
 ARG OKD_VERSION
 ARG JENKINS_CONFIG_FILE_PATH
@@ -14,12 +14,11 @@ ARG INSTALL_PKGS="git fontconfig java-17-openjdk shadow-utils tar jenkins"
 RUN set -x && \
     echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
     echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf && \
-    update-crypto-policies --set LEGACY && \
     curl -fsSLo /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
     rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key && \
-    dnf upgrade -y --nodocs && \
-    dnf install -y --nodocs ${INSTALL_PKGS} && \
-    dnf clean all && \
+    microdnf upgrade -y --nodocs && \
+    microdnf install -y --nodocs ${INSTALL_PKGS} && \
+    microdnf clean all && \
     curl -fsSLo /tmp/oc.tar.gz ${OC_CLI_URL} && \
     tar -C /usr/local/bin/ -xf /tmp/oc.tar.gz  'oc' 'kubectl' && \
     rm /tmp/oc.tar.gz && \
