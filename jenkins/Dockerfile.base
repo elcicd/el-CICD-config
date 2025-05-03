@@ -27,6 +27,8 @@ ARG INSTALL_PKGS="openssl bc git java-17-openjdk-headless vim tar unzip which zi
 RUN set -x && \
     echo 'fastestmirror=1' >> /etc/dnf/dnf.conf && \
     echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf && \
+    microdnf install -y --nodocs -y crypto-policies-scripts && \
+    update-crypto-policies --set LEGACY  && \
     microdnf install -y --nodocs -y epel-release epel-next-release && \
     sed -i '/\['"crb"'\]/,/^ *\[/ s/enabled=0/enabled=1/' /etc/yum.repos.d/centos.repo &&  \
     mkdir /var/lib/rhsm && \
@@ -39,7 +41,7 @@ RUN set -x && \
     rm /tmp/oc.tar.gz && \
     adduser -g 0 -u ${USER_UID} ${USER} && \
     umask 000 && \
-    mkdir -p ${HOME}/.${USER} ${AGENT_WORKDIR} ${CACHE_DIR} && \
+    mkdir -p ${HOME}/${USER} ${AGENT_WORKDIR} ${CACHE_DIR} && \
     chown -R ${USER_UID}:0 /home && \
     chmod -R 777 /home && \
     chmod 755 /usr/share/${USER} && \

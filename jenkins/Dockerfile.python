@@ -3,11 +3,13 @@ FROM ${JENKINS_OCI_REGISTRY}/elcicd-jenkins-agent-base
 
 USER root
 
-ARG INSTALL_PKGS="gcc python3-devel python3-setuptools python3-pip python3-wheel"
+ARG INSTALL_PKGS="gcc python3-devel"
 RUN microdnf install -y --nodocs ${INSTALL_PKGS} && \
     microdnf clean all && \
-    python3 -m pip install --upgrade pip && \
-    python3 -m pip install wheel bzt virtualenv && \
+    mkdir ${HOME}/.cache/pip && \
+    chmod 777 ${HOME}/.cache/pip && \
+    python3 -m ensurepip --upgrade && \
+    python3 -m pip install setuptools wheel bzt virtualenv && \
     rm -f /var/logs/*
 
 USER 1001

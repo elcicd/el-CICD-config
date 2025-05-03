@@ -5,7 +5,8 @@ USER root
 
 ARG INSTALL_PKGS="maven"
 
-RUN microdnf install -y --nodocs ${INSTALL_PKGS} && \
+RUN update-crypto-policies --set LEGACY && \
+    microdnf install -y --nodocs ${INSTALL_PKGS} && \
     microdnf clean all && \
     rm -f /var/logs/*
 
